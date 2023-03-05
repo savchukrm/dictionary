@@ -5,10 +5,10 @@ import axios from 'axios';
 
 export const fetchWords = createAsyncThunk(
   'words/fetchWordsStatus',
-  async () => {
+  async (param) => {
     const options = {
       method: 'GET',
-      url: `https://wordapi18.p.rapidapi.com/words/mother`,
+      url: `https://wordapi18.p.rapidapi.com/words/${param}`,
       headers: {
         'X-RapidAPI-Key': key.id,
         'X-RapidAPI-Host': 'wordapi18.p.rapidapi.com',
