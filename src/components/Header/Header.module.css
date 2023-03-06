@@ -1,0 +1,35 @@
+.header {
+  background-color: #5431a6;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #ece9f4;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerLogo {
+  text-transform: uppercase;
+  font-size: 30px;
+  font-weight: 600;
+  color: #ece9f4;
+}
+
+.headerBtnRow {
+  display: flex;
+  gap: 15px;
+}
+
+.headerBtn {
+  background-color: #ece9f4;
+  color: #5431a6;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 35px;
+}

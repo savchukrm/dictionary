@@ -9,7 +9,7 @@ const sts = {
 
 const initialState = {
   words: {},
-  status: sts.loading,
+  status: '',
 };
 
 const dataWords = createSlice({

@@ -1,0 +1,22 @@
+.main {
+  height: 95vh;
+  display: flex;
+  align-items: center;
+}
+
+.formInput {
+  background-color: #ece9f4;
+  border-radius: 35px;
+  padding: 10px 30px;
+}
+
+.formBtn {
+  margin-left: 15px;
+  background-color: #5431a6;
+  color: #ece9f4;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 10px 30px;
+  border: 2px solid #ece9f4;
+  border-radius: 35px;
+}
