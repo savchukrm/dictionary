@@ -1,7 +1,7 @@
 import ModeToggle from './DarkModeToggle';
 import styles from './Header.module.css';
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <div className={styles.header}>
       <div className="container">

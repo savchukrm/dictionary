@@ -1,11 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { key } from '../../key';
+import { DataWordState } from '../search/slice';
+
 import axios from 'axios';
+
+import { key } from '../../key';
 
 export const fetchWords = createAsyncThunk(
   'words/fetchWordsStatus',
-  async (param) => {
+  async (param: DataWordState) => {
     const options = {
       method: 'GET',
       url: `https://wordapi18.p.rapidapi.com/words/${param}`,

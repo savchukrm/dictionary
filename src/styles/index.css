@@ -1,9 +1,10 @@
 body {
   margin: 0;
-  font-family: 'Helvetica Neue', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #5431a6;
+  background-color: #0a192f;
+  color: #ece9f4;
 }
 
 code {

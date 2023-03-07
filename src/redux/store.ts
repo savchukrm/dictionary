@@ -8,4 +8,8 @@ export const store = configureStore({
   reducer: { words, search },
 });
 
-export const useAppDispatch = () => useDispatch();
+export type RootState = ReturnType<typeof store.getState>;
+
+type AppDispatch = typeof store.dispatch;
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();

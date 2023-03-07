@@ -1,15 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchWords } from './asynAction';
 
-const sts = {
-  loading: 'loading',
-  success: 'success',
-  error: 'error',
-};
+import { DataSliceState, Status } from './types';
 
-const initialState = {
+const initialState: DataSliceState = {
   words: {},
-  status: '',
+  status: Status.NOTHING,
 };
 
 const dataWords = createSlice({
@@ -22,15 +18,15 @@ const dataWords = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchWords.pending, (state, action) => {
-      state.status = sts.loading;
+      state.status = Status.LOADING;
       state.words = {};
     });
     builder.addCase(fetchWords.fulfilled, (state, action) => {
-      state.status = sts.success;
+      state.status = Status.SUCCESS;
       state.words = action.payload;
     });
     builder.addCase(fetchWords.rejected, (state, action) => {
-      state.status = sts.error;
+      state.status = Status.ERROR;
       state.words = {};
     });
   },
