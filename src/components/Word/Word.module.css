@@ -1,7 +1,38 @@
 .word {
-  padding: 30px;
+  padding: 35px 40px;
   margin: 40px auto;
   max-width: 1000px;
   border: 2px solid #fff;
   text-align: left;
+  border-radius: 50px;
+}
+
+.top {
+  border-bottom: 1px solid #fff;
+  padding-bottom: 20px;
+  margin-bottom: 1s0px;
+}
+
+.h1 {
+  font-weight: 600;
+  font-size: 49px;
+}
+
+.list {
+  padding: 20px;
+}
+
+.list h2 {
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.list ul {
+  padding-left: 35px;
+}
+
+li {
+  list-style: circle;
+  font-size: 18px;
+  margin: 8px 0;
 }
