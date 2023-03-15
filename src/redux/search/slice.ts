@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface DataWordState {
-  word: string;
+  word: string | any;
 }
 
 const initialState: DataWordState = {
