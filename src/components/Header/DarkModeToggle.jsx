@@ -6,17 +6,17 @@ const ModeToggle = () => {
   return (
     <DarkModeToggle
       mode={mode}
-      dark="Dark"
-      light="Light"
+      dark="dark"
+      light="light"
       size="md"
-      inactiveLabelColor="#ece9f4"
-      inactiveTrackColor="#e2e8f0"
-      inactiveTrackColorOnHover="#f8fafc"
-      inactiveTrackColorOnActive="#cbd5e1"
-      activeTrackColor="#334155"
-      activeTrackColorOnHover="#411b9c"
-      activeTrackColorOnActive="#0f172a"
-      inactiveThumbColor="#411b9c"
+      inactiveLabelColor="#444444"
+      inactiveTrackColor="#444444"
+      inactiveTrackColorOnHover="#444444"
+      inactiveTrackColorOnActive="#444444"
+      activeTrackColor="#444444"
+      activeTrackColorOnHover="#fffff"
+      activeTrackColorOnActive="#fffff"
+      inactiveThumbColor="#e2e8f0"
       activeThumbColor="#e2e8f0"
       onChange={(mode) => {
         setMode(mode);

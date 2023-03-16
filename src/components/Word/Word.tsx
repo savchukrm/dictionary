@@ -1,11 +1,12 @@
 import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 import Category from './Category';
 
 import Examples from './Examples';
 import styles from './Word.module.css';
 
 const Word = () => {
-  const { words, status } = useSelector((state) => state.words);
+  const { words, status } = useSelector((state: RootState) => state.words);
 
   return (
     <div className={styles.word}>

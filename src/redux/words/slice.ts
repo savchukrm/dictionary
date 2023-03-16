@@ -4,7 +4,12 @@ import { fetchWords } from './asynAction';
 import { DataSliceState, Status } from './types';
 
 const initialState: DataSliceState = {
-  words: {},
+  words: {
+    definitions: [{ definition: '', partOfSpeech: '', synonyms: [] }],
+    pronunciation: '',
+    word: '',
+    examples: [],
+  },
   status: Status.NOTHING,
 };
 
@@ -19,7 +24,12 @@ const dataWords = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchWords.pending, (state, action) => {
       state.status = Status.LOADING;
-      state.words = {};
+      state.words = {
+        definitions: [{ definition: '', partOfSpeech: '', synonyms: [] }],
+        pronunciation: '',
+        word: '',
+        examples: [],
+      };
     });
     builder.addCase(fetchWords.fulfilled, (state, action) => {
       state.status = Status.SUCCESS;
@@ -27,7 +37,12 @@ const dataWords = createSlice({
     });
     builder.addCase(fetchWords.rejected, (state, action) => {
       state.status = Status.ERROR;
-      state.words = {};
+      state.words = {
+        definitions: [{ definition: '', partOfSpeech: '', synonyms: [] }],
+        pronunciation: '',
+        word: '',
+        examples: [],
+      };
     });
   },
 });

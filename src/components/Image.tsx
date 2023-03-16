@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 const Image = () => {
-  const { words, status } = useSelector((state) => state.words);
+  const { words, status } = useSelector((state: RootState) => state.words);
 
   return (
     <div>
@@ -14,8 +15,15 @@ const Image = () => {
       )}
 
       {status === 'success' && words.definitions.length === 0 && (
-        <div>
-          <img width={300} height={300} src="/img/sorry-pana-dark.png" alt="" />
+        <div className="sorry">
+          <h3>You have no matching search terms.</h3>
+          <h4> Please make sure that you entered the word correctly.</h4>
+          <img
+            width={300}
+            height={300}
+            src="/img/sorry-pana-light.png"
+            alt=""
+          />
         </div>
       )}
     </div>

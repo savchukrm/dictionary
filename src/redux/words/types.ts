@@ -5,7 +5,20 @@ export enum Status {
   ERROR = 'error',
 }
 
+export type DefinitionsItem = {
+  definition: string;
+  partOfSpeech: string;
+  synonyms: string[] | string;
+};
+
+export type DataItem = {
+  definitions: DefinitionsItem[];
+  pronunciation: string;
+  word: string;
+  examples: [];
+};
+
 export interface DataSliceState {
-  words: {};
+  words: DataItem;
   status: Status;
 }

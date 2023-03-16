@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 import styles from './Word.module.css';
 
 function Examples() {
   const [showAll, setShowAll] = useState(false);
 
-  const { words } = useSelector((state) => state.words);
+  const { words } = useSelector((state: RootState) => state.words);
 
   const maxExamples = 5;
 

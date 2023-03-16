@@ -1,15 +1,16 @@
 import { useState } from 'react';
 
 import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 import styles from './Word.module.css';
 
 const Category = () => {
   const [showAll, setShowAll] = useState(false);
 
-  const { words } = useSelector((state) => state.words);
+  const { words } = useSelector((state: RootState) => state.words);
 
-  const nouns = words.definitions.reduce((all, obj) => {
+  const nouns = words.definitions.reduce((all: [string, string[]][], obj) => {
     if (obj.partOfSpeech === 'noun') {
       const synonyms = Array.isArray(obj.synonyms)
         ? obj.synonyms
@@ -19,7 +20,7 @@ const Category = () => {
     return all;
   }, []);
 
-  const verbs = words.definitions.reduce((all, obj) => {
+  const verbs = words.definitions.reduce((all: [string, string[]][], obj) => {
     if (obj.partOfSpeech === 'verb') {
       const synonyms = Array.isArray(obj.synonyms)
         ? obj.synonyms
@@ -29,17 +30,20 @@ const Category = () => {
     return all;
   }, []);
 
-  const adjectives = words.definitions.reduce((all, obj) => {
-    if (obj.partOfSpeech === 'adjective') {
-      const synonyms = Array.isArray(obj.synonyms)
-        ? obj.synonyms
-        : [obj.synonyms];
-      return all.concat([[obj.definition, synonyms]]);
-    }
-    return all;
-  }, []);
+  const adjectives = words.definitions.reduce(
+    (all: [string, string[]][], obj) => {
+      if (obj.partOfSpeech === 'adjective') {
+        const synonyms = Array.isArray(obj.synonyms)
+          ? obj.synonyms
+          : [obj.synonyms];
+        return all.concat([[obj.definition, synonyms]]);
+      }
+      return all;
+    },
+    []
+  );
 
-  const adverbs = words.definitions.reduce((all, obj) => {
+  const adverbs = words.definitions.reduce((all: [string, string[]][], obj) => {
     if (obj.partOfSpeech === 'adverb') {
       const synonyms = Array.isArray(obj.synonyms)
         ? obj.synonyms
@@ -49,15 +53,18 @@ const Category = () => {
     return all;
   }, []);
 
-  const adjectivesSatellite = words.definitions.reduce((all, obj) => {
-    if (obj.partOfSpeech === 'adjective satellite') {
-      const synonyms = Array.isArray(obj.synonyms)
-        ? obj.synonyms
-        : [obj.synonyms];
-      return all.concat([[obj.definition, synonyms]]);
-    }
-    return all;
-  }, []);
+  const adjectivesSatellite = words.definitions.reduce(
+    (all: [string, string[]][] | any, obj) => {
+      if (obj.partOfSpeech === 'adjective satellite') {
+        const synonyms = Array.isArray(obj.synonyms)
+          ? obj.synonyms
+          : [obj.synonyms];
+        return all.concat([[obj.definition, synonyms]]);
+      }
+      return all;
+    },
+    []
+  );
 
   const partsOfSpeech = [
     ['noun', nouns],
@@ -69,18 +76,20 @@ const Category = () => {
 
   return (
     <>
-      {' '}
       {partsOfSpeech.map((obj, i) => {
         if (obj[1].length >= 1) {
+          const [pos, items] = obj;
+          const displayItems = showAll ? items : items.slice(0, 5);
+
           return (
             <div className={styles.list} key={i}>
-              <h2>{obj[0]}</h2>
+              <h2>{pos}</h2>
 
-              {obj[1].slice(0, showAll ? obj[1].length : 5).map((item, i) => (
+              {displayItems.map((item: [string, string[]], i: number) => (
                 <ul key={i}>
                   <li>{item[0]}</li>
                   {item[1].length > 0 &&
-                    item[1].map((a, i) => (
+                    item[1].map((a: string, i: number) => (
                       <span
                         key={i}
                         className={styles.synonyms}
@@ -89,7 +98,7 @@ const Category = () => {
                 </ul>
               ))}
 
-              {obj[1].length > 5 && (
+              {items.length > 5 && (
                 <div className={styles.btnBlock}>
                   <button
                     className={styles.btn}
@@ -102,6 +111,8 @@ const Category = () => {
             </div>
           );
         }
+
+        return '';
       })}
     </>
   );

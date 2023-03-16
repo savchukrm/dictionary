@@ -9,8 +9,8 @@ const Header: React.FC = () => {
           <h3 className={styles.headerLogo}>meaningo</h3>
           <ModeToggle />
           <ul className={styles.headerBtnRow}>
-            <button className={styles.headerBtn}>Log In</button>
-            <button className={styles.headerBtn}>Sign Up</button>
+            <button className={styles.headerBtn}>log in</button>
+            <button className={styles.headerBtn}>sign up</button>
           </ul>
         </div>
       </div>
