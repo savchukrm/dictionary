@@ -1,4 +1,4 @@
-export const NotFoundBlock: React.FC = () => {
+const NotFound: React.FC = () => {
   return (
     <div>
       <h2>Nothing found</h2>
@@ -8,3 +8,5 @@ export const NotFoundBlock: React.FC = () => {
     </div>
   );
 };
+
+export default NotFound;

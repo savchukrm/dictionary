@@ -3,9 +3,10 @@ import { useDispatch } from 'react-redux';
 
 import words from './words/slice';
 import search from './search/slice';
+import user from './auth/slice';
 
 export const store = configureStore({
-  reducer: { words, search },
+  reducer: { words, search, user },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
