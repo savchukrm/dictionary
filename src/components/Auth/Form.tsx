@@ -1,11 +1,18 @@
 import { useState } from 'react';
 
-const Form = ({ title, handleClick }) => {
+import styles from './Form.module.css';
+
+interface FormProps {
+  title: string;
+  handleClick: (email: string, password: string) => void;
+}
+
+const Form: React.FC<FormProps> = ({ title, handleClick }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   return (
-    <div>
+    <div className={styles.block}>
       <input
         type="email"
         value={email}

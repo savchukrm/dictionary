@@ -18,8 +18,7 @@ const Word = () => {
           </div>
 
           <Category />
-
-          <Examples />
+          {words.examples.length >= 1 && <Examples />}
         </div>
       )}
     </div>

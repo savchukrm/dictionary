@@ -1,6 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+export type UserItem = {
+  email: string | null;
+  token: string | null;
+  id: number | null;
+};
+
+const initialState: UserItem = {
   email: null,
   token: null,
   id: null,

@@ -1,9 +1,16 @@
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useAuth } from '../../hooks/use-auth';
+
+import { removeUser } from '../../redux/auth/slice';
 
 import ModeToggle from './DarkModeToggle';
 import styles from './Header.module.css';
 
 const Header: React.FC = () => {
+  const dispatch = useDispatch();
+  const { isAuth } = useAuth();
+
   return (
     <div className={styles.header}>
       <div className="container">
@@ -16,9 +23,18 @@ const Header: React.FC = () => {
             <Link to="/login">
               <button className={styles.headerBtn}>log in</button>
             </Link>
-            <Link to="/register">
-              <button className={styles.headerBtn}>sign up</button>
-            </Link>
+            {isAuth ? (
+              <button
+                className={styles.headerBtn}
+                onClick={() => dispatch(removeUser())}
+              >
+                log out
+              </button>
+            ) : (
+              <Link to="/register">
+                <button className={styles.headerBtn}>sign up</button>
+              </Link>
+            )}
           </ul>
         </div>
       </div>

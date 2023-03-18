@@ -1,0 +1,19 @@
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin: 20px 0;
+}
+
+.block input {
+  border-radius: 40px;
+  height: 50px;
+  padding-left: 20px;
+}
+
+.block button {
+  background-color: green;
+  border-radius: 40px;
+  height: 50px;
+  text-transform: uppercase;
+}

@@ -9,18 +9,17 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleRegister = (email, password) => {
+  const handleRegister = (email: string, password: string) => {
     const auth = getAuth();
 
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        console.log(user);
         dispatch(
-          setUser({ email: user.email, id: user.id, token: user.accessToken })
+          setUser({ email: user.email, id: user.uid, token: user.refreshToken })
         );
         navigate('/');
       })
-      .catch(console.err);
+      .catch(() => alert('Invalid user'));
   };
   return (
     <div>
