@@ -1,0 +1,54 @@
+.block {
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 35%;
+  padding: 50px;
+  border: 1px solid #ffffff;
+  border-radius: 20px;
+  max-width: 500px;
+  background-color: #1c1c1c;
+}
+
+.top {
+  position: relative;
+}
+
+.smallBtn {
+  position: absolute;
+  bottom: 21px;
+  right: -26px;
+  color: #ffffff;
+}
+
+.smallBtn svg {
+  height: 1.5em;
+  width: 1.5em;
+}
+
+.h3 {
+  font-weight: 500;
+}
+
+.blockBtn {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 30px;
+  gap: 30px;
+}
+
+.blockBtn button {
+  padding: 10px 30px;
+}
+
+.btnYes {
+  background-color: #772b2b;
+  color: #ffffff;
+}
+
+.btnNo {
+  background-color: #337139;
+  color: #ffffff;
+}

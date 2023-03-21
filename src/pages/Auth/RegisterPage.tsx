@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import SignUp from '../components/Auth/SignUp';
+import SignUp from '../../components/Auth/SignUp';
 
 import styles from './Page.module.css';
 

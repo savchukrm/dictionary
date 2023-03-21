@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Login from '../components/Auth/Login';
+import Login from '../../components/Auth/Login';
 
 import styles from './Page.module.css';
 

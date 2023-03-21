@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useAuth } from '../../hooks/use-auth';
 
-import { removeUser } from '../../redux/auth/slice';
+import { handleOpen } from '../../redux/modal/slice';
 
 import ModeToggle from './DarkModeToggle';
 import styles from './Header.module.css';
@@ -10,6 +11,10 @@ import styles from './Header.module.css';
 const Header: React.FC = () => {
   const dispatch = useDispatch();
   const { isAuth } = useAuth();
+
+  const openModal = () => {
+    dispatch(handleOpen());
+  };
 
   return (
     <div className={styles.header}>
@@ -24,10 +29,7 @@ const Header: React.FC = () => {
               <button className={styles.headerBtn}>log in</button>
             </Link>
             {isAuth ? (
-              <button
-                className={styles.headerBtn}
-                onClick={() => dispatch(removeUser())}
-              >
+              <button className={styles.headerBtn} onClick={openModal}>
                 log out
               </button>
             ) : (
