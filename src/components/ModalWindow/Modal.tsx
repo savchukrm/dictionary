@@ -1,5 +1,5 @@
-import { CgClose } from 'react-icons/cg';
 import { useDispatch } from 'react-redux';
+import { CgClose } from 'react-icons/cg';
 
 import { handleClose } from '../../redux/modal/slice';
 import { removeUser } from '../../redux/auth/slice';

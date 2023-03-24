@@ -8,9 +8,27 @@
 }
 
 .top {
+  display: flex;
+  justify-content: space-between;
+
   border-bottom: 1px solid #fff;
   padding-bottom: 20px;
   margin-bottom: 1s0px;
+}
+
+.tab {
+  padding-top: 10px;
+  cursor: pointer;
+}
+
+.tab svg {
+  height: 1.7em;
+  width: 1.7em;
+  color: #fff;
+}
+
+.tab svg :hover {
+  fill: #337139;
 }
 
 .h1 {

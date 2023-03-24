@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { setUser } from '../../redux/auth/slice';
+import { addNewUser } from '../../config/firebase';
 
 import Form from './Form';
 
@@ -17,10 +18,13 @@ const SignUp = () => {
         dispatch(
           setUser({ email: user.email, id: user.uid, token: user.refreshToken })
         );
+        addNewUser(user.uid, email, password, []);
+
         navigate('/');
       })
       .catch(() => alert('Invalid user'));
   };
+
   return (
     <div>
       <Form title="register" handleClick={handleRegister} />
