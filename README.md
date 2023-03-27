@@ -2,7 +2,7 @@
 
 Application to search the words and to get their definitions.
 
-The following toolsa are used:
+The following tools are used:
 
 - React.js
 - Redux Toolkit

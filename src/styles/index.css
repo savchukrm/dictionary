@@ -1,13 +1,18 @@
+:root {
+  --color-white: #ece9f4;
+  --color-grey: #1c1c1c;
+
+  --color--greylight: #a0a0a0;
+
+  --color-green: #337139;
+  --color-red: #772b2b;
+}
+
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #1c1c1c;
-  color: #ece9f4;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  background-color: var(--color-grey);
+  color: var(--color-white);
 }

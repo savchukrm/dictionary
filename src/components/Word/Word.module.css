@@ -2,7 +2,7 @@
   padding: 35px 40px;
   margin: 40px auto;
   max-width: 1000px;
-  border: 2px solid #fff;
+  border: 2px solid var(--color-white);
   text-align: left;
   border-radius: 50px;
 }
@@ -11,7 +11,7 @@
   display: flex;
   justify-content: space-between;
 
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid var(--color-white);
   padding-bottom: 20px;
   margin-bottom: 1s0px;
 }
@@ -24,11 +24,11 @@
 .tab svg {
   height: 1.7em;
   width: 1.7em;
-  color: #fff;
+  color: var(--color-white);
 }
 
 .tab svg :hover {
-  fill: #337139;
+  fill: var(--color-green);
 }
 
 .h1 {
@@ -58,7 +58,7 @@ li {
 .synonyms {
   font-size: 16px;
   font-style: italic;
-  color: #aeaeae;
+  color: var(--color-greylight);
 }
 
 .examples {
@@ -80,6 +80,6 @@ h3 {
 .btn {
   font-size: 14px;
   text-transform: uppercase;
-  color: #aeaeae;
-  border-bottom: 1px solid #aeaeae;
+  color: var(--color-greylight);
+  border-bottom: 1px solid var(--color-greylight);
 }

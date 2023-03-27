@@ -2,7 +2,11 @@
   margin: 0 auto;
   margin-top: 60px;
   padding: 50px;
-  border: 1px solid #ffffff;
+  border: 1px solid var(--color-white);
   border-radius: 50px;
   max-width: 500px;
+}
+
+.block a {
+  color: var(--color-green);
 }

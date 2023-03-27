@@ -5,10 +5,10 @@
   right: 0;
   top: 35%;
   padding: 50px;
-  border: 1px solid #ffffff;
+  border: 1px solid var(--color-white);
   border-radius: 20px;
   max-width: 500px;
-  background-color: #1c1c1c;
+  background-color: var(--color-grey);
 }
 
 .top {
@@ -19,7 +19,7 @@
   position: absolute;
   bottom: 21px;
   right: -26px;
-  color: #ffffff;
+  color: var(--color-white);
 }
 
 .smallBtn svg {
@@ -44,11 +44,16 @@
 }
 
 .btnYes {
-  background-color: #772b2b;
-  color: #ffffff;
+  background-color: var(--color-red);
+  color: var(--color-white);
 }
 
 .btnNo {
-  background-color: #337139;
-  color: #ffffff;
+  background-color: var(--color-green);
+  color: var(--color-white);
+}
+
+.block button:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
 }
