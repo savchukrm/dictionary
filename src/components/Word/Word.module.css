@@ -2,7 +2,7 @@
   padding: 35px 40px;
   margin: 40px auto;
   max-width: 1000px;
-  border: 2px solid var(--color-white);
+  border: 2px solid var(--color--greysecond);
   text-align: left;
   border-radius: 50px;
 }
@@ -11,9 +11,9 @@
   display: flex;
   justify-content: space-between;
 
-  border-bottom: 1px solid var(--color-white);
+  border-bottom: 2px solid var(--color--greysecond);
   padding-bottom: 20px;
-  margin-bottom: 1s0px;
+  margin-bottom: 10px;
 }
 
 .tab {
@@ -24,7 +24,7 @@
 .tab svg {
   height: 1.7em;
   width: 1.7em;
-  color: var(--color-white);
+  color: var(--color--greysecond);
 }
 
 .tab svg :hover {
@@ -69,7 +69,7 @@ li {
   margin-bottom: 10px;
 }
 
-h3 {
+.word h3 {
   margin-bottom: 15px;
 }
 
@@ -81,5 +81,5 @@ h3 {
   font-size: 14px;
   text-transform: uppercase;
   color: var(--color-greylight);
-  border-bottom: 1px solid var(--color-greylight);
+  border-bottom: 1px solid var(--color--greysecond);
 }

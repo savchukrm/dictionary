@@ -12,7 +12,7 @@ import './styles/App.css';
 
 function App() {
   return (
-    <div className="App">
+    <>
       <Header />
       <Routes>
         <Route index={true} element={<Main />} />
@@ -21,7 +21,7 @@ function App() {
         <Route path="/modal" element={<ModalWindow />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </div>
+    </>
   );
 }
 

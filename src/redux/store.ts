@@ -5,9 +5,10 @@ import words from './words/slice';
 import search from './search/slice';
 import user from './auth/slice';
 import modal from './modal/slice';
+import mode from './mode/slice';
 
 export const store = configureStore({
-  reducer: { words, search, user, modal },
+  reducer: { words, search, user, modal, mode },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

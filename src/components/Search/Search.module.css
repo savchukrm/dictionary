@@ -1,17 +1,17 @@
 .formInput {
-  background-color: var(--color-white);
   border-radius: 35px;
   padding: 10px 30px;
+  border: 2px solid var(--color-grey);
 }
 
 .formBtn {
   margin-left: 15px;
-  color: var(--color-white);
-  background-color: var(--color-green);
+  color: inherit;
+  background-color: var(--color--greysecond);
   font-size: 20px;
   font-weight: 500;
   padding: 10px 30px;
-  border: 1px solid var(--color-white);
+  border: 2px solid var(--color--greysecond);
   border-radius: 35px;
 }
 
@@ -21,5 +21,5 @@
 }
 
 .formBtn:hover {
-  background-color: var(--color-red);
+  background-color: var(--color-green);
 }
