@@ -11,6 +11,9 @@ const LoginPage: React.FC = () => {
       <p>
         Or <Link to="/register"> register</Link>
       </p>
+      <Link to="/">
+        <button className={styles.btnReturn}>Return on main page</button>
+      </Link>
     </div>
   );
 };

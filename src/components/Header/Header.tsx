@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useAuth } from '../../hooks/use-auth';
 
+import { useAuth } from '../../hooks/use-auth';
 import { handleOpen } from '../../redux/modal/slice';
 
 import ModeToggle from './DarkModeToggle';
 import styles from './Header.module.css';
 
-const Header: React.FC = () => {
+const Header = () => {
   const dispatch = useDispatch();
   const { isAuth } = useAuth();
 
@@ -27,9 +27,10 @@ const Header: React.FC = () => {
             <Link to="/login">
               <button className={styles.headerBtn}>Log in</button>
             </Link>
+
             {isAuth ? (
               <button className={styles.headerBtn} onClick={openModal}>
-                log out
+                Log out
               </button>
             ) : (
               <Link to="/register">

@@ -1,0 +1,25 @@
+.notFound {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.notFound h2 {
+  font-size: 26px;
+  font-weight: 500;
+  padding-bottom: 10px;
+}
+
+.btn {
+  display: inline;
+  color: var(--color-white);
+  background-color: var(--color--greysecond);
+  padding: 10px 30px;
+  border: 2px solid var(--color--greysecond);
+  border-radius: 35px;
+}
+
+.btn:hover {
+  background-color: var(--color-green);
+}

@@ -1,25 +1,35 @@
+.form {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
 .formInput {
-  border-radius: 35px;
+  border-radius: 30px;
   padding: 10px 30px;
   border: 2px solid var(--color-grey);
 }
 
 .formBtn {
-  margin-left: 15px;
-  color: inherit;
-  background-color: var(--color--greysecond);
-  font-size: 20px;
   font-weight: 500;
+  color: var(--color-white);
+  font-size: 20px;
+  background-color: var(--color--greysecond);
+  border-radius: 30px;
   padding: 10px 30px;
-  border: 2px solid var(--color--greysecond);
-  border-radius: 35px;
 }
 
 .formBtn:disabled {
-  background-color: var(--color-greylight);
   cursor: initial;
 }
 
 .formBtn:hover {
   background-color: var(--color-green);
+  color: var(--color-white);
+}
+
+@media (max-width: 450px) {
+  .formInput {
+    width: 200px;
+  }
 }

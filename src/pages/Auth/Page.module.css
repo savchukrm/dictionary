@@ -1,7 +1,7 @@
 .block {
   margin: 0 auto;
   margin-top: 60px;
-  padding: 50px;
+  padding: 50px 50px 40px;
   border: 2px solid var(--color--greysecond);
   border-radius: 50px;
   max-width: 500px;
@@ -18,5 +18,14 @@
 }
 
 .block a:hover {
+  text-decoration: underline;
+}
+
+.btnReturn {
+  margin-top: 20px;
+  color: var(--color--greylight);
+}
+
+.btnReturn:hover {
   text-decoration: underline;
 }

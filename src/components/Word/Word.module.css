@@ -83,3 +83,21 @@ li {
   color: var(--color-greylight);
   border-bottom: 1px solid var(--color--greysecond);
 }
+
+@media (max-width: 1150px) {
+  .word {
+    max-width: 860px;
+  }
+}
+
+@media (max-width: 920px) {
+  .word {
+    max-width: 660px;
+  }
+}
+
+@media (max-width: 720px) {
+  .word {
+    border: none;
+  }
+}

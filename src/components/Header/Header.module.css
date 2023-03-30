@@ -1,5 +1,4 @@
 header {
-  display: flex;
   padding: 20px 0;
   align-items: center;
   border-bottom: 2px solid var(--color-white);
@@ -33,4 +32,16 @@ header {
   transform: scale(1.1);
   transition: transform 0.2s ease-in-out;
   text-decoration: underline;
+}
+
+@media (max-width: 1230px) {
+  .headerRow {
+    padding: 0 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .headerLogo {
+    font-size: 25px;
+  }
 }
