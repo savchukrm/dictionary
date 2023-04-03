@@ -1,9 +1,13 @@
 import { useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
+
 import { RootState } from '../redux/store';
 
 const Image = () => {
   const { words, status } = useSelector((state: RootState) => state.words);
   const { mode } = useSelector((state: RootState) => state.mode);
+
+  const isDesktop = useMediaQuery({ maxWidth: 650 });
 
   return (
     <div>
@@ -18,16 +22,30 @@ const Image = () => {
         />
       )}
 
-      {status === 'loading' && (
-        <img
-          width={500}
-          height={500}
-          src={
-            mode === 'dark' ? '/img/Loading-light.png' : '/img/Loading-dark.png'
-          }
-          alt="loading"
-        />
-      )}
+      {status === 'loading' &&
+        (!isDesktop ? (
+          <img
+            width={500}
+            height={500}
+            src={
+              mode === 'dark'
+                ? '/img/Loading-light.png'
+                : '/img/Loading-dark.png'
+            }
+            alt="loading"
+          />
+        ) : (
+          <img
+            width={500}
+            height={500}
+            src={
+              mode === 'dark'
+                ? '/img/Loading-small-light.png'
+                : '/img/Loading-small-dark.png'
+            }
+            alt="loading"
+          />
+        ))}
 
       {status === 'success' && words.definitions.length === 0 && (
         <div className="sorry">

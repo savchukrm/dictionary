@@ -1,44 +1,15 @@
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 
-import { useAuth } from '../../hooks/use-auth';
-import { handleOpen } from '../../redux/modal/slice';
-
-import ModeToggle from './DarkModeToggle';
-import styles from './Header.module.css';
+import BrowserNav from './Nav/BrowserNav';
+import MobileNav from './Nav/MobileNav';
 
 const Header = () => {
-  const dispatch = useDispatch();
-  const { isAuth } = useAuth();
-
-  const openModal = () => {
-    dispatch(handleOpen());
-  };
+  const isDesktop = useMediaQuery({ maxWidth: 650 });
 
   return (
     <header>
       <div className="container">
-        <div className={styles.headerRow}>
-          <Link to="/">
-            <h3 className={styles.headerLogo}>Meaningo</h3>
-          </Link>
-          <ul className={styles.headerBtnRow}>
-            <ModeToggle />
-            <Link to="/login">
-              <button className={styles.headerBtn}>Log in</button>
-            </Link>
-
-            {isAuth ? (
-              <button className={styles.headerBtn} onClick={openModal}>
-                Log out
-              </button>
-            ) : (
-              <Link to="/register">
-                <button className={styles.headerBtn}>Sign up</button>
-              </Link>
-            )}
-          </ul>
-        </div>
+        {!isDesktop ? <BrowserNav /> : <MobileNav />}
       </div>
     </header>
   );

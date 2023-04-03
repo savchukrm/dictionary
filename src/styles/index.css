@@ -32,3 +32,11 @@ body {
 .dark-border {
   border: 2px solid var(--color-grey);
 }
+
+.icon-light svg {
+  fill: var(--color-grey);
+}
+
+.icon-dark svg {
+  fill: var(--color-white);
+}

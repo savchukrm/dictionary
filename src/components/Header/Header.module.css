@@ -2,6 +2,7 @@ header {
   padding: 20px 0;
   align-items: center;
   border-bottom: 2px solid var(--color-white);
+  color: inherit;
 }
 
 .headerRow {
@@ -34,6 +35,41 @@ header {
   text-decoration: underline;
 }
 
+.openNav {
+  position: relative;
+  top: 6px;
+
+  font-size: 2.5em;
+  color: inherit;
+}
+
+.mobileNav {
+  display: flex;
+
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 15px;
+
+  text-align: center;
+}
+
+.navClose {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+
+  font-size: 2em;
+  color: inherit;
+}
+
 @media (max-width: 1230px) {
   .headerRow {
     padding: 0 30px;
@@ -43,5 +79,9 @@ header {
 @media (max-width: 600px) {
   .headerLogo {
     font-size: 25px;
+  }
+
+  .headerRow {
+    padding: 0 15px;
   }
 }
