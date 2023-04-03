@@ -11,14 +11,30 @@ const Form: React.FC<FormProps> = ({ title, handleClick }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [isValid, setIsValid] = useState(false);
+
+  function handleEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const newEmail = event.target.value;
+
+    setIsValid(emailRegex.test(newEmail));
+
+    setEmail(event.target.value);
+  }
+
   return (
     <div className={styles.block}>
       <input
         type="email"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={handleEmailChange}
         placeholder="email"
       ></input>
+
+      {!isValid && email.length > 3 && (
+        <p className={styles.error}>Email is invalid</p>
+      )}
+
       <input
         type="password"
         value={password}
@@ -26,7 +42,17 @@ const Form: React.FC<FormProps> = ({ title, handleClick }) => {
         placeholder="password"
       ></input>
 
-      <button onClick={() => handleClick(email, password)}> {title}</button>
+      {password.length < 6 && password.length > 0 && (
+        <p className={styles.error}>At least 6 characters in length</p>
+      )}
+
+      <button
+        disabled={!isValid || password.length < 6}
+        onClick={() => handleClick(email, password)}
+      >
+        {' '}
+        {title}
+      </button>
     </div>
   );
 };

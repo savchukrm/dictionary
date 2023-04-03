@@ -58,7 +58,7 @@ li {
 .synonyms {
   font-size: 16px;
   font-style: italic;
-  color: var(--color-greylight);
+  color: var(--color--greylight);
 }
 
 .examples {
@@ -99,5 +99,20 @@ li {
 @media (max-width: 720px) {
   .word {
     border: none;
+  }
+}
+
+@media (max-width: 660px) {
+  .word {
+    max-width: 380px;
+    padding: 0 0 0 20px;
+  }
+
+  .list ul {
+    padding-left: 10px;
+  }
+
+  .examples {
+    padding-left: 28px;
   }
 }

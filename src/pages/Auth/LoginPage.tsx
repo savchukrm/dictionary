@@ -6,7 +6,7 @@ import styles from './Page.module.css';
 const LoginPage: React.FC = () => {
   return (
     <div className={styles.block}>
-      <h1>Login</h1>
+      <h1>Log in</h1>
       <Login />
       <p>
         Or <Link to="/register"> register</Link>

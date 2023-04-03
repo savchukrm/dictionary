@@ -19,7 +19,7 @@ const Login = () => {
         );
         navigate('/');
       })
-      .catch(() => alert('Invalid user'));
+      .catch((error) => console.log(error));
   };
 
   return (

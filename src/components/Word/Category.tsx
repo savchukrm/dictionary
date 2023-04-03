@@ -90,10 +90,7 @@ const Category = () => {
                   <li>{item[0]}</li>
                   {item[1].length > 0 &&
                     item[1].map((a: string, i: number) => (
-                      <span
-                        key={i}
-                        className={styles.synonyms}
-                      >{`${a}; `}</span>
+                      <span key={i} className={styles.synonyms}>{`${a}⠀`}</span>
                     ))}
                 </ul>
               ))}
