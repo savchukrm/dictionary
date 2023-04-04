@@ -19,3 +19,7 @@ export const addWordToList = (userId, word, definition) => {
     }).catch((error) => console.log(error));
   });
 };
+
+export const getUserList = (userId) => {
+  return get(ref(database, `users/${userId}/list`));
+};

@@ -53,6 +53,12 @@ function MobileNav() {
             <CgClose />
           </button>
 
+          {isAuth && (
+            <Link onClick={handleOpenNav} to="/list">
+              <button className={styles.headerBtn}>List</button>
+            </Link>
+          )}
+
           <Link onClick={handleOpenNav} to="/login">
             <button className={styles.headerBtn}>Log in</button>
           </Link>

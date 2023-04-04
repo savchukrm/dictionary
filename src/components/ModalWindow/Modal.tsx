@@ -3,6 +3,7 @@ import { CgClose } from 'react-icons/cg';
 
 import { handleClose } from '../../redux/modal/slice';
 import { removeUser } from '../../redux/auth/slice';
+import { clearList } from '../../redux/list/slice';
 
 import styles from './Modal.module.css';
 
@@ -12,6 +13,7 @@ function Modal() {
   const onConfirm = () => {
     dispatch(handleClose());
     dispatch(removeUser());
+    dispatch(clearList());
   };
 
   const onClose = () => {

@@ -1,7 +1,7 @@
 .word {
   padding: 35px 40px;
   margin: 40px auto;
-  max-width: 1000px;
+  width: 1000px;
   border: 2px solid var(--color--greysecond);
   text-align: left;
   border-radius: 50px;
@@ -17,8 +17,12 @@
 }
 
 .tab {
-  padding-top: 10px;
   cursor: pointer;
+  padding-top: 20px;
+}
+
+.tabColor svg {
+  color: var(--color-green);
 }
 
 .tab svg {
@@ -86,13 +90,13 @@ li {
 
 @media (max-width: 1150px) {
   .word {
-    max-width: 860px;
+    width: 860px;
   }
 }
 
 @media (max-width: 920px) {
   .word {
-    max-width: 660px;
+    width: 660px;
   }
 }
 
@@ -104,7 +108,7 @@ li {
 
 @media (max-width: 660px) {
   .word {
-    max-width: 380px;
+    width: 380px;
     padding: 0 0 0 20px;
   }
 

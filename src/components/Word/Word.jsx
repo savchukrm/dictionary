@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { RootState } from '../../redux/store';
 import { addWordToList } from '../../config/firebase';
 import { useAuth } from '../../hooks/use-auth';
 
@@ -12,8 +11,9 @@ import Examples from './Examples';
 import styles from './Word.module.css';
 
 const Word = () => {
-  const { words, status } = useSelector((state: RootState) => state.words);
-  const { id } = useSelector((state: RootState) => state.user);
+  const { words, status } = useSelector((state) => state.words);
+  const { id } = useSelector((state) => state.user);
+  const { list } = useSelector((state) => state.list);
 
   const { isAuth } = useAuth();
 
@@ -21,7 +21,7 @@ const Word = () => {
     addWordToList(id, words.word, words.definitions);
   };
 
-  const toggleSuggest = () => {};
+  const isWordInList = list.map((el) => el[0]).includes(words.word);
 
   return (
     <div className={styles.word}>
@@ -33,12 +33,16 @@ const Word = () => {
               <span>/{words.pronunciation}/</span>
             </div>
             {isAuth ? (
-              <button className={styles.tab} onClick={toggleIsList}>
-                <BsFillBookmarkFill />
-              </button>
+              <div className={styles.tab}>
+                <button onClick={toggleIsList}>
+                  <BsFillBookmarkFill
+                    style={{ fill: isWordInList && '#337139' }}
+                  />
+                </button>
+              </div>
             ) : (
               <Link to="/login">
-                <div className={styles.tab} onClick={toggleSuggest}>
+                <div className={styles.tab}>
                   <BsFillBookmarkFill />
                 </div>
               </Link>

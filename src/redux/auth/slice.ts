@@ -13,7 +13,7 @@ const initialState: UserItem = {
 };
 
 const user = createSlice({
-  name: 'word',
+  name: 'user',
   initialState,
   reducers: {
     setUser(state, action) {

@@ -21,7 +21,14 @@ const BrowserNav = () => {
         <h3 className={styles.headerLogo}>Meaningo</h3>
       </Link>
       <ul className={styles.headerBtnRow}>
+        {isAuth && (
+          <Link to="/list">
+            <button className={styles.headerBtn}>List</button>
+          </Link>
+        )}
+
         <ModeToggle />
+
         <Link to="/login">
           <button className={styles.headerBtn}>Log in</button>
         </Link>

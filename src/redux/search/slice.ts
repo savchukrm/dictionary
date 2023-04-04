@@ -9,7 +9,7 @@ const initialState: DataWordState = {
 };
 
 const dataWord = createSlice({
-  name: 'word',
+  name: 'searchWord',
   initialState,
   reducers: {
     searchWord(state, action) {
