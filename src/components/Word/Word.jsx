@@ -1,7 +1,11 @@
+import { useEffect, useState } from 'react';
+
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addWordToList } from '../../config/firebase';
+
+import { addWordToList, removeWordFromList } from '../../config/firebase';
 import { useAuth } from '../../hooks/use-auth';
+import { getUserList } from '../../config/firebase';
 
 import { BsFillBookmarkFill } from 'react-icons/bs';
 
@@ -13,15 +17,27 @@ import styles from './Word.module.css';
 const Word = () => {
   const { words, status } = useSelector((state) => state.words);
   const { id } = useSelector((state) => state.user);
-  const { list } = useSelector((state) => state.list);
 
   const { isAuth } = useAuth();
 
+  const [isInList, setIsInList] = useState();
+
   const toggleIsList = () => {
-    addWordToList(id, words.word, words.definitions);
+    isInList
+      ? removeWordFromList(id, words.word)
+      : addWordToList(id, words.word, words.definitions);
+
+    setIsInList((prev) => !prev);
   };
 
-  const isWordInList = list.map((el) => el[0]).includes(words.word);
+  useEffect(() => {
+    getUserList(id)
+      .then((res) => {
+        if (res.val() !== null)
+          setIsInList(Object.keys(res.val()).some((el) => el === words.word));
+      })
+      .catch((error) => console.log(error));
+  }, [id, words.word, isInList]);
 
   return (
     <div className={styles.word}>
@@ -35,9 +51,7 @@ const Word = () => {
             {isAuth ? (
               <div className={styles.tab}>
                 <button onClick={toggleIsList}>
-                  <BsFillBookmarkFill
-                    style={{ fill: isWordInList && '#337139' }}
-                  />
+                  <BsFillBookmarkFill style={{ fill: isInList && '#337139' }} />
                 </button>
               </div>
             ) : (

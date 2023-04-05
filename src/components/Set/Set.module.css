@@ -1,0 +1,22 @@
+.setMain {
+  display: flex;
+}
+
+.setBlock {
+  padding: 25px 30px;
+  margin-bottom: 20px;
+
+  border: 2px solid var(--color--greysecond);
+  text-align: left;
+  border-radius: 20px;
+}
+
+.setBlock h3 {
+  text-transform: capitalize;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.setBlock p {
+  font-size: 15px;
+}

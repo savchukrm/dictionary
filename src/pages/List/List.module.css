@@ -1,0 +1,16 @@
+.listBlock {
+  margin-top: 30px;
+}
+
+.listBlock h1 {
+  font-size: 1.7em;
+}
+
+.content {
+  padding: 55px 40px;
+  margin: 40px auto;
+  max-width: 1000px;
+  border: 2px solid var(--color--greysecond);
+  text-align: left;
+  border-radius: 50px;
+}

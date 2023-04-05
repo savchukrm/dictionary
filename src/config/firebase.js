@@ -1,5 +1,5 @@
 import apps from '../firebase';
-import { ref, set, get } from 'firebase/database';
+import { ref, set, get, remove } from 'firebase/database';
 
 const { database } = apps;
 
@@ -18,6 +18,10 @@ export const addWordToList = (userId, word, definition) => {
       [word]: definition,
     }).catch((error) => console.log(error));
   });
+};
+
+export const removeWordFromList = (userId, word) => {
+  remove(ref(database, `users/${userId}/list/${word}`));
 };
 
 export const getUserList = (userId) => {

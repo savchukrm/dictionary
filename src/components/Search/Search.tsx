@@ -6,6 +6,7 @@ import { searchWord } from '../../redux/search/slice';
 import { fetchWords } from '../../redux/words/asynAction';
 
 import styles from './Search.module.css';
+
 const Search = () => {
   const dispatch = useAppDispatch();
   const [validForm, setValidForm] = useState(false);

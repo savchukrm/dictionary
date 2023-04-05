@@ -31,8 +31,10 @@
   color: var(--color--greysecond);
 }
 
-.tab svg :hover {
-  fill: var(--color-green);
+@media only screen and (min-width: 1024px) {
+  .tab svg :hover {
+    fill: var(--color-green);
+  }
 }
 
 .h1 {
