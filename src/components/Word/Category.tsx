@@ -10,7 +10,7 @@ const Category = () => {
 
   const { words } = useSelector((state: RootState) => state.words);
 
-  const nouns = words.definitions.reduce((all: [string, string[]][], obj) => {
+  const nouns = words.results.reduce((all: [string, string[]][], obj) => {
     if (obj.partOfSpeech === 'noun') {
       const synonyms = Array.isArray(obj.synonyms)
         ? obj.synonyms
@@ -20,7 +20,7 @@ const Category = () => {
     return all;
   }, []);
 
-  const verbs = words.definitions.reduce((all: [string, string[]][], obj) => {
+  const verbs = words.results.reduce((all: [string, string[]][], obj) => {
     if (obj.partOfSpeech === 'verb') {
       const synonyms = Array.isArray(obj.synonyms)
         ? obj.synonyms
@@ -30,20 +30,17 @@ const Category = () => {
     return all;
   }, []);
 
-  const adjectives = words.definitions.reduce(
-    (all: [string, string[]][], obj) => {
-      if (obj.partOfSpeech === 'adjective') {
-        const synonyms = Array.isArray(obj.synonyms)
-          ? obj.synonyms
-          : [obj.synonyms];
-        return all.concat([[obj.definition, synonyms]]);
-      }
-      return all;
-    },
-    []
-  );
+  const adjectives = words.results.reduce((all: [string, string[]][], obj) => {
+    if (obj.partOfSpeech === 'adjective') {
+      const synonyms = Array.isArray(obj.synonyms)
+        ? obj.synonyms
+        : [obj.synonyms];
+      return all.concat([[obj.definition, synonyms]]);
+    }
+    return all;
+  }, []);
 
-  const adverbs = words.definitions.reduce((all: [string, string[]][], obj) => {
+  const adverbs = words.results.reduce((all: [string, string[]][], obj) => {
     if (obj.partOfSpeech === 'adverb') {
       const synonyms = Array.isArray(obj.synonyms)
         ? obj.synonyms
@@ -53,7 +50,7 @@ const Category = () => {
     return all;
   }, []);
 
-  const adjectivesSatellite = words.definitions.reduce(
+  const adjectivesSatellite = words.results.reduce(
     (all: [string, string[]][] | any, obj) => {
       if (obj.partOfSpeech === 'adjective satellite') {
         const synonyms = Array.isArray(obj.synonyms)

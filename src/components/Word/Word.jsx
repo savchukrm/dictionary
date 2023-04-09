@@ -11,7 +11,7 @@ import { BsFillBookmarkFill } from 'react-icons/bs';
 
 import Category from './Category';
 
-import Examples from './Examples';
+// import Examples from './Examples';
 import styles from './Word.module.css';
 
 const Word = () => {
@@ -46,7 +46,7 @@ const Word = () => {
           <div className={styles.top}>
             <div>
               <h1 className={styles.h1}>{words.word}</h1>
-              <span>/{words.pronunciation}/</span>
+              <span>/{words.pronunciation.all}/</span>
             </div>
             {isAuth ? (
               <div className={styles.tab}>
@@ -64,7 +64,7 @@ const Word = () => {
           </div>
 
           <Category />
-          {words.examples.length >= 1 && <Examples />}
+          {/* {words.examples.length >= 1 && <Examples />} */}
         </div>
       )}
     </div>

@@ -12,10 +12,9 @@ export type DefinitionsItem = {
 };
 
 export type DataItem = {
-  definitions: DefinitionsItem[];
-  pronunciation: string;
+  results: DefinitionsItem[];
+  pronunciation: '';
   word: string;
-  examples: [];
 };
 
 export interface DataSliceState {

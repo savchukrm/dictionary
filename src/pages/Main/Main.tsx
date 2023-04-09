@@ -19,7 +19,7 @@ const Main = () => {
         {modal && <ModalWindow />}
 
         <Search />
-        {status === 'success' && words.definitions.length >= 1 && <Word />}
+        {status === 'success' && words.results.length >= 1 && <Word />}
         <Image />
       </div>
     </div>

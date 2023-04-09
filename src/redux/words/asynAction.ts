@@ -11,10 +11,10 @@ export const fetchWords = createAsyncThunk(
   async (param: DataWordState) => {
     const options = {
       method: 'GET',
-      url: `https://wordapi18.p.rapidapi.com/words/${param}`,
+      url: `https://wordapi18v1.p.rapidapi.com/words/${param}`,
       headers: {
         'X-RapidAPI-Key': key.id,
-        'X-RapidAPI-Host': 'wordapi18.p.rapidapi.com',
+        'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com',
       },
     };
 
