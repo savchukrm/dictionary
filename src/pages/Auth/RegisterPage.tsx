@@ -11,7 +11,7 @@ const Register: React.FC = () => {
       <p>
         Already have an account? <Link to="/login">log in</Link>
       </p>
-      <Link to="/">
+      <Link to="/main">
         <button className={styles.btnReturn}>Return on main page</button>
       </Link>
     </div>

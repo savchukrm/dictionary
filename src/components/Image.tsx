@@ -16,7 +16,9 @@ const Image = () => {
           width={500}
           height={500}
           src={
-            mode === 'dark' ? '/img/search-light.png' : '/img/search-dark.png'
+            mode === 'dark'
+              ? process.env.REACT_APP_PUBLIC_URL + '/img/search-light.png'
+              : process.env.REACT_APP_PUBLIC_URL + '/img/search-dark.png'
           }
           alt="search"
         />
@@ -29,8 +31,8 @@ const Image = () => {
             height={500}
             src={
               mode === 'dark'
-                ? '/img/Loading-light.png'
-                : '/img/Loading-dark.png'
+                ? process.env.REACT_APP_PUBLIC_URL + '/img/Loading-light.png'
+                : process.env.REACT_APP_PUBLIC_URL + '/img/Loading-dark.png'
             }
             alt="loading"
           />
@@ -40,8 +42,10 @@ const Image = () => {
             height={500}
             src={
               mode === 'dark'
-                ? '/img/Loading-small-light.png'
-                : '/img/Loading-small-dark.png'
+                ? process.env.REACT_APP_PUBLIC_URL +
+                  '/img/Loading-small-light.png'
+                : process.env.REACT_APP_PUBLIC_URL +
+                  '/img/Loading-small-dark.png'
             }
             alt="loading"
           />
@@ -56,8 +60,8 @@ const Image = () => {
             height={300}
             src={
               mode === 'dark'
-                ? '/img/sorry-pana-light.png'
-                : '/img/sorry-pana-dark.png'
+                ? process.env.REACT_APP_PUBLIC_URL + '/img/sorry-pana-light.png'
+                : process.env.REACT_APP_PUBLIC_URL + '/img/sorry-pana-dark.png'
             }
             alt="sorry"
           />

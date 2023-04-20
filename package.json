@@ -1,5 +1,6 @@
 {
-  "name": "words",
+  "homepage": "https://savchukrm.github.io/dictionary",
+  "name": "dictionary",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -23,6 +24,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "lint": "eslint.js",
+    "lint:js": "eslint src/**/*.{js,jsx}",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -49,6 +54,7 @@
   "devDependencies": {
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "gh-pages": "^5.0.0",
     "ts-loader": "^9.4.2",
     "typescript": "^4.9.5"
   }

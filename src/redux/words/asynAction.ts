@@ -4,7 +4,7 @@ import { DataWordState } from '../search/slice';
 
 import axios from 'axios';
 
-import { key } from '../../key';
+const API_KEY = process.env.REACT_APP_DICTIONARY_API_KEY;
 
 export const fetchWords = createAsyncThunk(
   'words/fetchWordsStatus',
@@ -13,7 +13,7 @@ export const fetchWords = createAsyncThunk(
       method: 'GET',
       url: `https://wordapi18v1.p.rapidapi.com/words/${param}`,
       headers: {
-        'X-RapidAPI-Key': key.id,
+        'X-RapidAPI-Key': API_KEY,
         'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com',
       },
     };

@@ -15,7 +15,7 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route index={true} element={<Main />} />
+        <Route index={true} path="/" element={<Main />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/list" element={<List />} />
