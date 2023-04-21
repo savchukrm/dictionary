@@ -5,9 +5,9 @@ import { handleClose } from '../../redux/modal/slice';
 import { removeUser } from '../../redux/auth/slice';
 import { clearList } from '../../redux/list/slice';
 
-import styles from './Modal.module.css';
+import styles from './ModalWindow.module.css';
 
-function Modal() {
+function ModalWindow() {
   const dispatch = useDispatch();
 
   const onConfirm = () => {
@@ -40,4 +40,4 @@ function Modal() {
   );
 }
 
-export default Modal;
+export default ModalWindow;

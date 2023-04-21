@@ -51,10 +51,10 @@ const Image = () => {
           />
         ))}
 
-      {status === 'success' && words.results.length === 0 && (
+      {status === 'error' && (
         <div className="sorry">
           <h3>You have no matching search terms.</h3>
-          <h4>Please make sure that you entered the word correctly.</h4>
+          <h4>Please make sure that you've entered the word correctly.</h4>
           <img
             width={300}
             height={300}
