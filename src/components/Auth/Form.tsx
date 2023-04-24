@@ -5,9 +5,10 @@ import styles from './Form.module.css';
 interface FormProps {
   title: string;
   handleClick: (email: string, password: string) => void;
+  error: string;
 }
 
-const Form: React.FC<FormProps> = ({ title, handleClick }) => {
+const Form: React.FC<FormProps> = ({ title, handleClick, error }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -24,6 +25,8 @@ const Form: React.FC<FormProps> = ({ title, handleClick }) => {
 
   return (
     <div className={styles.block}>
+      {error && <p className={styles.error}>{error}</p>}
+
       <input
         type="email"
         value={email}
