@@ -1,16 +1,18 @@
 import { useSelector } from 'react-redux';
 
+import { RootState } from '../../redux/store';
+
 import styles from './Set.module.css';
 
-function Set() {
-  const { list } = useSelector((state) => state.list);
+function Set(): JSX.Element {
+  const { list } = useSelector((state: RootState) => state.list);
 
   return (
     <div>
-      {list.map((el, i) => (
+      {list.map((el: [string, { definition: string }[]], i: number) => (
         <div className={styles.setBlock} key={i}>
           <h3>{el[0]}</h3>
-          {el[1].slice(0, 1).map((obj, i) => (
+          {el[1].slice(0, 1).map((obj: { definition: string }, i: number) => (
             <p key={i}>{obj.definition}</p>
           ))}
         </div>

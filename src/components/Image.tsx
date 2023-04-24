@@ -3,7 +3,7 @@ import { useMediaQuery } from 'react-responsive';
 
 import { RootState } from '../redux/store';
 
-const Image = () => {
+const Image: React.FC = () => {
   const { words, status } = useSelector((state: RootState) => state.words);
   const { mode } = useSelector((state: RootState) => state.mode);
 
@@ -51,7 +51,8 @@ const Image = () => {
           />
         ))}
 
-      {status === 'error' && (
+      {((status === 'error' && !words.word) ||
+        (status === 'success' && !words.results)) && (
         <div className="sorry">
           <h3>You have no matching search terms.</h3>
           <h4>Please make sure that you've entered the word correctly.</h4>

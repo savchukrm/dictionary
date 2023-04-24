@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { RootState } from '../../redux/store';
 import { addWordToList, removeWordFromList } from '../../config/firebase';
 import { useAuth } from '../../hooks/use-auth';
 import { getUserList } from '../../config/firebase';
@@ -11,21 +12,20 @@ import { BsFillBookmarkFill } from 'react-icons/bs';
 
 import Category from './Category';
 
-// import Examples from './Examples';
 import styles from './Word.module.css';
 
-const Word = () => {
-  const { words, status } = useSelector((state) => state.words);
-  const { id } = useSelector((state) => state.user);
+const Word = (): JSX.Element => {
+  const { words, status } = useSelector((state: RootState) => state.words);
+  const { id } = useSelector((state: RootState) => state.user);
 
   const { isAuth } = useAuth();
 
-  const [isInList, setIsInList] = useState();
+  const [isInList, setIsInList] = useState<boolean>();
 
-  const toggleIsList = () => {
+  const toggleIsList = (): void => {
     isInList
       ? removeWordFromList(id, words.word)
-      : addWordToList(id, words.word, words.definitions);
+      : addWordToList(id, words.word, words.results);
 
     setIsInList((prev) => !prev);
   };
@@ -41,7 +41,7 @@ const Word = () => {
 
   return (
     <div className={styles.word}>
-      {status === 'success' && (
+      {status === 'success' && words.results && (
         <div>
           <div className={styles.top}>
             <div>
@@ -51,7 +51,10 @@ const Word = () => {
             {isAuth ? (
               <div className={styles.tab}>
                 <button onClick={toggleIsList}>
-                  <BsFillBookmarkFill style={{ fill: isInList && '#337139' }} />
+                  <BsFillBookmarkFill
+                    className={styles.bookmarkIcon}
+                    style={{ fill: isInList ? '#337139' : '#525f7f' }}
+                  />
                 </button>
               </div>
             ) : (
@@ -64,7 +67,6 @@ const Word = () => {
           </div>
 
           <Category />
-          {/* {words.examples.length >= 1 && <Examples />} */}
         </div>
       )}
     </div>

@@ -13,7 +13,7 @@ export type DefinitionsItem = {
 
 export type DataItem = {
   results: DefinitionsItem[];
-  pronunciation: '';
+  pronunciation: { all: string };
   word: string;
 };
 

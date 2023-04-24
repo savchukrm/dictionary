@@ -11,11 +11,11 @@ export const addNewUser = (userId, email, password, list) => {
   });
 };
 
-export const addWordToList = (userId, word, definition) => {
+export const addWordToList = (userId, word, results) => {
   get(ref(database, `users/${userId}/list`)).then((res) => {
     set(ref(database, 'users/' + userId + '/list'), {
       ...res.val(),
-      [word]: definition,
+      [word]: results,
     }).catch((error) => console.log(error));
   });
 };

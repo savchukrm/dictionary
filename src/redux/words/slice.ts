@@ -6,7 +6,7 @@ import { DataSliceState, Status } from './types';
 const initialState: DataSliceState = {
   words: {
     results: [{ definition: '', partOfSpeech: '', synonyms: [] }],
-    pronunciation: '',
+    pronunciation: { all: '' },
     word: '',
   },
   status: Status.NOTHING,
@@ -25,7 +25,7 @@ const dataWords = createSlice({
       state.status = Status.LOADING;
       state.words = {
         results: [{ definition: '', partOfSpeech: '', synonyms: [] }],
-        pronunciation: '',
+        pronunciation: { all: '' },
         word: '',
       };
     });
@@ -37,7 +37,7 @@ const dataWords = createSlice({
       state.status = Status.ERROR;
       state.words = {
         results: [{ definition: '', partOfSpeech: '', synonyms: [] }],
-        pronunciation: '',
+        pronunciation: { all: '' },
         word: '',
       };
     });
