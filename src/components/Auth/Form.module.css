@@ -11,7 +11,7 @@
   margin-bottom: 30px;
 }
 
-.block button {
+.btnForm {
   background-color: var(--color--greysecond);
   color: var(--color-white);
   border-radius: 40px;
@@ -19,13 +19,36 @@
   text-transform: uppercase;
 }
 
-.block button:disabled {
+.btnForm {
   background-color: rgb(98, 98, 98);
   pointer-events: none;
 }
 
-.block button:hover {
+.btnForm {
   background-color: var(--color-green);
+}
+
+.btnGoogle {
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 40px;
+}
+
+.btnGoogle:hover {
+  background-color: #045fc0b9;
+  color: #ffffff;
+}
+
+.btnGoogle svg {
+  position: relative;
+  bottom: 2px;
+
+  height: 1.4em;
+  width: 1.4em;
+}
+
+.block p {
+  margin: 13px 0;
 }
 
 .error {

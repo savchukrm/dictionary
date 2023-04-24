@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from 'firebase/auth';
 
 import { setUser } from '../../redux/auth/slice';
 import { addNewUser } from '../../config/firebase';
@@ -14,9 +19,10 @@ const SignUp = (): JSX.Element => {
 
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleRegister = (email: string, password: string) => {
-    const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+  const auth = getAuth();
 
+  const handleRegister = (email: string, password: string) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         dispatch(
@@ -48,11 +54,29 @@ const SignUp = (): JSX.Element => {
       });
   };
 
+  const signUpViaGoogle = () => {
+    signInWithPopup(auth, provider).then(({ user }) => {
+      dispatch(
+        setUser({ email: user.email, id: user.uid, token: user.refreshToken })
+      );
+
+      addNewUser(
+        user.uid,
+        user.email,
+        Math.floor(Math.random() * 900000) + 100000,
+        []
+      );
+
+      navigate('/');
+    });
+  };
+
   return (
     <div>
       <Form
         title="register"
         handleClick={handleRegister}
+        viaGoogle={signUpViaGoogle}
         error={errorMessage}
       />
     </div>

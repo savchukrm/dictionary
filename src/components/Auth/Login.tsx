@@ -2,7 +2,14 @@ import { useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from 'firebase/auth';
+
 import { setUser } from '../../redux/auth/slice';
 
 import Form from './Form';
@@ -11,11 +18,12 @@ const Login = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const provider = new GoogleAuthProvider();
+  const auth = getAuth();
+
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleLogin = (email: string, password: string) => {
-    const auth = getAuth();
-
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -43,9 +51,24 @@ const Login = (): JSX.Element => {
       });
   };
 
+  function loginViaGoogle() {
+    signInWithPopup(auth, provider).then(({ user }) => {
+      dispatch(
+        setUser({ email: user.email, id: user.uid, token: user.refreshToken })
+      );
+
+      navigate('/');
+    });
+  }
+
   return (
     <div>
-      <Form title="log in" handleClick={handleLogin} error={errorMessage} />
+      <Form
+        title="log in"
+        handleClick={handleLogin}
+        error={errorMessage}
+        viaGoogle={loginViaGoogle}
+      />
     </div>
   );
 };
