@@ -8,6 +8,8 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
+  getAdditionalUserInfo,
+  UserCredential,
 } from 'firebase/auth';
 
 import { setUser } from '../../redux/auth/slice';
@@ -34,7 +36,6 @@ const Login = (): JSX.Element => {
       })
       .catch((error) => {
         let errorCode = error.code;
-
         switch (errorCode) {
           case 'auth/user-not-found':
             setErrorMessage('User not found');
@@ -52,13 +53,39 @@ const Login = (): JSX.Element => {
   };
 
   function loginViaGoogle() {
-    signInWithPopup(auth, provider).then(({ user }) => {
-      dispatch(
-        setUser({ email: user.email, id: user.uid, token: user.refreshToken })
-      );
+    signInWithPopup(auth, provider)
+      .then((credential: UserCredential) => {
+        const user = credential.user;
+        const additionalUserInfo = getAdditionalUserInfo(credential);
 
-      navigate('/');
-    });
+        if (additionalUserInfo && additionalUserInfo.isNewUser) {
+          setErrorMessage(
+            'User not found. Please go to the registration page and create an account'
+          );
+          const user = auth.currentUser;
+
+          if (user) {
+            user
+              .delete()
+              .then(() => {})
+              .catch((error) => {
+                console.error(error);
+              });
+          }
+        } else {
+          dispatch(
+            setUser({
+              email: user.email,
+              id: user.uid,
+              token: user.refreshToken,
+            })
+          );
+          navigate('/');
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   return (

@@ -19,7 +19,7 @@
   text-transform: uppercase;
 }
 
-.btnForm {
+.btnForm:disabled {
   background-color: rgb(98, 98, 98);
   pointer-events: none;
 }

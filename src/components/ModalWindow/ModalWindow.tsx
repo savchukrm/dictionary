@@ -1,4 +1,6 @@
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 import { CgClose } from 'react-icons/cg';
 
 import { handleClose } from '../../redux/modal/slice';
@@ -7,13 +9,16 @@ import { clearList } from '../../redux/list/slice';
 
 import styles from './ModalWindow.module.css';
 
-function ModalWindow() {
+function ModalWindow(): JSX.Element {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onConfirm = () => {
     dispatch(handleClose());
     dispatch(removeUser());
     dispatch(clearList());
+
+    navigate('/');
   };
 
   const onClose = () => {

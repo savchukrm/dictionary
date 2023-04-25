@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
+import apps from '../../firebase';
 import {
   getAuth,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
 } from 'firebase/auth';
+import { ref, get, set } from 'firebase/database';
 
 import { setUser } from '../../redux/auth/slice';
 import { addNewUser } from '../../config/firebase';
@@ -19,6 +22,7 @@ const SignUp = (): JSX.Element => {
 
   const [errorMessage, setErrorMessage] = useState('');
 
+  const { database } = apps;
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
 
@@ -55,20 +59,36 @@ const SignUp = (): JSX.Element => {
   };
 
   const signUpViaGoogle = () => {
-    signInWithPopup(auth, provider).then(({ user }) => {
-      dispatch(
-        setUser({ email: user.email, id: user.uid, token: user.refreshToken })
-      );
-
-      addNewUser(
-        user.uid,
-        user.email,
-        Math.floor(Math.random() * 900000) + 100000,
-        []
-      );
-
-      navigate('/');
-    });
+    signInWithPopup(auth, provider)
+      .then(({ user }) => {
+        const userRef = ref(database, `users/${user.uid}`);
+        get(userRef).then((snapshot) => {
+          if (snapshot.exists()) {
+            setErrorMessage(
+              'You already have an account. Please log in instead'
+            );
+            return;
+          } else {
+            dispatch(
+              setUser({
+                email: user.email,
+                id: user.uid,
+                token: user.refreshToken,
+              })
+            );
+            set(userRef, {
+              email: user.email,
+              id: user.uid,
+              random: Math.floor(Math.random() * 900000) + 100000,
+              array: [],
+            });
+            navigate('/');
+          }
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
