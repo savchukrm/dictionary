@@ -1,17 +1,18 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { RootState } from '../../redux/store';
 import { getUserList } from '../../config/firebase';
 import { setList, clearList } from '../../redux/list/slice';
 
 import Set from '../../components/Set/Set';
 import styles from './List.module.css';
 
-const List = () => {
+const List = (): JSX.Element => {
   const dispatch = useDispatch();
 
-  const { list } = useSelector((state) => state.list);
-  const { id } = useSelector((state) => state.user);
+  const { list } = useSelector((state: RootState) => state.list);
+  const { id } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     getUserList(id)
