@@ -12,7 +12,11 @@ import {
 
 import styles from './Popup.module.css';
 
-const PopupMenu: React.FC = () => {
+interface PopupProps {
+  setIsNewList: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const PopupMenu: React.FC<PopupProps> = ({ setIsNewList }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [isInList, setIsInList] = useState<boolean>();
@@ -37,6 +41,10 @@ const PopupMenu: React.FC = () => {
       .catch((error) => console.log(error));
   }, [id, words.word, isInList]);
 
+  const handleModal = () => {
+    setIsNewList((prev) => !prev);
+  };
+
   return (
     <div className={styles.popup}>
       <button className={styles.popupBtn} onClick={() => setIsOpen(!isOpen)}>
@@ -44,7 +52,7 @@ const PopupMenu: React.FC = () => {
       </button>
       {isOpen && (
         <ul className={styles.popupOptions}>
-          <li>Create new list</li>
+          <li onClick={handleModal}>Create new list</li>
           <li onClick={toggleIsList}>Favorite</li>
         </ul>
       )}

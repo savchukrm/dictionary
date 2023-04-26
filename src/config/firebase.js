@@ -11,6 +11,18 @@ export const addNewUser = (userId, email, password, list) => {
   });
 };
 
+export const createNewList = (userId, name) => {
+  const now = new Date().toISOString();
+
+  get(ref(database, `users/${userId}/`))
+    .then(() => {
+      set(ref(database, `users/${userId}/${name}`), { createdAt: now }).catch(
+        (error) => console.log(error)
+      );
+    })
+    .catch((error) => console.log(error));
+};
+
 export const addWordToList = (userId, word, results) => {
   get(ref(database, `users/${userId}/list`)).then((res) => {
     set(ref(database, 'users/' + userId + '/list'), {
