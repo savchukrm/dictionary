@@ -32,29 +32,32 @@ const ModalInput: React.FC<ModalProps> = ({ setIsNewList }) => {
   };
 
   return (
-    <div className={styles.block}>
-      <div className={styles.top}>
-        <h3 className={styles.h3}>Create a new list</h3>
-        <button onClick={handleModal} className={styles.smallBtn}>
-          <CgClose />
-        </button>
-      </div>
-      <form className={styles.main} onSubmit={handleSubmit}>
-        <label>
-          List name
+    <div className={styles.modal}>
+      <div className={styles.block}>
+        <div className={styles.top}>
+          <h3 className={styles.h3}>Create a new list</h3>
+          <button onClick={handleModal} className={styles.smallBtn}>
+            <CgClose />
+          </button>
+        </div>
+        <form className={styles.main} onSubmit={handleSubmit}>
+          <label>
+            List name
+            <input
+              className={styles.formInput}
+              type="text"
+              placeholder="e.g. 'Family'"
+              onChange={handleChange}
+            />
+          </label>
           <input
-            className={styles.formInput}
-            type="text"
-            placeholder="e.g. 'Family'"
-            onChange={handleChange}
+            disabled={inputName.length < 1}
+            className={styles.btnConfirm}
+            type="submit"
+            value="Create list"
           />
-        </label>
-        <input
-          className={styles.btnConfirm}
-          type="submit"
-          value="Create list"
-        />
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

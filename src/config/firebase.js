@@ -14,28 +14,32 @@ export const addNewUser = (userId, email, password, list) => {
 export const createNewList = (userId, name) => {
   const now = new Date().toISOString();
 
-  get(ref(database, `users/${userId}/`))
+  get(ref(database, `users/${userId}/lists/`))
     .then(() => {
-      set(ref(database, `users/${userId}/${name}`), { createdAt: now }).catch(
-        (error) => console.log(error)
-      );
+      set(ref(database, `users/${userId}/lists/${name}`), {
+        createdAt: now,
+      }).catch((error) => console.log(error));
     })
     .catch((error) => console.log(error));
 };
 
-export const addWordToList = (userId, word, results) => {
-  get(ref(database, `users/${userId}/list`)).then((res) => {
-    set(ref(database, 'users/' + userId + '/list'), {
+export const addWordToFavorite = (userId, word, results) => {
+  get(ref(database, `users/${userId}/favorite`)).then((res) => {
+    set(ref(database, 'users/' + userId + '/favorite'), {
       ...res.val(),
       [word]: results,
     }).catch((error) => console.log(error));
   });
 };
 
-export const removeWordFromList = (userId, word) => {
-  remove(ref(database, `users/${userId}/list/${word}`));
+export const removeWordFromFavorite = (userId, word) => {
+  remove(ref(database, `users/${userId}/favorite/${word}`));
 };
 
-export const getUserList = (userId) => {
-  return get(ref(database, `users/${userId}/list`));
+export const getUserFavorite = (userId) => {
+  return get(ref(database, `users/${userId}/favorite`));
+};
+
+export const getUserLists = (userId) => {
+  return get(ref(database, `users/${userId}/lists`));
 };

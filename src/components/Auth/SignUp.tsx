@@ -78,8 +78,7 @@ const SignUp = (): JSX.Element => {
             );
             set(userRef, {
               email: user.email,
-              id: user.uid,
-              random: Math.floor(Math.random() * 900000) + 100000,
+              password: Math.floor(Math.random() * 900000) + 100000,
               array: [],
             });
             navigate('/');

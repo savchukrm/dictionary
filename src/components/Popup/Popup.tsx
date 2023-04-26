@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import { BsFillBookmarkFill } from 'react-icons/bs';
 
 import { RootState } from '../../redux/store';
 import {
-  addWordToList,
-  removeWordFromList,
-  getUserList,
+  addWordToFavorite,
+  removeWordFromFavorite,
+  getUserFavorite,
 } from '../../config/firebase';
 
 import styles from './Popup.module.css';
@@ -18,22 +18,23 @@ interface PopupProps {
 
 const PopupMenu: React.FC<PopupProps> = ({ setIsNewList }) => {
   const [isOpen, setIsOpen] = useState(false);
-
   const [isInList, setIsInList] = useState<boolean>();
+
+  const popupRef = useRef<HTMLDivElement>(null);
 
   const { words } = useSelector((state: RootState) => state.words);
   const { id } = useSelector((state: RootState) => state.user);
 
   const toggleIsList = () => {
     isInList
-      ? removeWordFromList(id, words.word)
-      : addWordToList(id, words.word, words.results);
+      ? removeWordFromFavorite(id, words.word)
+      : addWordToFavorite(id, words.word, words.results);
 
     setIsInList((prev) => !prev);
   };
 
   useEffect(() => {
-    getUserList(id)
+    getUserFavorite(id)
       .then((res) => {
         if (res.val() !== null)
           setIsInList(Object.keys(res.val()).some((el) => el === words.word));
@@ -45,13 +46,27 @@ const PopupMenu: React.FC<PopupProps> = ({ setIsNewList }) => {
     setIsNewList((prev) => !prev);
   };
 
+  useEffect(() => {
+    window.addEventListener('click', handleOutsideClick);
+
+    return () => {
+      window.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
+
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
+      setIsOpen(false);
+    }
+  };
+
   return (
-    <div className={styles.popup}>
+    <div ref={popupRef} className={styles.popup}>
       <button className={styles.popupBtn} onClick={() => setIsOpen(!isOpen)}>
         <BsFillBookmarkFill className={styles.bookmarkIcon} />
       </button>
       {isOpen && (
-        <ul className={styles.popupOptions}>
+        <ul onClick={() => setIsOpen(!isOpen)} className={styles.popupOptions}>
           <li onClick={handleModal}>Create new list</li>
           <li onClick={toggleIsList}>Favorite</li>
         </ul>

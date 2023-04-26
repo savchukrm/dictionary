@@ -14,3 +14,18 @@
   text-align: left;
   border-radius: 50px;
 }
+
+.btnAdd {
+  margin-top: 30px;
+  font-weight: 500;
+  color: var(--color-white);
+  font-size: 20px;
+  background-color: var(--color--greysecond);
+  border-radius: 30px;
+  padding: 10px 30px;
+}
+
+.btnAdd:hover {
+  background-color: var(--color-green);
+  color: var(--color-white);
+}
