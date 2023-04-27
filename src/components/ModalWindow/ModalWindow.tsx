@@ -3,9 +3,12 @@ import { useNavigate } from 'react-router-dom';
 
 import { CgClose } from 'react-icons/cg';
 
+import { getAuth } from 'firebase/auth';
+
 import { handleClose } from '../../redux/modal/slice';
 import { removeUser } from '../../redux/auth/slice';
-import { clearList } from '../../redux/list/slice';
+import { clearFavorite } from '../../redux/favorite/slice';
+import { clearLists } from '../../redux/lists/slice';
 
 import styles from './ModalWindow.module.css';
 
@@ -13,10 +16,22 @@ function ModalWindow(): JSX.Element {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const auth = getAuth();
+
   const onConfirm = () => {
     dispatch(handleClose());
-    dispatch(removeUser());
-    dispatch(clearList());
+
+    dispatch(clearFavorite());
+    dispatch(clearLists());
+
+    auth
+      .signOut()
+      .then(() => {
+        dispatch(removeUser());
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
     navigate('/');
   };

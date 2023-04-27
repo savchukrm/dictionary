@@ -1,12 +1,11 @@
 import { useState } from 'react';
-
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import { BsFillBookmarkFill } from 'react-icons/bs';
 
 import { RootState } from '../../redux/store';
 import { useAuth } from '../../hooks/use-auth';
-
-import { BsFillBookmarkFill } from 'react-icons/bs';
 
 import Category from './Category';
 
@@ -15,9 +14,9 @@ import PopupMenu from '../Popup/Popup';
 import ModalInput from '../ModalInput/ModalInput';
 
 const Word = (): JSX.Element => {
-  const { words, status } = useSelector((state: RootState) => state.words);
-
   const { isAuth } = useAuth();
+
+  const { words, status } = useSelector((state: RootState) => state.words);
 
   const [isNewList, setIsNewList] = useState<boolean>(false);
 

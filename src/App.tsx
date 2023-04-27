@@ -1,7 +1,11 @@
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { RootState } from './redux/store';
+
+import { getAuth } from 'firebase/auth';
+import { setUser } from './redux/auth/slice';
 
 import Header from './components/Header/Header';
 
@@ -15,7 +19,20 @@ import Modal from './pages/Modal/Modal';
 import './styles/App.css';
 
 function App() {
+  const dispatch = useDispatch();
+  const auth = getAuth();
+
   const { modal } = useSelector((state: RootState) => state.modal);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        dispatch(
+          setUser({ email: user.email, id: user.uid, token: user.refreshToken })
+        );
+      }
+    });
+  }, []);
 
   return (
     <>
