@@ -9,15 +9,14 @@ import { getUserLists } from '../../config/firebase';
 import { setFavorite, clearFavorite } from '../../redux/favorite/slice';
 import { setLists } from '../../redux/lists/slice';
 
-import Set from '../../components/Set/Set';
-
 import styles from './List.module.css';
+import ListBlock from '../../components/ListBlock/ListBlock';
 
 const List = (): JSX.Element => {
   const dispatch = useDispatch();
 
-  const { favorite } = useSelector((state: RootState) => state.favorite);
   const { id } = useSelector((state: RootState) => state.user);
+  const { lists } = useSelector((state: RootState) => state.lists);
 
   useEffect(() => {
     getUserFavorite(id)
@@ -55,11 +54,16 @@ const List = (): JSX.Element => {
       <h1>My lists</h1>
       <button className={styles.btnAdd}>New list</button>
       <div className={styles.content}>
-        {favorite.length === 0 ? (
-          <p>You do not have any saved items</p>
-        ) : (
-          <Set />
-        )}
+        <ul className={styles.blocks}>
+          <li key={0}>
+            <ListBlock title="favorite" />
+          </li>
+          {lists.map((item, i) => (
+            <li key={i + 1}>
+              <ListBlock title={item[0]} />
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

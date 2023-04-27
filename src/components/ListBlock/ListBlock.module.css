@@ -1,0 +1,16 @@
+.card {
+  padding: 20px;
+
+  border-radius: 30px;
+  background-color: rgb(0, 80, 90);
+  max-width: 380px;
+  height: 132px;
+}
+
+.card h3 {
+  height: 73px;
+}
+
+.card h3::first-letter {
+  text-transform: uppercase;
+}

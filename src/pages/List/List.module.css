@@ -7,12 +7,45 @@
 }
 
 .content {
-  padding: 55px 40px;
+  padding: 50px 20px 50px 40px;
   margin: 40px auto;
   max-width: 1000px;
   border: 2px solid var(--color--greysecond);
   text-align: left;
   border-radius: 50px;
+}
+
+.blocks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.blocks li {
+  width: 100%;
+}
+
+@media screen and (min-width: 1000px) {
+  .blocks li {
+    width: calc((100% - 80px) / 3);
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .content {
+    border: none;
+    padding: 20px;
+  }
+
+  .blocks li {
+    width: calc((100% - 30px) / 2);
+  }
+}
+
+@media screen and (max-width: 475px) {
+  .blocks li {
+    width: 100%;
+  }
 }
 
 .btnAdd {
