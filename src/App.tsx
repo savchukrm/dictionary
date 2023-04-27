@@ -13,7 +13,7 @@ import Main from './pages/Main/Main';
 import LoginPage from './pages/Auth/LoginPage';
 import RegisterPage from './pages/Auth/RegisterPage';
 import NotFound from './pages/NotFound/NotFound';
-import List from './pages/List/List';
+import Lists from './pages/Lists/Lists';
 import Modal from './pages/Modal/Modal';
 
 import './styles/App.css';
@@ -42,7 +42,7 @@ function App() {
         <Route index={true} path="/" element={<Main />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/list" element={<List />} />
+        <Route path="/lists" element={<Lists />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

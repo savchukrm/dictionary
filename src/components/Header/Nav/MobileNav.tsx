@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useAuth } from '../../../hooks/use-auth';
 import { handleOpen } from '../../../redux/modal/slice';
+import { RootState } from '../../../redux/store';
 
 import { BiMenu } from 'react-icons/bi';
 import { CgClose } from 'react-icons/cg';
 
 import ModeToggle from '../DarkModeToggle';
 import styles from '../Header.module.css';
-import { RootState } from '../../../redux/store';
 
 function MobileNav() {
   const [openNav, setOpenNav] = useState(false);
@@ -54,7 +54,7 @@ function MobileNav() {
           </button>
 
           {isAuth && (
-            <Link onClick={handleOpenNav} to="/list">
+            <Link onClick={handleOpenNav} to="/lists">
               <button className={styles.headerBtn}>List</button>
             </Link>
           )}

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { BsFillBookmarkFill } from 'react-icons/bs';
 
@@ -8,6 +9,7 @@ import {
   addWordToFavorite,
   removeWordFromFavorite,
   getUserFavorite,
+  addWordToList,
 } from '../../config/firebase';
 
 import styles from './Popup.module.css';
@@ -24,6 +26,7 @@ const PopupMenu: React.FC<PopupProps> = ({ setIsNewList }) => {
 
   const { words } = useSelector((state: RootState) => state.words);
   const { id } = useSelector((state: RootState) => state.user);
+  const { lists } = useSelector((state: RootState) => state.lists);
 
   const toggleIsList = () => {
     isInList
@@ -41,10 +44,6 @@ const PopupMenu: React.FC<PopupProps> = ({ setIsNewList }) => {
       })
       .catch((error) => console.log(error));
   }, [id, words.word, isInList]);
-
-  const handleModal = () => {
-    setIsNewList((prev) => !prev);
-  };
 
   useEffect(() => {
     window.addEventListener('click', handleOutsideClick);
@@ -65,10 +64,24 @@ const PopupMenu: React.FC<PopupProps> = ({ setIsNewList }) => {
       <button className={styles.popupBtn} onClick={() => setIsOpen(!isOpen)}>
         <BsFillBookmarkFill className={styles.bookmarkIcon} />
       </button>
+
       {isOpen && (
         <ul onClick={() => setIsOpen(!isOpen)} className={styles.popupOptions}>
-          <li onClick={handleModal}>Create new list</li>
+          <Link to="/lists">
+            <li>Create new list</li>
+          </Link>
           <li onClick={toggleIsList}>Favorite</li>
+
+          {lists.map((item, i) => (
+            <li
+              onClick={() =>
+                addWordToList(id, item[0], words.word, words.results)
+              }
+              key={i + 1}
+            >
+              {item[0]}
+            </li>
+          ))}
         </ul>
       )}
     </div>

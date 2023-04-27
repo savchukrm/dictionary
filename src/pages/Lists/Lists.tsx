@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { RootState } from '../../redux/store';
@@ -9,14 +9,18 @@ import { getUserLists } from '../../config/firebase';
 import { setFavorite, clearFavorite } from '../../redux/favorite/slice';
 import { setLists } from '../../redux/lists/slice';
 
-import styles from './List.module.css';
 import ListBlock from '../../components/ListBlock/ListBlock';
+import ModalInput from '../../components/ModalInput/ModalInput';
 
-const List = (): JSX.Element => {
+import styles from './Lists.module.css';
+
+const Lists = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const { id } = useSelector((state: RootState) => state.user);
   const { lists } = useSelector((state: RootState) => state.lists);
+
+  const [isNewList, setIsNewList] = useState<boolean>(false);
 
   useEffect(() => {
     getUserFavorite(id)
@@ -47,12 +51,20 @@ const List = (): JSX.Element => {
     };
 
     fetchData();
-  }, [id]);
+  }, [dispatch, id, lists]);
+
+  const handleModal = () => {
+    setIsNewList((prev) => !prev);
+  };
 
   return (
     <div className={styles.listBlock}>
+      {isNewList && <ModalInput setIsNewList={setIsNewList} />}
+
       <h1>My lists</h1>
-      <button className={styles.btnAdd}>New list</button>
+      <button onClick={handleModal} className={styles.btnAdd}>
+        New list
+      </button>
       <div className={styles.content}>
         <ul className={styles.blocks}>
           <li key={0}>
@@ -69,4 +81,4 @@ const List = (): JSX.Element => {
   );
 };
 
-export default List;
+export default Lists;
