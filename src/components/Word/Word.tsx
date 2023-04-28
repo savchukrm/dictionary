@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -11,18 +10,14 @@ import Category from './Category';
 
 import styles from './Word.module.css';
 import PopupMenu from '../Popup/Popup';
-import ModalInput from '../ModalInput/ModalInput';
 
 const Word = (): JSX.Element => {
   const { isAuth } = useAuth();
 
   const { words, status } = useSelector((state: RootState) => state.words);
 
-  const [isNewList, setIsNewList] = useState<boolean>(false);
-
   return (
     <div className={styles.word}>
-      {isNewList && <ModalInput setIsNewList={setIsNewList} />}
       {status === 'success' && words.results && (
         <div>
           <div className={styles.top}>
@@ -34,7 +29,7 @@ const Word = (): JSX.Element => {
             </div>
             {isAuth ? (
               <div className={styles.tab}>
-                <PopupMenu setIsNewList={setIsNewList} />
+                <PopupMenu />
               </div>
             ) : (
               <Link to="/login">

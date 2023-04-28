@@ -29,9 +29,11 @@ const BrowserNav = () => {
 
         <ModeToggle />
 
-        <Link to="/login">
-          <button className={styles.headerBtn}>Log in</button>
-        </Link>
+        {!isAuth && (
+          <Link to="/login">
+            <button className={styles.headerBtn}>Log in</button>
+          </Link>
+        )}
 
         {isAuth ? (
           <button className={styles.headerBtn} onClick={openModal}>

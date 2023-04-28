@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { BsFillBookmarkFill } from 'react-icons/bs';
+import { ImCheckmark } from 'react-icons/im';
 
 import { RootState } from '../../redux/store';
 import {
@@ -10,31 +11,21 @@ import {
   removeWordFromFavorite,
   getUserFavorite,
   addWordToList,
+  removeWordFromList,
 } from '../../config/firebase';
 
 import styles from './Popup.module.css';
 
-interface PopupProps {
-  setIsNewList: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const PopupMenu: React.FC<PopupProps> = ({ setIsNewList }) => {
+const PopupMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isInList, setIsInList] = useState<boolean>();
+  const [listStates, setListStates] = useState<Record<string, boolean>>({});
 
   const popupRef = useRef<HTMLDivElement>(null);
 
   const { words } = useSelector((state: RootState) => state.words);
   const { id } = useSelector((state: RootState) => state.user);
   const { lists } = useSelector((state: RootState) => state.lists);
-
-  const toggleIsList = () => {
-    isInList
-      ? removeWordFromFavorite(id, words.word)
-      : addWordToFavorite(id, words.word, words.results);
-
-    setIsInList((prev) => !prev);
-  };
 
   useEffect(() => {
     getUserFavorite(id)
@@ -44,6 +35,30 @@ const PopupMenu: React.FC<PopupProps> = ({ setIsNewList }) => {
       })
       .catch((error) => console.log(error));
   }, [id, words.word, isInList]);
+
+  const toggleIsInFavorite = useCallback(() => {
+    const newIsInList = !isInList;
+    setIsInList(newIsInList);
+
+    if (newIsInList) {
+      addWordToFavorite(id, words.word, words.results);
+    } else {
+      removeWordFromFavorite(id, words.word);
+    }
+  }, [isInList, id, words.word, words.results]);
+
+  const toggleWordInList = (listName: string) => {
+    const isInList = listStates[listName];
+    if (isInList) {
+      removeWordFromList(id, listName, words.word);
+    } else {
+      addWordToList(id, listName, words.word, words.results);
+    }
+    setListStates((prev) => ({
+      ...prev,
+      [listName]: !isInList,
+    }));
+  };
 
   useEffect(() => {
     window.addEventListener('click', handleOutsideClick);
@@ -62,26 +77,48 @@ const PopupMenu: React.FC<PopupProps> = ({ setIsNewList }) => {
   return (
     <div ref={popupRef} className={styles.popup}>
       <button className={styles.popupBtn} onClick={() => setIsOpen(!isOpen)}>
-        <BsFillBookmarkFill className={styles.bookmarkIcon} />
+        <BsFillBookmarkFill />
       </button>
 
       {isOpen && (
-        <ul onClick={() => setIsOpen(!isOpen)} className={styles.popupOptions}>
+        <ul className={styles.popupOptions}>
           <Link to="/lists">
-            <li>Create new list</li>
+            <li className={styles.btnNewList}>Create new list</li>
           </Link>
-          <li onClick={toggleIsList}>Favorite</li>
+          <li onClick={toggleIsInFavorite}>
+            Favourites
+            {isInList ? (
+              <button className={styles.tick}>
+                <ImCheckmark />
+              </button>
+            ) : (
+              ''
+            )}
+          </li>
 
-          {lists.map((item, i) => (
-            <li
-              onClick={() =>
-                addWordToList(id, item[0], words.word, words.results)
-              }
-              key={i + 1}
-            >
-              {item[0]}
-            </li>
-          ))}
+          {lists.map((item, i) => {
+            const [listName, listData] = item;
+            const isWordInCurrentList =
+              listData && Object.keys(listData).some((el) => el === words.word);
+            const isInList = listStates[listName];
+            const shouldRenderTick = isWordInCurrentList && isInList;
+
+            return (
+              <li
+                onClick={() => {
+                  toggleWordInList(listName);
+                }}
+                key={i + 1}
+              >
+                {listName}
+                {shouldRenderTick && (
+                  <button className={styles.tick}>
+                    <ImCheckmark />
+                  </button>
+                )}
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>

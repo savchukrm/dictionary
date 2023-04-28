@@ -38,7 +38,7 @@ const Lists = (): JSX.Element => {
     const fetchData = async () => {
       try {
         const res = await getUserLists(id);
-        if (res !== undefined) {
+        if (res.val() !== undefined) {
           const userListsArray = Object.keys(res.val()).map((key) => [
             key,
             res.val()[key],
