@@ -13,9 +13,16 @@ const Category = () => {
   const nouns = words.results.reduce((all: [string, string[]][], obj) => {
     if (obj.partOfSpeech === 'noun') {
       const synonyms = Array.isArray(obj.synonyms)
-        ? obj.synonyms
-        : [obj.synonyms];
-      return all.concat([[obj.definition, synonyms]]);
+        ? obj.synonyms.filter(Boolean)
+        : [];
+
+      if (synonyms.length > 3) {
+        synonyms.length = 3;
+      }
+
+      if (synonyms.length) {
+        return all.concat([[obj.definition, synonyms]]);
+      }
     }
     return all;
   }, []);
@@ -23,9 +30,16 @@ const Category = () => {
   const verbs = words.results.reduce((all: [string, string[]][], obj) => {
     if (obj.partOfSpeech === 'verb') {
       const synonyms = Array.isArray(obj.synonyms)
-        ? obj.synonyms
-        : [obj.synonyms];
-      return all.concat([[obj.definition, synonyms]]);
+        ? obj.synonyms.filter(Boolean)
+        : [];
+
+      if (synonyms.length > 3) {
+        synonyms.length = 3;
+      }
+
+      if (synonyms.length) {
+        return all.concat([[obj.definition, synonyms]]);
+      }
     }
     return all;
   }, []);
@@ -33,9 +47,16 @@ const Category = () => {
   const adjectives = words.results.reduce((all: [string, string[]][], obj) => {
     if (obj.partOfSpeech === 'adjective') {
       const synonyms = Array.isArray(obj.synonyms)
-        ? obj.synonyms
-        : [obj.synonyms];
-      return all.concat([[obj.definition, synonyms]]);
+        ? obj.synonyms.filter(Boolean)
+        : [];
+
+      if (synonyms.length > 3) {
+        synonyms.length = 3;
+      }
+
+      if (synonyms.length) {
+        return all.concat([[obj.definition, synonyms]]);
+      }
     }
     return all;
   }, []);
@@ -43,9 +64,16 @@ const Category = () => {
   const adverbs = words.results.reduce((all: [string, string[]][], obj) => {
     if (obj.partOfSpeech === 'adverb') {
       const synonyms = Array.isArray(obj.synonyms)
-        ? obj.synonyms
-        : [obj.synonyms];
-      return all.concat([[obj.definition, synonyms]]);
+        ? obj.synonyms.filter(Boolean)
+        : [];
+
+      if (synonyms.length > 3) {
+        synonyms.length = 3;
+      }
+
+      if (synonyms.length) {
+        return all.concat([[obj.definition, synonyms]]);
+      }
     }
     return all;
   }, []);
@@ -54,9 +82,16 @@ const Category = () => {
     (all: [string, string[]][] | any, obj) => {
       if (obj.partOfSpeech === 'adjective satellite') {
         const synonyms = Array.isArray(obj.synonyms)
-          ? obj.synonyms
-          : [obj.synonyms];
-        return all.concat([[obj.definition, synonyms]]);
+          ? obj.synonyms.filter(Boolean)
+          : [];
+
+        if (synonyms.length > 3) {
+          synonyms.length = 3;
+        }
+
+        if (synonyms.length) {
+          return all.concat([[obj.definition, synonyms]]);
+        }
       }
       return all;
     },

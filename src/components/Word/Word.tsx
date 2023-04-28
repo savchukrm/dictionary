@@ -28,7 +28,9 @@ const Word = (): JSX.Element => {
           <div className={styles.top}>
             <div>
               <h1 className={styles.h1}>{words.word}</h1>
-              <span>/{words.pronunciation.all}/</span>
+              <span>
+                {words.pronunciation ? `/${words.pronunciation.all}/` : ''}
+              </span>
             </div>
             {isAuth ? (
               <div className={styles.tab}>
