@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import { IoMdArrowRoundBack } from 'react-icons/io';
 
 import { RootState } from '../../redux/store';
 
@@ -61,15 +64,29 @@ const Lists = (): JSX.Element => {
     <div className={styles.listBlock}>
       {isNewList && <ModalInput setIsNewList={setIsNewList} />}
 
-      <h1>My lists</h1>
-      <button onClick={handleModal} className={styles.btnAdd}>
-        New list
-      </button>
+      <div className={styles.header}>
+        <Link to="/">
+          <button className="btnBack">
+            <IoMdArrowRoundBack />
+            home page
+          </button>
+        </Link>
+
+        <h1>My lists</h1>
+
+        <button onClick={handleModal} className={styles.btnAdd}>
+          New list
+        </button>
+      </div>
+
       <div className={styles.content}>
         <ul className={styles.blocks}>
           <li key={0}>
-            <ListBlock title="favorite" />
+            <Link to="/lists/favourite">
+              <ListBlock title="favourites" />
+            </Link>
           </li>
+
           {lists.map((item, i) => (
             <li key={i + 1}>
               <ListBlock title={item[0]} />

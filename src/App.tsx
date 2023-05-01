@@ -12,9 +12,11 @@ import Header from './components/Header/Header';
 import Main from './pages/Main/Main';
 import LoginPage from './pages/Auth/LoginPage';
 import RegisterPage from './pages/Auth/RegisterPage';
-import NotFound from './pages/NotFound/NotFound';
 import Lists from './pages/Lists/Lists';
+import ListContent from './pages/ListContent/ListContent';
 import Modal from './pages/Modal/Modal';
+import NotFound from './pages/NotFound/NotFound';
+import Favourite from './pages/ListContent/Favourite';
 
 import './styles/App.css';
 
@@ -43,6 +45,8 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/lists" element={<Lists />} />
+        <Route path="/lists/:listName" element={<ListContent />} />
+        <Route path="/lists/favourites" element={<Favourite />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

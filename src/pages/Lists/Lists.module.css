@@ -1,15 +1,22 @@
 .listBlock {
   margin-top: 30px;
+  max-width: 1000px;
+  margin: 40px auto;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .listBlock h1 {
+  margin: 0 20px;
   font-size: 1.7em;
 }
 
 .content {
   padding: 50px 20px 50px 40px;
   margin: 40px auto;
-  max-width: 1000px;
   border: 2px solid var(--color--greysecond);
   text-align: left;
   border-radius: 50px;
@@ -49,7 +56,6 @@
 }
 
 .btnAdd {
-  margin-top: 30px;
   font-weight: 500;
   color: var(--color-white);
   font-size: 20px;

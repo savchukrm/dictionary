@@ -1,24 +1,17 @@
-import { useSelector } from 'react-redux';
-
-import { RootState } from '../../redux/store';
-
 import styles from './Set.module.css';
 
-function Set(): JSX.Element {
-  const { favorite } = useSelector((state: RootState) => state.favorite);
+interface SetProps {
+  listName: string;
+  definition: string;
+}
 
+const Set: React.FC<SetProps> = ({ listName, definition }) => {
   return (
-    <div>
-      {favorite.map((el: [string, { definition: string }[]], i: number) => (
-        <div className={styles.setBlock} key={i}>
-          <h3>{el[0]}</h3>
-          {el[1].slice(0, 1).map((obj: { definition: string }, i: number) => (
-            <p key={i}>{obj.definition}</p>
-          ))}
-        </div>
-      ))}
+    <div className={styles.setBlock}>
+      <h3>{listName}</h3>
+      <p>{definition}</p>
     </div>
   );
-}
+};
 
 export default Set;

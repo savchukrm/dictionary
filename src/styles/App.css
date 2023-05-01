@@ -6,3 +6,25 @@
 .sorry {
   margin-top: 50px;
 }
+
+.btnBack {
+  position: relative;
+
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--color-white);
+  background-color: var(--color--greysecond);
+  border-radius: 30px;
+  padding: 10px 30px 10px 40px;
+}
+
+.btnBack:hover {
+  background-color: var(--color-green);
+  color: var(--color-white);
+}
+
+.btnBack svg {
+  position: absolute;
+  top: 13px;
+  left: 16px;
+}

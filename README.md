@@ -1,6 +1,6 @@
 # Dictionary
 
-Application to search the words and to get their definitions, toc create an account,reate lists and add words here.
+The software to search for words and get their definitions, create an account, create lists and add words here.
 
 - Single page application with React.
 - Authentication, data storage, and CRUD functionality implemented with Firebase.
