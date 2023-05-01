@@ -5,21 +5,34 @@ import { Link } from 'react-router-dom';
 import { BsFillBookmarkFill } from 'react-icons/bs';
 import { ImCheckmark } from 'react-icons/im';
 
-import { RootState } from '../../redux/store';
+import { RootState, useAppDispatch } from '../../redux/store';
+
+import { setLists } from '../../redux/lists/slice';
+
 import {
   addWordToFavorite,
   removeWordFromFavorite,
   getUserFavorite,
+  getUserLists,
   addWordToList,
   removeWordFromList,
 } from '../../config/firebase';
 
 import styles from './Popup.module.css';
 
+interface ListStates {
+  [listName: string]: {
+    [word: string]: boolean;
+  };
+}
+
 const PopupMenu: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const [isOpen, setIsOpen] = useState(false);
   const [isInList, setIsInList] = useState<boolean>();
-  const [listStates, setListStates] = useState<Record<string, boolean>>({});
+  const [listStates, setListStates] = useState<ListStates>({});
+  const [shouldRenderTick, setShouldRenderTick] = useState(false);
 
   const popupRef = useRef<HTMLDivElement>(null);
 
@@ -34,7 +47,7 @@ const PopupMenu: React.FC = () => {
           setIsInList(Object.keys(res.val()).some((el) => el === words.word));
       })
       .catch((error) => console.log(error));
-  }, [id, words.word, isInList]);
+  }, [id, words.word]);
 
   const toggleIsInFavorite = useCallback(() => {
     const newIsInList = !isInList;
@@ -45,19 +58,51 @@ const PopupMenu: React.FC = () => {
     } else {
       removeWordFromFavorite(id, words.word);
     }
-  }, [isInList, id, words.word, words.results]);
+  }, [id, isInList, words.results, words.word]);
 
-  const toggleWordInList = (listName: string) => {
-    const isInList = listStates[listName];
+  useEffect(() => {
+    getUserLists(id)
+      .then((res) => {
+        if (res.val() !== null) dispatch(setLists(lists));
+        const fetchedLists = res.val() as {
+          [listName: string]: { [word: string]: boolean };
+        } | null;
+        const newStates: ListStates = {};
+        for (const [listName, listData] of Object.entries(fetchedLists || {})) {
+          if (listData && Object.keys(listData).includes(words.word)) {
+            newStates[listName] = { ...listData };
+          }
+        }
+        setListStates((prev) => ({ ...prev, ...newStates }));
+      })
+      .catch((error) => console.log(error));
+  }, [words.word, id, dispatch, lists]);
+
+  const toggleWordInList = (listName: string): void => {
+    const wordStates = listStates[listName] || {};
+    const isInList = wordStates[words.word];
+
     if (isInList) {
       removeWordFromList(id, listName, words.word);
     } else {
       addWordToList(id, listName, words.word, words.results);
     }
-    setListStates((prev) => ({
-      ...prev,
-      [listName]: !isInList,
-    }));
+
+    const newListStates = {
+      ...listStates,
+      [listName]: {
+        ...wordStates,
+        [words.word]: !isInList,
+      },
+    };
+
+    setListStates(newListStates);
+
+    const shouldRenderTick =
+      Object.values(newListStates).some(
+        (wordStates) => wordStates[words.word]
+      ) || isInList;
+    setShouldRenderTick(shouldRenderTick);
   };
 
   useEffect(() => {
@@ -97,18 +142,16 @@ const PopupMenu: React.FC = () => {
           </li>
 
           {lists.map((item, i) => {
-            const [listName, listData] = item;
-            const isWordInCurrentList =
-              listData && Object.keys(listData).some((el) => el === words.word);
+            const [listName] = item;
             const isInList = listStates[listName];
-            const shouldRenderTick = isWordInCurrentList && isInList;
+            const shouldRenderTick = isInList?.[words.word] ?? false;
 
             return (
               <li
                 onClick={() => {
                   toggleWordInList(listName);
                 }}
-                key={i + 1}
+                key={i}
               >
                 {listName}
                 {shouldRenderTick && (
