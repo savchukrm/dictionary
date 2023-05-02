@@ -1,19 +1,20 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-
-import { useAuth } from '../../../hooks/use-auth';
-import { handleOpen } from '../../../redux/modal/slice';
 
 import { BiMenu } from 'react-icons/bi';
 import { CgClose } from 'react-icons/cg';
+
+import { useAppDispatch } from '../../../redux/store';
+
+import { handleOpen } from '../../../redux/modal/slice';
+import { useAuth } from '../../../hooks/use-auth';
 
 import styles from '../Header.module.css';
 
 function MobileNav() {
   const [openNav, setOpenNav] = useState(false);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { isAuth } = useAuth();
 
   const openModal = () => {
@@ -42,13 +43,15 @@ function MobileNav() {
 
           {isAuth && (
             <Link onClick={handleOpenNav} to="/lists">
-              <button className={styles.headerBtn}>List</button>
+              <button className={styles.headerBtn}>Lists</button>
             </Link>
           )}
 
-          <Link onClick={handleOpenNav} to="/login">
-            <button className={styles.headerBtn}>Log in</button>
-          </Link>
+          {!isAuth && (
+            <Link to="/login">
+              <button className={styles.headerBtn}>Log in</button>
+            </Link>
+          )}
 
           {isAuth ? (
             <div onClick={handleOpenNav}>

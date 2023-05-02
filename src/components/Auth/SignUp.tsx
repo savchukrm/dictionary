@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
+import { useAppDispatch } from '../../redux/store';
 
 import apps from '../../firebase';
 import {
@@ -17,7 +18,7 @@ import { addNewUser } from '../../config/firebase';
 import Form from './Form';
 
 const SignUp = (): JSX.Element => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [errorMessage, setErrorMessage] = useState('');

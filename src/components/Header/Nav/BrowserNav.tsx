@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+
+import { useAppDispatch } from '../../../redux/store';
+import { handleOpen } from '../../../redux/modal/slice';
 
 import { useAuth } from '../../../hooks/use-auth';
-import { handleOpen } from '../../../redux/modal/slice';
 
 import styles from '../Header.module.css';
 
 const BrowserNav = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { isAuth } = useAuth();
 
   const openModal = () => {
@@ -22,7 +23,7 @@ const BrowserNav = () => {
       <ul className={styles.headerBtnRow}>
         {isAuth && (
           <Link to="/lists">
-            <button className={styles.headerBtn}>List</button>
+            <button className={styles.headerBtn}>Lists</button>
           </Link>
         )}
 

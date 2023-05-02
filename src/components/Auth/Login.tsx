@@ -1,7 +1,7 @@
 import { useState } from 'react';
-
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
+import { useAppDispatch } from '../../redux/store';
 
 import {
   getAuth,
@@ -17,7 +17,7 @@ import { setUser } from '../../redux/auth/slice';
 import Form from './Form';
 
 const Login = (): JSX.Element => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const provider = new GoogleAuthProvider();

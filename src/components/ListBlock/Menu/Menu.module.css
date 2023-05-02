@@ -1,0 +1,33 @@
+.block {
+  user-select: none;
+  position: absolute;
+
+  left: 67px;
+  top: 120px;
+
+  background-color: var(--color--greysecond);
+  border: 1px solid var(--color-white);
+  border-radius: 10px;
+  z-index: 1;
+
+  width: 200px;
+  padding: 15px;
+}
+
+.item {
+  width: 100%;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+  .block {
+    left: 160px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .block {
+    left: 150px;
+  }
+}

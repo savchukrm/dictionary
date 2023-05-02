@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { IoMdArrowRoundBack } from 'react-icons/io';
 
-import { RootState } from '../../redux/store';
+import { RootState, useAppDispatch } from '../../redux/store';
 
 import { getUserFavorite } from '../../config/firebase';
 import { getUserLists } from '../../config/firebase';
@@ -13,12 +13,13 @@ import { setFavorite, clearFavorite } from '../../redux/favorite/slice';
 import { setLists } from '../../redux/lists/slice';
 
 import ListBlock from '../../components/ListBlock/ListBlock';
+import FavoriteBlock from '../../components/ListBlock/FavoriteBlock';
 import ModalInput from '../../components/ModalInput/ModalInput';
 
 import styles from './Lists.module.css';
 
 const Lists = (): JSX.Element => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const { id } = useSelector((state: RootState) => state.user);
   const { lists } = useSelector((state: RootState) => state.lists);
@@ -86,9 +87,9 @@ const Lists = (): JSX.Element => {
 
       <div className={styles.content}>
         <ul className={styles.blocks}>
-          <li key={0}>
+          <li className={styles.item} key={0}>
             <Link to="/lists/favourite">
-              <ListBlock length={favoriteLength} title="favourites" />
+              <FavoriteBlock length={favoriteLength} title="favourites" />
             </Link>
           </li>
 

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { RootState } from '../../redux/store';
+import { RootState, useAppDispatch } from '../../redux/store';
 
 import { getUserLists, getUserFavorite } from '../../config/firebase';
 import { setLists } from '../../redux/lists/slice';
@@ -14,7 +14,7 @@ import Word from '../../components/Word/Word';
 import styles from './Main.module.css';
 
 const Main = (): JSX.Element => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const { status, words } = useSelector((state: RootState) => state.words);
   const { id } = useSelector((state: RootState) => state.user);

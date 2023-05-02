@@ -117,3 +117,7 @@ export const removeWordFromList = async (
     })
     .catch((error) => console.log(error));
 };
+
+export const removeListFromLists = (userId: number | null, list: string) => {
+  remove(ref(database, `users/${userId}/lists/${list}`));
+};

@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { RootState } from './redux/store';
+import { RootState, useAppDispatch } from './redux/store';
 
 import { getAuth } from 'firebase/auth';
 import { setUser } from './redux/auth/slice';
@@ -21,7 +21,7 @@ import Favourite from './pages/ListContent/Favourite';
 import './styles/App.css';
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const auth = getAuth();
 
   const { modal } = useSelector((state: RootState) => state.modal);

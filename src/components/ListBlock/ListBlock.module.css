@@ -1,3 +1,7 @@
+.block {
+  position: relative;
+}
+
 .card {
   padding: 20px;
 
@@ -13,4 +17,20 @@
 
 .card h3::first-letter {
   text-transform: uppercase;
+}
+
+.bottom {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom button {
+  position: absolute;
+  right: -5px;
+  top: 6px;
+}
+
+.btn svg {
+  fill: var(--color-white);
 }
