@@ -22,6 +22,7 @@ const Lists = (): JSX.Element => {
 
   const { id } = useSelector((state: RootState) => state.user);
   const { lists } = useSelector((state: RootState) => state.lists);
+  const { favorite } = useSelector((state: RootState) => state.favorite);
 
   const [isNewList, setIsNewList] = useState<boolean>(false);
 
@@ -54,11 +55,15 @@ const Lists = (): JSX.Element => {
     };
 
     fetchData();
-  }, [dispatch, id, lists]);
+  }, [dispatch, id]);
 
   const handleModal = () => {
     setIsNewList((prev) => !prev);
   };
+
+  const favoriteLength = favorite.find((item) => item[0] === 'createdAt')
+    ? 0
+    : favorite.length;
 
   return (
     <div className={styles.listBlock}>
@@ -83,15 +88,26 @@ const Lists = (): JSX.Element => {
         <ul className={styles.blocks}>
           <li key={0}>
             <Link to="/lists/favourite">
-              <ListBlock title="favourites" />
+              <ListBlock length={favoriteLength} title="favourites" />
             </Link>
           </li>
 
-          {lists.map((item, i) => (
-            <li key={i + 1}>
-              <ListBlock title={item[0]} />
-            </li>
-          ))}
+          {lists.map((item, i) => {
+            const [title, content] = item;
+            const contentLength = Object.entries(content);
+
+            const lengthValue = contentLength.find(
+              (el) => el[0] === 'createdAt'
+            )
+              ? 0
+              : contentLength.length;
+
+            return (
+              <li key={i + 1}>
+                <ListBlock title={title} length={lengthValue} />
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>

@@ -32,7 +32,7 @@ const Favourite = () => {
 
           return (
             <li key={i}>
-              {favorite[0] === 'createdAt' ? (
+              {word === 'createdAt' ? (
                 <p>You do not have any saved items in the current list</p>
               ) : (
                 <Set listName={word} definition={definition} />
