@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { useAuth } from '../../../hooks/use-auth';
 import { handleOpen } from '../../../redux/modal/slice';
 
-import ModeToggle from '../DarkModeToggle';
 import styles from '../Header.module.css';
 
 const BrowserNav = () => {
@@ -26,8 +25,6 @@ const BrowserNav = () => {
             <button className={styles.headerBtn}>List</button>
           </Link>
         )}
-
-        <ModeToggle />
 
         {!isAuth && (
           <Link to="/login">

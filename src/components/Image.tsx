@@ -5,7 +5,6 @@ import { RootState } from '../redux/store';
 
 const Image: React.FC = () => {
   const { words, status } = useSelector((state: RootState) => state.words);
-  const { mode } = useSelector((state: RootState) => state.mode);
 
   const isDesktop = useMediaQuery({ maxWidth: 650 });
 
@@ -15,11 +14,7 @@ const Image: React.FC = () => {
         <img
           width={500}
           height={500}
-          src={
-            mode === 'dark'
-              ? process.env.REACT_APP_PUBLIC_URL + '/img/search-light.png'
-              : process.env.REACT_APP_PUBLIC_URL + '/img/search-dark.png'
-          }
+          src={process.env.REACT_APP_PUBLIC_URL + '/img/search-light.png'}
           alt="search"
         />
       )}
@@ -29,11 +24,7 @@ const Image: React.FC = () => {
           <img
             width={500}
             height={500}
-            src={
-              mode === 'dark'
-                ? process.env.REACT_APP_PUBLIC_URL + '/img/Loading-light.png'
-                : process.env.REACT_APP_PUBLIC_URL + '/img/Loading-dark.png'
-            }
+            src={process.env.REACT_APP_PUBLIC_URL + '/img/Loading-light.png'}
             alt="loading"
           />
         ) : (
@@ -41,11 +32,7 @@ const Image: React.FC = () => {
             width={500}
             height={500}
             src={
-              mode === 'dark'
-                ? process.env.REACT_APP_PUBLIC_URL +
-                  '/img/Loading-small-light.png'
-                : process.env.REACT_APP_PUBLIC_URL +
-                  '/img/Loading-small-dark.png'
+              process.env.REACT_APP_PUBLIC_URL + '/img/Loading-small-light.png'
             }
             alt="loading"
           />
@@ -59,11 +46,7 @@ const Image: React.FC = () => {
           <img
             width={300}
             height={300}
-            src={
-              mode === 'dark'
-                ? process.env.REACT_APP_PUBLIC_URL + '/img/sorry-pana-light.png'
-                : process.env.REACT_APP_PUBLIC_URL + '/img/sorry-pana-dark.png'
-            }
+            src={process.env.REACT_APP_PUBLIC_URL + '/img/sorry-pana-light.png'}
             alt="sorry"
           />
         </div>

@@ -1,13 +1,8 @@
 import { Link } from 'react-router-dom';
 
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
-
 import styles from './NotFound.module.css';
 
 const NotFound: React.FC = () => {
-  const { mode } = useSelector((state: RootState) => state.mode);
-
   return (
     <div className={styles.notFound}>
       <h2>Nothing found</h2>
@@ -15,11 +10,7 @@ const NotFound: React.FC = () => {
       <img
         width={350}
         height={350}
-        src={
-          mode === 'dark'
-            ? process.env.REACT_APP_PUBLIC_URL + '/img/404light.png'
-            : process.env.REACT_APP_PUBLIC_URL + '/img/404dark.png'
-        }
+        src={process.env.REACT_APP_PUBLIC_URL + '/img/404dark.png'}
         alt="not-found"
       />
       <Link to="/">
