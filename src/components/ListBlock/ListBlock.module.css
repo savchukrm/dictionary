@@ -2,7 +2,7 @@
   padding: 20px;
 
   border-radius: 30px;
-  background-color: rgb(0, 80, 90);
+  background-color: var(--color-teal);
   max-width: 380px;
   height: 132px;
 }

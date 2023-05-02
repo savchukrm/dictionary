@@ -44,6 +44,10 @@
     padding: 20px;
   }
 
+  .header {
+    padding-left: 20px;
+  }
+
   .blocks li {
     width: calc((100% - 30px) / 2);
   }
@@ -65,6 +69,20 @@
 }
 
 .btnAdd:hover {
-  background-color: var(--color-green);
+  background-color: var(--color-teal);
   color: var(--color-white);
+}
+
+@media screen and (max-width: 600px) {
+  .btnAdd {
+    padding: 10px;
+    font-size: 17px;
+    font-weight: 500;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .btnAdd:hover {
+    background-color: var(--color--greysecond);
+  }
 }

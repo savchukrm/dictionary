@@ -14,7 +14,7 @@
 }
 
 .block a {
-  color: var(--color-green);
+  background-color: var(--color-teal);
 }
 
 .block a:hover {

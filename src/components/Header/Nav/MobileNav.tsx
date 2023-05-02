@@ -35,7 +35,7 @@ function MobileNav() {
       </button>
 
       {openNav && (
-        <div className={styles.mobileNav}>
+        <div style={{ background: '#171935' }} className={styles.mobileNav}>
           <button onClick={handleOpenNav} className={styles.navClose}>
             <CgClose />
           </button>

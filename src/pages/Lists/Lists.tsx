@@ -68,14 +68,14 @@ const Lists = (): JSX.Element => {
         <Link to="/">
           <button className="btnBack">
             <IoMdArrowRoundBack />
-            home page
+            return
           </button>
         </Link>
 
         <h1>My lists</h1>
 
         <button onClick={handleModal} className={styles.btnAdd}>
-          New list
+          new list
         </button>
       </div>
 

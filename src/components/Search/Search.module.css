@@ -7,7 +7,7 @@
 .formInput {
   border-radius: 30px;
   padding: 10px 30px;
-  border: 2px solid var(--color-grey);
+  border: 2px solid var(--color-darkblue);
 }
 
 .formBtn {
@@ -24,7 +24,7 @@
 }
 
 .formBtn:hover {
-  background-color: var(--color-green);
+  background-color: var(--color-teal);
   color: var(--color-white);
 }
 

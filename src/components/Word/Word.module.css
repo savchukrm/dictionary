@@ -22,7 +22,7 @@
 }
 
 .tabColor svg {
-  color: var(--color-green);
+  background-color: var(--color-teal);
 }
 
 .tab svg {
@@ -33,7 +33,7 @@
 
 @media only screen and (min-width: 1024px) {
   .tab svg :hover {
-    fill: var(--color-green);
+    background-color: var(--color-teal);
   }
 }
 
