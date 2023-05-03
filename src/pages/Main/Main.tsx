@@ -44,8 +44,6 @@ const Main = (): JSX.Element => {
       .then((res) => {
         if (res.val() != null) {
           dispatch(setFavorite(Object.entries(res.val())));
-        } else {
-          dispatch(clearFavorite());
         }
       })
       .catch((error) => console.log(error));

@@ -1,21 +1,41 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
 import { IoMdArrowRoundBack } from 'react-icons/io';
 
-import { RootState } from '../../redux/store';
+import { RootState, useAppDispatch } from '../../redux/store';
+
+import { getUserList } from '../../utils/firebase';
+import { setList, clearList } from '../../redux/set/slice';
 
 import Set from '../../components/Set/Set';
 
 import styles from './ListContent.module.css';
 
 const ListContent = () => {
+  const dispatch = useAppDispatch();
   const { listName } = useParams();
-  const { lists } = useSelector((state: RootState) => state.lists);
 
-  const list: any = lists.find((el) => el[0] === listName);
-  const [name, info] = list;
-  const wordsInList = Object.entries(info);
+  const { list } = useSelector((state: RootState) => state.list);
+  const { id } = useSelector((state: RootState) => state.user);
+
+  useEffect(() => {
+    const fetchLists = async () => {
+      try {
+        const res = await getUserList(id, listName);
+        if (res.val() !== undefined) {
+          const userListsArray = Object.entries(res.val());
+          dispatch(setList(userListsArray));
+        } else {
+          dispatch(clearList());
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchLists();
+  }, [id, dispatch]);
 
   return (
     <div className={styles.content}>
@@ -26,11 +46,11 @@ const ListContent = () => {
             All lists
           </button>
         </Link>
-        <h1>{name}</h1>
+        <h1>{listName}</h1>
       </div>
 
       <ul className={styles.contentBlock}>
-        {wordsInList.map((item, i) => {
+        {list.map((item, i) => {
           const [listName, content]: [string, any] = item;
           const definition = content[0].definition;
 

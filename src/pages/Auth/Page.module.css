@@ -13,10 +13,6 @@
   padding-bottom: 10px;
 }
 
-.block a {
-  background-color: var(--color-teal);
-}
-
 .block a:hover {
   text-decoration: underline;
 }

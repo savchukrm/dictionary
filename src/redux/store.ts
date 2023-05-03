@@ -7,9 +7,10 @@ import user from './auth/slice';
 import modal from './modal/slice';
 import favorite from './favorite/slice';
 import lists from './lists/slice';
+import list from './set/slice';
 
 export const store = configureStore({
-  reducer: { words, search, user, modal, favorite, lists },
+  reducer: { words, search, user, modal, favorite, lists, list },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

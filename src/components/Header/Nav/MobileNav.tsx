@@ -48,7 +48,7 @@ function MobileNav() {
           )}
 
           {!isAuth && (
-            <Link to="/login">
+            <Link onClick={handleOpenNav} to="/login">
               <button className={styles.headerBtn}>Log in</button>
             </Link>
           )}

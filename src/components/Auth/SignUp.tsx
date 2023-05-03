@@ -33,7 +33,8 @@ const SignUp = (): JSX.Element => {
         dispatch(
           setUser({ email: user.email, id: user.uid, token: user.refreshToken })
         );
-        addNewUser(user.uid, email, password, []);
+        const now = new Date().toISOString();
+        addNewUser(user.uid, email, password, [], { createdAt: now });
 
         navigate('/');
       })
@@ -77,11 +78,14 @@ const SignUp = (): JSX.Element => {
                 token: user.refreshToken,
               })
             );
+            const now = new Date().toISOString();
+
             set(userRef, {
               email: user.email,
               password: Math.floor(Math.random() * 900000) + 100000,
-              array: [],
+              favorite: { createdAt: now },
             });
+
             navigate('/');
           }
         });

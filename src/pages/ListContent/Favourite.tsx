@@ -1,16 +1,33 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { IoMdArrowRoundBack } from 'react-icons/io';
 
-import { RootState } from '../../redux/store';
+import { RootState, useAppDispatch } from '../../redux/store';
+
+import { getUserFavorite } from '../../utils/firebase';
+import { setFavorite, clearFavorite } from '../../redux/favorite/slice';
 
 import Set from '../../components/Set/Set';
 
 import styles from './ListContent.module.css';
 
 const Favourite = () => {
+  const dispatch = useAppDispatch();
+
   const { favorite } = useSelector((state: RootState) => state.favorite);
+  const { id } = useSelector((state: RootState) => state.user);
+
+  useEffect(() => {
+    getUserFavorite(id)
+      .then((res) => {
+        if (res.val() != null) {
+          dispatch(setFavorite(Object.entries(res.val())));
+        }
+      })
+      .catch((error) => console.log(error));
+  }, [dispatch, id]);
 
   return (
     <div className={styles.content}>

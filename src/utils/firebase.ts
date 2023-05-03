@@ -6,14 +6,16 @@ const { database } = apps;
 
 export const addNewUser = (
   userId: string,
-  email: string,
+  email: string | null,
   password: string,
-  list: string[]
+  list: string[],
+  favorite: any
 ) => {
   set(ref(database, 'users/' + userId), {
     email,
     list,
     password,
+    favorite,
   });
 };
 
@@ -24,7 +26,7 @@ export const addWordToFavorite = (
 ) => {
   get(ref(database, `users/${userId}/favorite`)).then((res) => {
     const { createdAt, ...rest } = res.val();
-    set(ref(database, 'users/' + userId + '/favorite'), {
+    set(ref(database, 'users/' + userId + '/favorite/'), {
       ...rest,
       [word]: results,
     }).catch((error) => console.log(error));
@@ -72,6 +74,13 @@ export const createNewList = (userId: number | null, name: string) => {
 
 export const getUserLists = (userId: number | null) => {
   return get(ref(database, `users/${userId}/lists`));
+};
+
+export const getUserList = (
+  userId: number | null,
+  name: string | undefined
+) => {
+  return get(ref(database, `users/${userId}/lists/${name}`));
 };
 
 export const addWordToList = (
