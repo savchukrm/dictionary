@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { IoMdClose } from 'react-icons/io';
 
-import ModalDelete from './Menu/ModalDelete/ModalDelete';
 import Menu from './Menu/Menu';
+import ModalDelete from './Menu/ModalDelete/ModalDelete';
+import ModalChange from './Menu/ModalChange/ModalChange';
 
 import styles from './ListBlock.module.css';
 
@@ -17,6 +18,7 @@ export interface BlockProps {
 const ListBlock: React.FC<BlockProps> = ({ title, length }) => {
   const [openModal, setOpenModal] = useState(false);
   const [modalDelete, setModalDelete] = useState(false);
+  const [modalChange, setModalChange] = useState(false);
 
   const popupRef = useRef<HTMLDivElement>(null);
 
@@ -56,6 +58,10 @@ const ListBlock: React.FC<BlockProps> = ({ title, length }) => {
         <ModalDelete setModalDelete={setModalDelete} title={title} />
       )}
 
+      {modalChange && (
+        <ModalChange setModalChange={setModalChange} title={title} />
+      )}
+
       <div className={styles.block}>
         <div className={styles.card}>
           <Link to={`/lists/${title}`}>
@@ -78,7 +84,11 @@ const ListBlock: React.FC<BlockProps> = ({ title, length }) => {
 
         {openModal ? (
           <div ref={popupRef}>
-            <Menu setModalDelete={setModalDelete} setOpenModal={setOpenModal} />
+            <Menu
+              setModalDelete={setModalDelete}
+              setOpenModal={setOpenModal}
+              setModalChange={setModalChange}
+            />
           </div>
         ) : (
           ''

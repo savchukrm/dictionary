@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from '../../redux/store';
 
-import apps from '../../firebase';
+import apps from '../../config/firebase';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -13,7 +13,7 @@ import {
 import { ref, get, set } from 'firebase/database';
 
 import { setUser } from '../../redux/auth/slice';
-import { addNewUser } from '../../config/firebase';
+import { addNewUser } from '../../utils/firebase';
 
 import Form from './Form';
 

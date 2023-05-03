@@ -3,9 +3,10 @@ import { useSelector } from 'react-redux';
 
 import { RootState, useAppDispatch } from '../../redux/store';
 
-import { getUserLists, getUserFavorite } from '../../config/firebase';
 import { setLists } from '../../redux/lists/slice';
 import { setFavorite, clearFavorite } from '../../redux/favorite/slice';
+
+import { getUserLists, getUserFavorite } from '../../utils/firebase';
 
 import Search from '../../components/Search/Search';
 import Image from '../../components/Image';

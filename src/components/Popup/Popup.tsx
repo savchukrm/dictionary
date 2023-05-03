@@ -16,7 +16,7 @@ import {
   getUserLists,
   addWordToList,
   removeWordFromList,
-} from '../../config/firebase';
+} from '../../utils/firebase';
 
 import styles from './Popup.module.css';
 
