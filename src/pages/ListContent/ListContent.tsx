@@ -37,11 +37,15 @@ const ListContent = () => {
     fetchLists();
   }, [id, dispatch]);
 
+  const handleClearLlist = () => {
+    dispatch(clearList());
+  };
+
   return (
     <div className={styles.content}>
       <div className={styles.top}>
         <Link to="/lists">
-          <button className="btnBack">
+          <button onClick={handleClearLlist} className="btnBack">
             <IoMdArrowRoundBack />
             All lists
           </button>

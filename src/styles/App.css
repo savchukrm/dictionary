@@ -28,3 +28,16 @@
   top: 13px;
   left: 16px;
 }
+
+@media screen and (max-width: 600px) {
+  .btnBack {
+    padding: 10px 15px 10px 28px;
+    font-size: 15px;
+  }
+
+  .btnBack svg {
+    position: absolute;
+    top: 13px;
+    left: 11px;
+  }
+}

@@ -12,7 +12,7 @@ import {
   UserCredential,
 } from 'firebase/auth';
 
-import { setUser } from '../../redux/auth/slice';
+import { setUser, removeUser } from '../../redux/auth/slice';
 
 import Form from './Form';
 
@@ -62,6 +62,7 @@ const Login = (): JSX.Element => {
           setErrorMessage(
             'User not found. Please go to the registration page and create an account'
           );
+          dispatch(removeUser());
           const user = auth.currentUser;
 
           if (user) {

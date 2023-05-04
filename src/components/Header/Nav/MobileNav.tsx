@@ -31,6 +31,12 @@ function MobileNav() {
         <h3 className={styles.headerLogo}>Meaningo</h3>
       </Link>
 
+      {isAuth && (
+        <Link to="/lists">
+          <button className={styles.headerBtn}>Lists</button>
+        </Link>
+      )}
+
       <button onClick={handleOpenNav} className={styles.openNav}>
         <BiMenu />
       </button>

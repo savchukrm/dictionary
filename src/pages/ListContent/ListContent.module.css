@@ -21,3 +21,20 @@
   text-align: left;
   border-radius: 50px;
 }
+
+@media screen and (max-width: 1000px) {
+  .contentBlock {
+    border: none;
+    padding: 30px 20px;
+  }
+  .top {
+    padding: 0 20px;
+  }
+}
+
+@media screen and (max-width: 675px) {
+  .contentBlock {
+    border: none;
+    padding: 15px 20px;
+  }
+}

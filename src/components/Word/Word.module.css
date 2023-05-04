@@ -93,6 +93,8 @@ li {
 @media (max-width: 1150px) {
   .word {
     width: 860px;
+    border: none;
+    padding: 20px;
   }
 }
 

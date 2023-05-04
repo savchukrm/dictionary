@@ -4,12 +4,16 @@ import { DefinitionsItem } from '../redux/words/types';
 
 const { database } = apps;
 
+interface Favorite {
+  createdAt: string;
+}
+
 export const addNewUser = (
   userId: string,
   email: string | null,
   password: string,
   list: string[],
-  favorite: any
+  favorite: Favorite
 ) => {
   set(ref(database, 'users/' + userId), {
     email,

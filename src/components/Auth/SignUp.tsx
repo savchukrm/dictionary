@@ -12,7 +12,7 @@ import {
 } from 'firebase/auth';
 import { ref, get, set } from 'firebase/database';
 
-import { setUser } from '../../redux/auth/slice';
+import { setUser, removeUser } from '../../redux/auth/slice';
 import { addNewUser } from '../../utils/firebase';
 
 import Form from './Form';
@@ -69,6 +69,8 @@ const SignUp = (): JSX.Element => {
             setErrorMessage(
               'You already have an account. Please log in instead'
             );
+            dispatch(removeUser());
+
             return;
           } else {
             dispatch(

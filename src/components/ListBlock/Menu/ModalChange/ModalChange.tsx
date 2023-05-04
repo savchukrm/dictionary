@@ -27,6 +27,7 @@ const ModalChange: React.FC<ModalChangeProps> = ({ setModalChange, title }) => {
     event.preventDefault();
     changeListName(id, title, newName);
     setModalChange(false);
+
     const updatedLists = lists.map((list: any) => {
       const [name, content] = list;
       if (name === title) {

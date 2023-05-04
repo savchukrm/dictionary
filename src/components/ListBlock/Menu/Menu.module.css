@@ -2,7 +2,7 @@
   user-select: none;
   position: absolute;
 
-  left: 67px;
+  left: 165px;
   top: 120px;
 
   background-color: var(--color--greysecond);
@@ -29,5 +29,11 @@
 @media screen and (max-width: 800px) {
   .block {
     left: 150px;
+  }
+}
+
+@media (max-width: 400px) {
+  .block {
+    left: 110px;
   }
 }

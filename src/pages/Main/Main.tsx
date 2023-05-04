@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../redux/store';
 
 import { setLists } from '../../redux/lists/slice';
-import { setFavorite, clearFavorite } from '../../redux/favorite/slice';
+import { setFavorite } from '../../redux/favorite/slice';
 
 import { getUserLists, getUserFavorite } from '../../utils/firebase';
 
@@ -21,32 +21,36 @@ const Main = (): JSX.Element => {
   const { id } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await getUserLists(id);
-        if (res !== undefined) {
-          const userListsArray = Object.keys(res.val()).map((key) => [
-            key,
-            res.val()[key],
-          ]);
-          dispatch(setLists(userListsArray));
+    if (id !== null) {
+      const fetchData = async () => {
+        try {
+          const res = await getUserLists(id);
+          if (res !== undefined) {
+            const userListsArray = Object.keys(res.val()).map((key) => [
+              key,
+              res.val()[key],
+            ]);
+            dispatch(setLists(userListsArray));
+          }
+        } catch (error) {
+          console.log(error);
         }
-      } catch (error) {
-        console.log(error);
-      }
-    };
+      };
 
-    fetchData();
+      fetchData();
+    }
   }, [id]);
 
   useEffect(() => {
-    getUserFavorite(id)
-      .then((res) => {
-        if (res.val() != null) {
-          dispatch(setFavorite(Object.entries(res.val())));
-        }
-      })
-      .catch((error) => console.log(error));
+    if (id !== null) {
+      getUserFavorite(id)
+        .then((res) => {
+          if (res.val() != null) {
+            dispatch(setFavorite(Object.entries(res.val())));
+          }
+        })
+        .catch((error) => console.log(error));
+    }
   }, [id]);
 
   return (

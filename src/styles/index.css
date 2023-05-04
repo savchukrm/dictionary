@@ -20,11 +20,3 @@ body {
   background-color: var(--color-darkblue);
   color: var(--color-white);
 }
-
-.icon-light svg {
-  fill: var(--color-darkblue);
-}
-
-.icon-dark svg {
-  fill: var(--color-white);
-}
