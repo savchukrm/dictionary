@@ -55,7 +55,7 @@ const ListContent = () => {
 
       <ul className={styles.contentBlock}>
         {list.map((item, i) => {
-          const [listName, content]: [string, any] = item;
+          const [word, content]: [string, any] = item;
           const definition = content[0].definition;
 
           return (
@@ -63,7 +63,7 @@ const ListContent = () => {
               {listName === 'createdAt' ? (
                 <p>You do not have any saved items in the current list</p>
               ) : (
-                <Set listName={listName} definition={definition} />
+                <Set word={word} definition={definition} content={content} />
               )}
             </li>
           );

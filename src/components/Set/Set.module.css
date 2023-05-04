@@ -1,4 +1,5 @@
 .setBlock {
+  position: relative;
   padding: 25px 30px;
   margin-bottom: 20px;
 
@@ -16,4 +17,16 @@
 
 .setBlock p {
   font-size: 18px;
+}
+
+.btn {
+  position: absolute;
+  right: 18px;
+  top: 20px;
+}
+
+.btn svg {
+  fill: var(--color-white);
+  width: 1em;
+  height: 1em;
 }

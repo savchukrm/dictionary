@@ -20,8 +20,6 @@ const ListBlock: React.FC<BlockProps> = ({ title, length }) => {
   const [modalDelete, setModalDelete] = useState(false);
   const [modalChange, setModalChange] = useState(false);
 
-  const popupRef = useRef<HTMLDivElement>(null);
-
   const handleOpen = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -36,20 +34,6 @@ const ListBlock: React.FC<BlockProps> = ({ title, length }) => {
     event.preventDefault();
     event.stopPropagation();
     setOpenModal((prev) => !prev);
-  };
-
-  useEffect(() => {
-    window.addEventListener('click', handleOutsideClick);
-
-    return () => {
-      window.removeEventListener('click', handleOutsideClick);
-    };
-  }, []);
-
-  const handleOutsideClick = (event: MouseEvent) => {
-    if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
-      setOpenModal(false);
-    }
   };
 
   return (
@@ -82,16 +66,12 @@ const ListBlock: React.FC<BlockProps> = ({ title, length }) => {
           </div>
         </div>
 
-        {openModal ? (
-          <div ref={popupRef}>
-            <Menu
-              setModalDelete={setModalDelete}
-              setOpenModal={setOpenModal}
-              setModalChange={setModalChange}
-            />
-          </div>
-        ) : (
-          ''
+        {openModal && (
+          <Menu
+            setModalDelete={setModalDelete}
+            setOpenModal={setOpenModal}
+            setModalChange={setModalChange}
+          />
         )}
       </div>
     </div>

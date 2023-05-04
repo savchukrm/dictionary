@@ -32,7 +32,7 @@ const ModalDelete: React.FC<ModalDeleteProps> = ({ setModalDelete, title }) => {
   };
 
   return (
-    <div className={styles.block}>
+    <div className="modal">
       <div className={styles.content}>
         <div className={styles.head}>
           <button onClick={handleCloseModal} className={styles.btnClose}>

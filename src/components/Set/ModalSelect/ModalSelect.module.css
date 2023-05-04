@@ -1,0 +1,13 @@
+.block {
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 25%;
+  padding: 40px 40px 50px;
+  border: 1px solid var(--color-white);
+  border-radius: 20px;
+  max-width: 500px;
+  background-color: var(--color-teal);
+  color: var(--color-white);
+}

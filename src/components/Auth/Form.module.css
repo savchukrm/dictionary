@@ -47,7 +47,7 @@
   width: 1.4em;
 }
 
-.block p {
+.or {
   margin: 13px 0;
 }
 
@@ -55,6 +55,6 @@
   position: relative;
   bottom: 20px;
 
-  color: red;
+  color: #ff0000d1;
   font-size: 15px;
 }

@@ -66,7 +66,7 @@ const Form: React.FC<FormProps> = ({
         {title}
       </button>
 
-      <p>or</p>
+      <p className={styles.or}>or</p>
 
       <button className={styles.btnGoogle} onClick={viaGoogle}>
         <FcGoogle /> {title} with Google

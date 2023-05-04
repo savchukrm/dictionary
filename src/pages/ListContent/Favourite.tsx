@@ -52,7 +52,7 @@ const Favourite = () => {
               {word === 'createdAt' ? (
                 <p>You do not have any saved items in the current list</p>
               ) : (
-                <Set listName={word} definition={definition} />
+                <Set word={word} definition={definition} content={content} />
               )}
             </li>
           );
