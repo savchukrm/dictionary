@@ -2,16 +2,23 @@ import { CgClose } from 'react-icons/cg';
 
 import styles from './ModalSelect.module.css';
 
+import { DefinitionsItem } from '../../../redux/words/types';
+import Sort from './Sort/Sort';
+
 interface ModalSelectProps {
+  listName: string | undefined;
   setModalSelect: React.Dispatch<React.SetStateAction<boolean>>;
   word: string;
-  content: any;
+  content: DefinitionsItem[];
+  pronunciation: { all: string };
 }
 
 const ModalSelect: React.FC<ModalSelectProps> = ({
   setModalSelect,
   word,
   content,
+  pronunciation,
+  listName,
 }) => {
   const handleCloseModal = () => {
     setModalSelect(false);
@@ -20,17 +27,15 @@ const ModalSelect: React.FC<ModalSelectProps> = ({
   return (
     <div className="modal">
       <div className={styles.block}>
-        <h1>Select a New Definition</h1>
-        <h3>{word}</h3>
-        <button onClick={handleCloseModal} className={styles.smallBtn}>
+        <button onClick={handleCloseModal} className={styles.btnClose}>
           <CgClose />
         </button>
+        <h2>Select a New Definition</h2>
+        <h3>{word}</h3>
+        <span>/{pronunciation.all}/</span>
         <ul className={styles.contentBlock}>
-          {content.map((item: { definition: any }) => {
-            return <li>{item.definition}</li>;
-          })}
+          <Sort content={content} listName={listName} word={word} />
         </ul>
-        <button>Update Definition</button>
       </div>
     </div>
   );

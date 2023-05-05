@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { IoMdClose } from 'react-icons/io';
@@ -8,13 +8,23 @@ import ModalSelect from './ModalSelect/ModalSelect';
 
 import styles from './Set.module.css';
 
+import { DefinitionsItem } from '../../redux/words/types';
+
 interface SetProps {
+  listName: string | undefined;
   word: string;
   definition: string;
-  content: any;
+  meanings: DefinitionsItem[];
+  pronunciation: { all: string };
 }
 
-const Set: React.FC<SetProps> = ({ word, definition, content }) => {
+const Set: React.FC<SetProps> = ({
+  listName,
+  word,
+  definition,
+  meanings,
+  pronunciation,
+}) => {
   const [openMenu, setOpenMenu] = useState(false);
   const [modalSelect, setModalSelect] = useState(false);
 
@@ -30,14 +40,18 @@ const Set: React.FC<SetProps> = ({ word, definition, content }) => {
     <div>
       {modalSelect && (
         <ModalSelect
+          listName={listName}
           word={word}
           setModalSelect={setModalSelect}
-          content={content}
+          content={meanings}
+          pronunciation={pronunciation}
         />
       )}
 
       <div className={styles.setBlock}>
         <h3>{word}</h3>
+        {pronunciation && <span>/{pronunciation.all}/</span>}
+
         <p>{definition}</p>
 
         {!openMenu ? (

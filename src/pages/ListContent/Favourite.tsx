@@ -7,11 +7,13 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import { RootState, useAppDispatch } from '../../redux/store';
 
 import { getUserFavorite } from '../../utils/firebase';
-import { setFavorite, clearFavorite } from '../../redux/favorite/slice';
+import { setFavorite } from '../../redux/favorite/slice';
 
 import Set from '../../components/Set/Set';
 
 import styles from './ListContent.module.css';
+
+import { DefinitionsItem } from '../../redux/words/types';
 
 const Favourite = () => {
   const dispatch = useAppDispatch();
@@ -43,16 +45,27 @@ const Favourite = () => {
 
       <ul className={styles.contentBlock}>
         {favorite.map((item, i) => {
-          const [word, content]: [string, any] = item;
+          const [word, content]: [
+            string,
+            [DefinitionsItem[], { all: string }]
+          ] = item;
 
-          const definition = content[0].definition;
+          const [meanings, pronunciation] = content;
+
+          const definition = meanings[0].definition;
 
           return (
             <li key={i}>
               {word === 'createdAt' ? (
                 <p>You do not have any saved items in the current list</p>
               ) : (
-                <Set word={word} definition={definition} content={content} />
+                <Set
+                  listName="favorite"
+                  word={word}
+                  definition={definition}
+                  meanings={meanings}
+                  pronunciation={pronunciation}
+                />
               )}
             </li>
           );

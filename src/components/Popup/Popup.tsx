@@ -85,7 +85,13 @@ const PopupMenu: React.FC = () => {
     if (isInList) {
       removeWordFromList(id, listName, words.word);
     } else {
-      addWordToList(id, listName, words.word, words.results);
+      addWordToList(
+        id,
+        listName,
+        words.word,
+        words.results,
+        words.pronunciation
+      );
     }
 
     const newListStates = {

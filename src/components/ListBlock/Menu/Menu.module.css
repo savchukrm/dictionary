@@ -16,8 +16,13 @@
 
 .item {
   width: 100%;
+  font-weight: 500;
   padding: 10px 0;
   cursor: pointer;
+}
+
+.item:last-child:hover {
+  color: var(--color-red);
 }
 
 @media screen and (max-width: 1000px) {

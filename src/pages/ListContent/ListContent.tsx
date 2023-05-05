@@ -13,6 +13,8 @@ import Set from '../../components/Set/Set';
 
 import styles from './ListContent.module.css';
 
+import { DefinitionsItem } from '../../redux/words/types';
+
 const ListContent = () => {
   const dispatch = useAppDispatch();
   const { listName } = useParams();
@@ -55,15 +57,27 @@ const ListContent = () => {
 
       <ul className={styles.contentBlock}>
         {list.map((item, i) => {
-          const [word, content]: [string, any] = item;
-          const definition = content[0].definition;
+          const [word, content]: [
+            string,
+            [DefinitionsItem[], { all: string }]
+          ] = item;
+
+          const [meanings, pronunciation] = content;
+
+          const definition = meanings[0].definition;
 
           return (
             <li key={i}>
               {listName === 'createdAt' ? (
                 <p>You do not have any saved items in the current list</p>
               ) : (
-                <Set word={word} definition={definition} content={content} />
+                <Set
+                  listName={listName}
+                  word={word}
+                  definition={definition}
+                  meanings={meanings}
+                  pronunciation={pronunciation}
+                />
               )}
             </li>
           );

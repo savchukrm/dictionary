@@ -12,11 +12,15 @@
   text-transform: capitalize;
   font-size: 20px;
   font-weight: 500;
-  margin-bottom: 5px;
 }
 
 .setBlock p {
   font-size: 18px;
+  margin-top: 8px;
+}
+
+.setBlock span {
+  font-size: 13px;
 }
 
 .btn {

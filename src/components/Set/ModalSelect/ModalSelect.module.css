@@ -3,11 +3,40 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 25%;
-  padding: 40px 40px 50px;
+  top: 10%;
+  padding: 40px;
   border: 1px solid var(--color-white);
   border-radius: 20px;
   max-width: 500px;
-  background-color: var(--color-teal);
+  background-color: #2d385b;
   color: var(--color-white);
+}
+
+.btnClose {
+  position: absolute;
+
+  right: 20px;
+  top: 24px;
+}
+
+.btnClose svg {
+  color: var(--color-white);
+  width: 1.3em;
+  height: 1.3em;
+}
+
+.block h2 {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.block h3 {
+  margin: 20px 0 0;
+  font-size: 22px;
+
+  font-weight: 500;
+}
+
+.contentBlock li {
+  margin: 10px;
 }
