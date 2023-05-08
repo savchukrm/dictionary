@@ -8,7 +8,7 @@ import { RootState, useAppDispatch } from '../../redux/store';
 
 import { getUserFavorite, getUserLists } from '../../utils/firebase';
 
-import { setFavorite, clearFavorite } from '../../redux/favorite/slice';
+import { setFavorite } from '../../redux/favorite/slice';
 import { setLists } from '../../redux/lists/slice';
 
 import ListBlock from '../../components/ListBlock/ListBlock';

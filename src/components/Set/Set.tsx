@@ -65,7 +65,12 @@ const Set: React.FC<SetProps> = ({
         )}
 
         {openMenu && (
-          <MenuSet setModalSelect={setModalSelect} setOpenMenu={setOpenMenu} />
+          <MenuSet
+            setModalSelect={setModalSelect}
+            setOpenMenu={setOpenMenu}
+            listName={listName}
+            word={word}
+          />
         )}
       </div>
     </div>

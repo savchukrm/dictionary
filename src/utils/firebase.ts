@@ -26,13 +26,15 @@ export const addNewUser = (
 export const addWordToFavorite = (
   userId: number | null,
   word: string,
-  results: DefinitionsItem[]
+  results: DefinitionsItem[],
+  pronunciation: { all: string },
+  firstDefinition: string
 ) => {
   get(ref(database, `users/${userId}/favorite`)).then((res) => {
     const { createdAt, ...rest } = res.val();
     set(ref(database, 'users/' + userId + '/favorite/'), {
       ...rest,
-      [word]: results,
+      [word]: [results, pronunciation, firstDefinition],
     }).catch((error) => console.log(error));
   });
 };
@@ -92,14 +94,15 @@ export const addWordToList = (
   name: string,
   word: string,
   results: DefinitionsItem[],
-  pronunciation: { all: string }
+  pronunciation: { all: string },
+  firstDefinition: string
 ) => {
   get(ref(database, `users/${userId}/lists/${name}/`))
     .then((res) => {
       const { createdAt, ...rest } = res.val();
       set(ref(database, `users/${userId}/lists/${name}`), {
         ...rest,
-        [word]: [results, pronunciation],
+        [word]: [results, pronunciation, firstDefinition],
       }).catch((error) => console.log(error));
     })
     .catch((error) => console.log(error));
@@ -107,7 +110,7 @@ export const addWordToList = (
 
 export const removeWordFromList = async (
   userId: number | null,
-  name: string,
+  name: string | undefined,
   word: string
 ) => {
   get(ref(database, `users/${userId}/lists/${name}/`))
@@ -157,10 +160,50 @@ export const changeListName = async (
   }
 };
 
-export const getWordFromList = (
+export const updateMainDefinitionOnList = async (
   userId: number | null,
   listName: string | undefined,
-  word: string
+  word: string,
+  selectedItem: string
 ) => {
-  return get(ref(database, `users/${userId}/lists/${listName}/${word}/0`));
+  try {
+    const snapshot = await get(
+      ref(database, `users/${userId}/lists/${listName}/${word}`)
+    );
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      const updatedData = [...data];
+      updatedData[2] = selectedItem;
+      await set(
+        ref(database, `users/${userId}/lists/${listName}/${word}`),
+        updatedData
+      );
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+export const updateMainDefinitionOnFavorite = async (
+  userId: number | null,
+  word: string,
+  selectedItem: string
+) => {
+  try {
+    const snapshot = await get(
+      ref(database, `users/${userId}/favorite/${word}`)
+    );
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      const updatedData = [...data];
+      updatedData[2] = selectedItem;
+      await set(ref(database, `users/${userId}/favorite/${word}`), updatedData);
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
 };

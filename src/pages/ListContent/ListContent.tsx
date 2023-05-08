@@ -59,22 +59,20 @@ const ListContent = () => {
         {list.map((item, i) => {
           const [word, content]: [
             string,
-            [DefinitionsItem[], { all: string }]
+            [DefinitionsItem[], { all: string }, string]
           ] = item;
 
-          const [meanings, pronunciation] = content;
-
-          const definition = meanings[0].definition;
+          const [meanings, pronunciation, mainDefinition] = content;
 
           return (
             <li key={i}>
-              {listName === 'createdAt' ? (
+              {word === 'createdAt' ? (
                 <p>You do not have any saved items in the current list</p>
               ) : (
                 <Set
                   listName={listName}
                   word={word}
-                  definition={definition}
+                  definition={mainDefinition}
                   meanings={meanings}
                   pronunciation={pronunciation}
                 />

@@ -34,7 +34,12 @@ const ModalSelect: React.FC<ModalSelectProps> = ({
         <h3>{word}</h3>
         <span>/{pronunciation.all}/</span>
         <ul className={styles.contentBlock}>
-          <Sort content={content} listName={listName} word={word} />
+          <Sort
+            content={content}
+            listName={listName}
+            word={word}
+            setModalSelect={setModalSelect}
+          />
         </ul>
       </div>
     </div>

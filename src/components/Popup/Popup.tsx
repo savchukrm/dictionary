@@ -40,6 +40,8 @@ const PopupMenu: React.FC = () => {
   const { id } = useSelector((state: RootState) => state.user);
   const { lists } = useSelector((state: RootState) => state.lists);
 
+  const [mainDefinition] = words.results;
+
   useEffect(() => {
     getUserFavorite(id)
       .then((res) => {
@@ -54,7 +56,13 @@ const PopupMenu: React.FC = () => {
     setIsInList(newIsInList);
 
     if (newIsInList) {
-      addWordToFavorite(id, words.word, words.results);
+      addWordToFavorite(
+        id,
+        words.word,
+        words.results,
+        words.pronunciation,
+        mainDefinition.definition
+      );
     } else {
       removeWordFromFavorite(id, words.word);
     }
@@ -90,7 +98,8 @@ const PopupMenu: React.FC = () => {
         listName,
         words.word,
         words.results,
-        words.pronunciation
+        words.pronunciation,
+        mainDefinition.definition
       );
     }
 

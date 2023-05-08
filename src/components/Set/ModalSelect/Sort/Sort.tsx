@@ -1,9 +1,15 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { RootState } from '../../../../redux/store';
+import { RootState, useAppDispatch } from '../../../../redux/store';
 
-import { getWordFromList } from '../../../../utils/firebase';
+import {
+  updateMainDefinitionOnList,
+  updateMainDefinitionOnFavorite,
+} from '../../../../utils/firebase';
+
+import { setList } from '../../../../redux/set/slice';
+import { setFavorite } from '../../../../redux/favorite/slice';
 
 import styles from './Sort.module.css';
 
@@ -16,16 +22,58 @@ interface SortProps {
   content: DefinitionsItem[];
   listName: string | undefined;
   word: string;
+  setModalSelect: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Sort: React.FC<SortProps> = ({ content, listName, word }) => {
+const Sort: React.FC<SortProps> = ({
+  content,
+  listName,
+  word,
+  setModalSelect,
+}) => {
+  const dispatch = useAppDispatch();
+
   const [showAll, setShowAll] = useState(false);
   const [selectedItem, setSelectedItem] = useState('');
 
   const { id } = useSelector((state: RootState) => state.user);
+  const { list } = useSelector((state: RootState) => state.list);
+  const { favorite } = useSelector((state: RootState) => state.favorite);
+
+  const updateCurrentList = () => {
+    updateMainDefinitionOnList(id, listName, word, selectedItem);
+
+    const updatedDefinition = list.map((el) => {
+      const [term, content] = el;
+      if (term === word) {
+        return [term, [content[0], content[1], selectedItem]];
+      } else {
+        return el;
+      }
+    });
+
+    dispatch(setList(updatedDefinition));
+  };
+
+  const updateFavoriteList = () => {
+    updateMainDefinitionOnFavorite(id, word, selectedItem);
+
+    const updatedDefinition = favorite.map((el) => {
+      const [term, content] = el;
+      if (term === word) {
+        return [term, [content[0], content[1], selectedItem]];
+      } else {
+        return el;
+      }
+    });
+
+    dispatch(setFavorite(updatedDefinition));
+  };
 
   const updateDefinition = () => {
-    getWordFromList(id, listName, word);
+    listName === 'favorite' ? updateFavoriteList() : updateCurrentList();
+
+    setModalSelect(false);
   };
 
   const nouns = content.reduce((all: string[], obj) => {

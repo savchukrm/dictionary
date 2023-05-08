@@ -47,12 +47,10 @@ const Favourite = () => {
         {favorite.map((item, i) => {
           const [word, content]: [
             string,
-            [DefinitionsItem[], { all: string }]
+            [DefinitionsItem[], { all: string }, string]
           ] = item;
 
-          const [meanings, pronunciation] = content;
-
-          const definition = meanings[0].definition;
+          const [meanings, pronunciation, mainDefinition] = content;
 
           return (
             <li key={i}>
@@ -62,7 +60,7 @@ const Favourite = () => {
                 <Set
                   listName="favorite"
                   word={word}
-                  definition={definition}
+                  definition={mainDefinition}
                   meanings={meanings}
                   pronunciation={pronunciation}
                 />
