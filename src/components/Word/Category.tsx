@@ -23,6 +23,8 @@ const Category = () => {
       if (synonyms.length) {
         return all.concat([[obj.definition, synonyms]]);
       }
+
+      return all.concat([[obj.definition, synonyms]]);
     }
     return all;
   }, []);
@@ -40,6 +42,8 @@ const Category = () => {
       if (synonyms.length) {
         return all.concat([[obj.definition, synonyms]]);
       }
+
+      return all.concat([[obj.definition, synonyms]]);
     }
     return all;
   }, []);
@@ -57,6 +61,8 @@ const Category = () => {
       if (synonyms.length) {
         return all.concat([[obj.definition, synonyms]]);
       }
+
+      return all.concat([[obj.definition, synonyms]]);
     }
     return all;
   }, []);
@@ -74,6 +80,8 @@ const Category = () => {
       if (synonyms.length) {
         return all.concat([[obj.definition, synonyms]]);
       }
+
+      return all.concat([[obj.definition, synonyms]]);
     }
     return all;
   }, []);
@@ -92,6 +100,8 @@ const Category = () => {
         if (synonyms.length) {
           return all.concat([[obj.definition, synonyms]]);
         }
+
+        return all.concat([[obj.definition, synonyms]]);
       }
       return all;
     },

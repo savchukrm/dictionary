@@ -33,7 +33,7 @@ const Favourite = () => {
 
   return (
     <div className={styles.content}>
-      <div className={styles.top}>
+      <div className="header">
         <Link to="/lists">
           <button className="btnBack">
             <IoMdArrowRoundBack />

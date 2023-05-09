@@ -19,6 +19,7 @@ import NotFound from './pages/NotFound/NotFound';
 import Favourite from './pages/ListContent/Favourite';
 
 import './styles/App.css';
+import Flashcard from './pages/Flashcard/Flashcard';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -45,6 +46,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/lists" element={<Lists />} />
+        <Route path="/flashcard" element={<Flashcard />} />
         <Route path="/lists/:listName" element={<ListContent />} />
         <Route path="/lists/favourites" element={<Favourite />} />
         <Route path="*" element={<NotFound />} />

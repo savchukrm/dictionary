@@ -52,7 +52,7 @@ const ModalChange: React.FC<ModalChangeProps> = ({ setModalChange, title }) => {
     <div className={styles.modal}>
       <div className={styles.block}>
         <div className={styles.top}>
-          <h3 className={styles.h3}>Edit a new list</h3>
+          <h3 className={styles.h3}>Edit list name</h3>
           <button onClick={handleModal} className={styles.smallBtn}>
             <CgClose />
           </button>

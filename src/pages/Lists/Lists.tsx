@@ -67,7 +67,7 @@ const Lists = (): JSX.Element => {
     <div className={styles.listBlock}>
       {isNewList && <ModalInput setIsNewList={setIsNewList} />}
 
-      <div className={styles.header}>
+      <div className="header">
         <Link to="/">
           <button className="btnBack">
             <IoMdArrowRoundBack />
@@ -77,7 +77,7 @@ const Lists = (): JSX.Element => {
 
         <h1>My lists</h1>
 
-        <button onClick={handleModal} className={styles.btnAdd}>
+        <button onClick={handleModal} className="btnAdd">
           new list
         </button>
       </div>

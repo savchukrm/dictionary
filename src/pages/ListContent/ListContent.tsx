@@ -8,6 +8,7 @@ import { RootState, useAppDispatch } from '../../redux/store';
 
 import { getUserList } from '../../utils/firebase';
 import { setList, clearList } from '../../redux/set/slice';
+import { setListForQuiz } from '../../redux/quiz/slice';
 
 import Set from '../../components/Set/Set';
 
@@ -43,9 +44,14 @@ const ListContent = () => {
     dispatch(clearList());
   };
 
+  const handleCreateFlashcardList = () => {
+    const newArray = list.map((item) => [item[0], item[1][2]]);
+    dispatch(setListForQuiz(newArray));
+  };
+
   return (
     <div className={styles.content}>
-      <div className={styles.top}>
+      <div className="header">
         <Link to="/lists">
           <button onClick={handleClearLlist} className="btnBack">
             <IoMdArrowRoundBack />
@@ -53,6 +59,10 @@ const ListContent = () => {
           </button>
         </Link>
         <h1>{listName}</h1>
+
+        <button onClick={handleCreateFlashcardList} className="btnAdd">
+          <Link to="/flashcard">Flashcard</Link>
+        </button>
       </div>
 
       <ul className={styles.contentBlock}>

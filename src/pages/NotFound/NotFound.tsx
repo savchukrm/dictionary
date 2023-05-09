@@ -10,7 +10,7 @@ const NotFound: React.FC = () => {
       <img
         width={350}
         height={350}
-        src={process.env.REACT_APP_PUBLIC_URL + '/img/404dark.png'}
+        src={process.env.REACT_APP_PUBLIC_URL + '/img/404light.png'}
         alt="not-found"
       />
       <Link to="/">
