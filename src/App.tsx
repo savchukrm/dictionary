@@ -14,12 +14,12 @@ import LoginPage from './pages/Auth/LoginPage';
 import RegisterPage from './pages/Auth/RegisterPage';
 import Lists from './pages/Lists/Lists';
 import ListContent from './pages/ListContent/ListContent';
-import Modal from './pages/Modal/Modal';
-import NotFound from './pages/NotFound/NotFound';
 import Favourite from './pages/ListContent/Favourite';
+import Modal from './pages/Modal/Modal';
+import Flashcard from './pages/Flashcard/Flashcard';
+import NotFound from './pages/NotFound/NotFound';
 
 import './styles/App.css';
-import Flashcard from './pages/Flashcard/Flashcard';
 
 function App() {
   const dispatch = useAppDispatch();

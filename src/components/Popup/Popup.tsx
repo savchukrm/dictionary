@@ -13,10 +13,13 @@ import {
   addWordToFavorite,
   removeWordFromFavorite,
   getUserFavorite,
+} from '../../utils/favorite/favorite';
+
+import {
   getUserLists,
   addWordToList,
   removeWordFromList,
-} from '../../utils/firebase';
+} from '../../utils/lists/list';
 
 import styles from './Popup.module.css';
 

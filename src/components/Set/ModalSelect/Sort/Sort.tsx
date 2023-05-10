@@ -3,10 +3,8 @@ import { useSelector } from 'react-redux';
 
 import { RootState, useAppDispatch } from '../../../../redux/store';
 
-import {
-  updateMainDefinitionOnList,
-  updateMainDefinitionOnFavorite,
-} from '../../../../utils/firebase';
+import { updateMainDefinitionOnList } from '../../../../utils/lists/list';
+import { updateMainDefinitionOnFavorite } from '../../../../utils/favorite/favorite';
 
 import { setList } from '../../../../redux/set/slice';
 import { setFavorite } from '../../../../redux/favorite/slice';

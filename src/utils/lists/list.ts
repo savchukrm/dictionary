@@ -1,69 +1,18 @@
-import apps from '../config/firebase';
+import apps from '../../config/firebase';
 import { ref, set, get, remove, update } from 'firebase/database';
-import { DefinitionsItem } from '../redux/words/types';
+import { DefinitionsItem } from '../../redux/words/types';
 
 const { database } = apps;
 
-interface Favorite {
-  createdAt: string;
-}
-
-export const addNewUser = (
-  userId: string,
-  email: string | null,
-  password: string,
-  list: string[],
-  favorite: Favorite
-) => {
-  set(ref(database, 'users/' + userId), {
-    email,
-    list,
-    password,
-    favorite,
-  });
+export const getUserLists = (userId: number | null) => {
+  return get(ref(database, `users/${userId}/lists`));
 };
 
-export const addWordToFavorite = (
+export const getUserList = (
   userId: number | null,
-  word: string,
-  results: DefinitionsItem[],
-  pronunciation: { all: string },
-  firstDefinition: string
+  name: string | undefined
 ) => {
-  get(ref(database, `users/${userId}/favorite`)).then((res) => {
-    const { createdAt, ...rest } = res.val();
-    set(ref(database, 'users/' + userId + '/favorite/'), {
-      ...rest,
-      [word]: [results, pronunciation, firstDefinition],
-    }).catch((error) => console.log(error));
-  });
-};
-
-export const removeWordFromFavorite = (userId: number | null, word: string) => {
-  get(ref(database, `users/${userId}/favorite/`))
-    .then((res) => {
-      const list = res.val();
-      const listLenght = Object.keys(list).length;
-      const now = new Date().toISOString();
-
-      if (listLenght === 1) {
-        set(ref(database, `users/${userId}/favorite/`), {
-          createdAt: now,
-        }).catch((error) => console.log(error));
-        remove(ref(database, `users/${userId}/favorite/${word}`)).catch(
-          (error) => console.log(error)
-        );
-      } else {
-        remove(ref(database, `users/${userId}/favorite/${word}`)).catch(
-          (error) => console.log(error)
-        );
-      }
-    })
-    .catch((error) => console.log(error));
-};
-
-export const getUserFavorite = (userId: number | null) => {
-  return get(ref(database, `users/${userId}/favorite`));
+  return get(ref(database, `users/${userId}/lists/${name}`));
 };
 
 export const createNewList = (userId: number | null, name: string) => {
@@ -76,17 +25,6 @@ export const createNewList = (userId: number | null, name: string) => {
       }).catch((error) => console.log(error));
     })
     .catch((error) => console.log(error));
-};
-
-export const getUserLists = (userId: number | null) => {
-  return get(ref(database, `users/${userId}/lists`));
-};
-
-export const getUserList = (
-  userId: number | null,
-  name: string | undefined
-) => {
-  return get(ref(database, `users/${userId}/lists/${name}`));
 };
 
 export const addWordToList = (
@@ -178,28 +116,6 @@ export const updateMainDefinitionOnList = async (
         ref(database, `users/${userId}/lists/${listName}/${word}`),
         updatedData
       );
-    } else {
-      return null;
-    }
-  } catch (error) {
-    console.error('Error:', error);
-  }
-};
-
-export const updateMainDefinitionOnFavorite = async (
-  userId: number | null,
-  word: string,
-  selectedItem: string
-) => {
-  try {
-    const snapshot = await get(
-      ref(database, `users/${userId}/favorite/${word}`)
-    );
-    if (snapshot.exists()) {
-      const data = snapshot.val();
-      const updatedData = [...data];
-      updatedData[2] = selectedItem;
-      await set(ref(database, `users/${userId}/favorite/${word}`), updatedData);
     } else {
       return null;
     }

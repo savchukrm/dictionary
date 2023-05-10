@@ -5,7 +5,7 @@ import { IoMdClose } from 'react-icons/io';
 import { RootState, useAppDispatch } from '../../../../redux/store';
 import { setLists } from '../../../../redux/lists/slice';
 
-import { removeListFromLists } from '../../../../utils/firebase';
+import { removeListFromLists } from '../../../../utils/lists/list';
 
 import styles from './ModalDelete.module.css';
 

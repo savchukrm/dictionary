@@ -6,7 +6,7 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 
 import { RootState, useAppDispatch } from '../../redux/store';
 
-import { getUserFavorite } from '../../utils/firebase';
+import { getUserFavorite } from '../../utils/favorite/favorite';
 import { setFavorite } from '../../redux/favorite/slice';
 import { setListForQuiz } from '../../redux/quiz/slice';
 

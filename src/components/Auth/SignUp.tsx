@@ -13,7 +13,7 @@ import {
 import { ref, get, set } from 'firebase/database';
 
 import { setUser, removeUser } from '../../redux/auth/slice';
-import { addNewUser } from '../../utils/firebase';
+import { addNewUser } from '../../utils/user/user';
 
 import Form from './Form';
 
@@ -34,7 +34,7 @@ const SignUp = (): JSX.Element => {
           setUser({ email: user.email, id: user.uid, token: user.refreshToken })
         );
         const now = new Date().toISOString();
-        addNewUser(user.uid, email, password, [], { createdAt: now });
+        addNewUser(user.uid, email, password, [], [], { createdAt: now });
 
         navigate('/');
       })

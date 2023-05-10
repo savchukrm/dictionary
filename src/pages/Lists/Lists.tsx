@@ -6,7 +6,8 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 
 import { RootState, useAppDispatch } from '../../redux/store';
 
-import { getUserFavorite, getUserLists } from '../../utils/firebase';
+import { getUserFavorite } from '../../utils/favorite/favorite';
+import { getUserLists } from '../../utils/lists/list';
 
 import { setFavorite } from '../../redux/favorite/slice';
 import { setLists } from '../../redux/lists/slice';
@@ -87,9 +88,7 @@ const Lists = (): JSX.Element => {
       <div className={styles.content}>
         <ul className={styles.blocks}>
           <li className={styles.item} key={0}>
-            <Link to="/lists/favourite">
-              <FavoriteBlock length={favoriteLength} title="favourites" />
-            </Link>
+            <FavoriteBlock length={favoriteLength} title="favourites" />
           </li>
 
           {lists.map((item, i) => {

@@ -6,12 +6,12 @@ import styles from './ListBlock.module.css';
 
 const FavoriteBlock: React.FC<BlockProps> = ({ title, length }) => {
   return (
-    <Link to={`/lists/${title}`}>
-      <div className={styles.card}>
+    <div className={styles.card}>
+      <Link to={`/lists/${title}`}>
         <h3>{title}</h3>
-        <p>{length === 1 ? `${length} word` : `${length} words`}</p>
-      </div>
-    </Link>
+      </Link>
+      <p>{length === 1 ? `${length} word` : `${length} words`}</p>
+    </div>
   );
 };
 

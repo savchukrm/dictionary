@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { CgClose } from 'react-icons/cg';
 
 import { RootState, useAppDispatch } from '../../redux/store';
-import { createNewList } from '../../utils/firebase';
+import { createNewList } from '../../utils/lists/list';
 import { setLists } from '../../redux/lists/slice';
 
 import styles from './ModalInput.module.css';

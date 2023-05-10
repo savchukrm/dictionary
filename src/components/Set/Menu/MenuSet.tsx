@@ -2,10 +2,8 @@ import { useSelector } from 'react-redux';
 
 import { RootState, useAppDispatch } from '../../../redux/store';
 
-import {
-  removeWordFromFavorite,
-  removeWordFromList,
-} from '../../../utils/firebase';
+import { removeWordFromFavorite } from '../../../utils/favorite/favorite';
+import { removeWordFromList } from '../../../utils/lists/list';
 
 import { setList } from '../../../redux/set/slice';
 import { setFavorite } from '../../../redux/favorite/slice';

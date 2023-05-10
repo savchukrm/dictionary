@@ -6,7 +6,7 @@ import { CgClose } from 'react-icons/cg';
 import { RootState, useAppDispatch } from '../../../../redux/store';
 
 import { setLists } from '../../../../redux/lists/slice';
-import { changeListName } from '../../../../utils/firebase';
+import { changeListName } from '../../../../utils/lists/list';
 
 import styles from '../../../ModalInput/ModalInput.module.css';
 

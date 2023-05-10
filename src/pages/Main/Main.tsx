@@ -6,7 +6,8 @@ import { RootState, useAppDispatch } from '../../redux/store';
 import { setLists } from '../../redux/lists/slice';
 import { setFavorite } from '../../redux/favorite/slice';
 
-import { getUserLists, getUserFavorite } from '../../utils/firebase';
+import { getUserFavorite } from '../../utils/favorite/favorite';
+import { getUserLists } from '../../utils/lists/list';
 
 import Search from '../../components/Search/Search';
 import Image from '../../components/Image';

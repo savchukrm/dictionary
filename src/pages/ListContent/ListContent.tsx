@@ -6,7 +6,7 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 
 import { RootState, useAppDispatch } from '../../redux/store';
 
-import { getUserList } from '../../utils/firebase';
+import { getUserList } from '../../utils/lists/list';
 import { setList, clearList } from '../../redux/set/slice';
 import { setListForQuiz } from '../../redux/quiz/slice';
 
@@ -62,7 +62,7 @@ const ListContent = () => {
         <Link to="/lists">
           <button onClick={handleClearLlist} className="btnBack">
             <IoMdArrowRoundBack />
-            All lists
+            return
           </button>
         </Link>
 

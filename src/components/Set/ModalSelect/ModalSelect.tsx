@@ -1,9 +1,9 @@
 import { CgClose } from 'react-icons/cg';
 
+import Sort from './Sort/Sort';
 import styles from './ModalSelect.module.css';
 
 import { DefinitionsItem } from '../../../redux/words/types';
-import Sort from './Sort/Sort';
 
 interface ModalSelectProps {
   listName: string | undefined;
