@@ -9,9 +9,10 @@ import favorite from './favorite/slice';
 import lists from './lists/slice';
 import list from './set/slice';
 import quiz from './quiz/slice';
+import folders from './folders/slice';
 
 export const store = configureStore({
-  reducer: { words, search, user, modal, favorite, lists, list, quiz },
+  reducer: { words, search, user, modal, favorite, lists, list, quiz, folders },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

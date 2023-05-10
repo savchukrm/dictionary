@@ -7,7 +7,7 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import { RootState, useAppDispatch } from '../../redux/store';
 
 import { getUserFavorite } from '../../utils/favorite/favorite';
-import { getUserLists } from '../../utils/lists/list';
+import { getUserLists, createNewList } from '../../utils/lists/list';
 
 import { setFavorite } from '../../redux/favorite/slice';
 import { setLists } from '../../redux/lists/slice';
@@ -66,9 +66,25 @@ const Lists = (): JSX.Element => {
     ? 0
     : favorite.length;
 
+  const handleModalContent = (
+    inputName: string,
+    id: number | null,
+    now: string
+  ) => {
+    createNewList(id, inputName);
+    setIsNewList(false);
+    dispatch(setLists([...lists, [inputName, { createdAt: now }]]));
+  };
+
   return (
     <div className={styles.listBlock}>
-      {isNewList && <ModalInput setIsNewList={setIsNewList} />}
+      {isNewList && (
+        <ModalInput
+          setIsNewOne={setIsNewList}
+          name={'list'}
+          handleContent={handleModalContent}
+        />
+      )}
 
       <div className="header">
         <Link to="/">

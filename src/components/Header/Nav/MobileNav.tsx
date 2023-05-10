@@ -50,9 +50,15 @@ function MobileNav() {
           </button>
 
           {isAuth && (
-            <Link onClick={handleOpenNav} to="/lists">
-              <button className={styles.headerBtn}>Lists</button>
-            </Link>
+            <>
+              <Link onClick={handleOpenNav} to="/lists">
+                <button className={styles.headerBtn}>Lists</button>
+              </Link>
+
+              <Link onClick={handleOpenNav} to="/folders">
+                <button className={styles.headerBtn}>Folders</button>
+              </Link>
+            </>
           )}
 
           {!isAuth && (

@@ -23,9 +23,15 @@ const BrowserNav = () => {
       </Link>
       <ul className={styles.headerBtnRow}>
         {isAuth && (
-          <Link to="/lists">
-            <button className={styles.headerBtn}>Lists</button>
-          </Link>
+          <>
+            <Link to="/lists">
+              <button className={styles.headerBtn}>Lists</button>
+            </Link>
+
+            <Link to="/folders">
+              <button className={styles.headerBtn}>Folders</button>
+            </Link>
+          </>
         )}
 
         {!isAuth && (
