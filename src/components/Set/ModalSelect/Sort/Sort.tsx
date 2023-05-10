@@ -74,6 +74,7 @@ const Sort: React.FC<SortProps> = ({
     listName === 'favorite' ? updateFavoriteList() : updateCurrentList();
 
     setModalSelect(false);
+    document.body.classList.remove('modal-open');
   };
 
   const nouns = content.reduce((all: string[], obj) => {

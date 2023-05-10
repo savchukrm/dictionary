@@ -34,6 +34,8 @@ const MenuSet: React.FC<MenuSetProps> = ({
   const handleOpenModalSelect = () => {
     setModalSelect(true);
     setOpenMenu(false);
+
+    document.body.classList.add('modal-open');
   };
 
   const deleteWordFromFavorite = () => {

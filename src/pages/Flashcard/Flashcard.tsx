@@ -47,7 +47,7 @@ const Flashcard = (): JSX.Element => {
               <div className={styles.progressBar}>
                 <div
                   className={styles.progress}
-                  style={{ width: `${progress}%` }}
+                  style={{ width: `${progress}%`, transition: 'width 2s' }}
                 ></div>
               </div>
 

@@ -7,6 +7,14 @@
   margin-top: 50px;
 }
 
+.hide {
+  visibility: hidden;
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
 .btnBack {
   position: relative;
 
@@ -67,6 +75,10 @@
   font-weight: 500;
 }
 
+.header h1::first-letter {
+  text-transform: uppercase;
+}
+
 .btnAdd {
   font-weight: 500;
   color: var(--color-white);
@@ -103,6 +115,10 @@
   .btnAdd {
     padding: 0px 10px;
     font-size: 15px;
+  }
+
+  .btnFlashcard {
+    padding: 10px 20px;
   }
 
   .btnAdd:hover {

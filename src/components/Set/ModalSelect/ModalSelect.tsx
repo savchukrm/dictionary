@@ -22,6 +22,7 @@ const ModalSelect: React.FC<ModalSelectProps> = ({
 }) => {
   const handleCloseModal = () => {
     setModalSelect(false);
+    document.body.classList.remove('modal-open');
   };
 
   return (

@@ -38,6 +38,8 @@ const ModalChange: React.FC<ModalChangeProps> = ({ setModalChange, title }) => {
     });
 
     dispatch(setLists(updatedLists));
+
+    document.body.classList.remove('modal-open');
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,6 +48,8 @@ const ModalChange: React.FC<ModalChangeProps> = ({ setModalChange, title }) => {
 
   const handleModal = () => {
     setModalChange(false);
+
+    document.body.classList.remove('modal-open');
   };
 
   return (

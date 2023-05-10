@@ -29,6 +29,8 @@ const ModalInput: React.FC<ModalProps> = ({ setIsNewList }) => {
     createNewList(id, inputName);
     setIsNewList(false);
     dispatch(setLists([...lists, [inputName, { createdAt: now }]]));
+
+    document.body.classList.remove('modal-open');
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +38,8 @@ const ModalInput: React.FC<ModalProps> = ({ setIsNewList }) => {
   };
 
   const handleModal = () => {
+    document.body.classList.remove('modal-open');
+
     setIsNewList((prev) => !prev);
   };
 

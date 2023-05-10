@@ -10,6 +10,7 @@ import { removeUser } from '../../redux/auth/slice';
 import { clearFavorite } from '../../redux/favorite/slice';
 import { clearLists } from '../../redux/lists/slice';
 import { clearList } from '../../redux/set/slice';
+import { clearListForQuiz } from '../../redux/quiz/slice';
 
 import styles from './ModalWindow.module.css';
 
@@ -20,11 +21,13 @@ function ModalWindow(): JSX.Element {
   const auth = getAuth();
 
   const onConfirm = () => {
-    dispatch(handleClose());
+    document.body.classList.remove('modal-open');
 
+    dispatch(handleClose());
     dispatch(clearFavorite());
     dispatch(clearLists());
     dispatch(clearList());
+    dispatch(clearListForQuiz());
 
     auth
       .signOut()
@@ -39,6 +42,8 @@ function ModalWindow(): JSX.Element {
   };
 
   const onClose = () => {
+    document.body.classList.remove('modal-open');
+
     dispatch(handleClose());
   };
 

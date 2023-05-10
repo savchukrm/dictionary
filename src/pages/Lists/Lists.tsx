@@ -56,6 +56,8 @@ const Lists = (): JSX.Element => {
   }, [dispatch, id]);
 
   const handleModal = () => {
+    document.body.classList.add('modal-open');
+
     setIsNewList((prev) => !prev);
   };
 

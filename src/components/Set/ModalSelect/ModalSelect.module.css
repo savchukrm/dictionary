@@ -40,3 +40,10 @@
 .contentBlock li {
   margin: 10px;
 }
+
+@media screen and (max-width: 550px) {
+  .block {
+    top: 5%;
+    margin: 0 20px;
+  }
+}

@@ -8,6 +8,9 @@ import { RootState, useAppDispatch } from '../../redux/store';
 
 import { getUserFavorite } from '../../utils/firebase';
 import { setFavorite } from '../../redux/favorite/slice';
+import { setListForQuiz } from '../../redux/quiz/slice';
+
+import { shuffleArray } from '../../utils/utilityFunctions';
 
 import Set from '../../components/Set/Set';
 
@@ -31,16 +34,36 @@ const Favourite = () => {
       .catch((error) => console.log(error));
   }, [dispatch, id]);
 
+  const handleCreateFlashcardList = () => {
+    const newArray = favorite.map((item) => [item[0], item[1][2]]);
+    const shuffledNewArray = shuffleArray(newArray);
+    dispatch(setListForQuiz(shuffledNewArray));
+  };
+
+  const showFlashcardsBtn = favorite.find((el) => el[0] === 'createdAt')
+    ? 'hide'
+    : '';
+
   return (
     <div className={styles.content}>
       <div className="header">
         <Link to="/lists">
           <button className="btnBack">
             <IoMdArrowRoundBack />
-            All lists
+            return
           </button>
         </Link>
+
         <h1>Favourites</h1>
+
+        <Link to="/flashcard">
+          <button
+            onClick={handleCreateFlashcardList}
+            className={`btnAdd btnFlashcard ${showFlashcardsBtn && 'hide'}`}
+          >
+            Flashcards
+          </button>
+        </Link>
       </div>
 
       <ul className={styles.contentBlock}>

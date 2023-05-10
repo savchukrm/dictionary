@@ -49,3 +49,9 @@
   text-transform: uppercase;
   margin-bottom: 10px;
 }
+
+@media screen and (max-width: 550px) {
+  .flashcard {
+    height: 250px;
+  }
+}

@@ -22,13 +22,17 @@ const ModalDelete: React.FC<ModalDeleteProps> = ({ setModalDelete, title }) => {
 
   const handleCloseModal = () => {
     setModalDelete(false);
+
+    document.body.classList.remove('modal-open');
   };
 
   const handleDeleteList = () => {
     const newList = lists.filter((item) => item[0] !== title);
-    removeListFromLists(id, title);
-    setModalDelete(false);
     dispatch(setLists(newList));
+    removeListFromLists(id, title);
+
+    setModalDelete(false);
+    document.body.classList.remove('modal-open');
   };
 
   return (

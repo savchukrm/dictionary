@@ -12,6 +12,7 @@ const BrowserNav = () => {
   const { isAuth } = useAuth();
 
   const openModal = () => {
+    document.body.classList.add('modal-open');
     dispatch(handleOpen());
   };
 

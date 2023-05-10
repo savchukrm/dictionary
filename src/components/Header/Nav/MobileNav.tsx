@@ -18,6 +18,8 @@ function MobileNav() {
   const { isAuth } = useAuth();
 
   const openModal = () => {
+    document.body.classList.add('modal-open');
+
     dispatch(handleOpen());
   };
 

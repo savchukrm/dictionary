@@ -10,6 +10,8 @@ import { getUserList } from '../../utils/firebase';
 import { setList, clearList } from '../../redux/set/slice';
 import { setListForQuiz } from '../../redux/quiz/slice';
 
+import { shuffleArray } from '../../utils/utilityFunctions';
+
 import Set from '../../components/Set/Set';
 
 import styles from './ListContent.module.css';
@@ -46,8 +48,13 @@ const ListContent = () => {
 
   const handleCreateFlashcardList = () => {
     const newArray = list.map((item) => [item[0], item[1][2]]);
-    dispatch(setListForQuiz(newArray));
+    const shuffledNewArray = shuffleArray(newArray);
+    dispatch(setListForQuiz(shuffledNewArray));
   };
+
+  const showFlashcardsBtn = list.find((el) => el[0] === 'createdAt')
+    ? 'hide'
+    : '';
 
   return (
     <div className={styles.content}>
@@ -58,11 +65,17 @@ const ListContent = () => {
             All lists
           </button>
         </Link>
+
         <h1>{listName}</h1>
 
-        <button onClick={handleCreateFlashcardList} className="btnAdd">
-          <Link to="/flashcard">Flashcard</Link>
-        </button>
+        <Link to="/flashcard">
+          <button
+            onClick={handleCreateFlashcardList}
+            className={`btnAdd btnFlashcard ${showFlashcardsBtn && 'hide'}`}
+          >
+            Flashcards
+          </button>
+        </Link>
       </div>
 
       <ul className={styles.contentBlock}>
