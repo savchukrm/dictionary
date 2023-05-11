@@ -15,6 +15,7 @@ import { setLists } from '../../redux/lists/slice';
 import ListBlock from '../../components/ListBlock/ListBlock';
 import FavoriteBlock from '../../components/ListBlock/FavoriteBlock';
 import ModalInput from '../../components/ModalInput/ModalInput';
+import Skeleton from '../../components/Skeleton/Skeleton';
 
 import styles from './Lists.module.css';
 
@@ -26,6 +27,7 @@ const Lists = (): JSX.Element => {
   const { favorite } = useSelector((state: RootState) => state.favorite);
 
   const [isNewList, setIsNewList] = useState<boolean>(false);
+  const [isLoding, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     getUserFavorite(id)
@@ -48,6 +50,7 @@ const Lists = (): JSX.Element => {
           ]);
           dispatch(setLists(userListsArray));
         }
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -81,7 +84,8 @@ const Lists = (): JSX.Element => {
       {isNewList && (
         <ModalInput
           setIsNewOne={setIsNewList}
-          name={'list'}
+          title="Create a new list"
+          act="new list"
           handleContent={handleModalContent}
         />
       )}
@@ -102,28 +106,32 @@ const Lists = (): JSX.Element => {
       </div>
 
       <div className={styles.content}>
-        <ul className={styles.blocks}>
-          <li className={styles.item} key={0}>
-            <FavoriteBlock length={favoriteLength} title="favourites" />
-          </li>
+        {isLoding ? (
+          <Skeleton />
+        ) : (
+          <ul className={styles.blocks}>
+            <li className={styles.item} key={0}>
+              <FavoriteBlock length={favoriteLength} title="favourites" />
+            </li>
 
-          {lists.map((item, i) => {
-            const [title, content] = item;
-            const contentLength = Object.entries(content);
+            {lists.map((item, i) => {
+              const [title, content] = item;
+              const contentLength = Object.entries(content);
 
-            const lengthValue = contentLength.find(
-              (el) => el[0] === 'createdAt'
-            )
-              ? 0
-              : contentLength.length;
+              const lengthValue = contentLength.find(
+                (el) => el[0] === 'createdAt'
+              )
+                ? 0
+                : contentLength.length;
 
-            return (
-              <li key={i + 1}>
-                <ListBlock title={title} length={lengthValue} />
-              </li>
-            );
-          })}
-        </ul>
+              return (
+                <li key={i + 1}>
+                  <ListBlock title={title} length={lengthValue} />
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </div>
     </div>
   );

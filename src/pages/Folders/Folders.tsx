@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -6,19 +6,34 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 
 import { RootState, useAppDispatch } from '../../redux/store';
 
-import { createNewFolder } from '../../utils/folders/folders';
+import { createNewFolder, getUserFolders } from '../../utils/folders/folders';
 import { setFolders } from '../../redux/folders/slice';
 
+import FolderBlock from '../../components/FolderBlock/FolderBlock';
 import ModalInput from '../../components/ModalInput/ModalInput';
+import Skeleton from '../../components/Skeleton/Skeleton';
 
 import styles from './Folders.module.css';
 
 const Folders = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
+  const { id } = useSelector((state: RootState) => state.user);
   const { folders } = useSelector((state: RootState) => state.folders);
 
   const [isNewFolder, setIsNewFolder] = useState<boolean>(false);
+  const [isLoding, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    getUserFolders(id)
+      .then((res) => {
+        if (res.val() != null) {
+          dispatch(setFolders(Object.entries(res.val())));
+        }
+        setIsLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, [dispatch, id]);
 
   const handleModal = () => {
     document.body.classList.add('modal-open');
@@ -26,7 +41,7 @@ const Folders = (): JSX.Element => {
     setIsNewFolder((prev) => !prev);
   };
 
-  const handleModalContent = (
+  const handleNewFolder = (
     inputName: string,
     id: number | null,
     now: string
@@ -41,8 +56,9 @@ const Folders = (): JSX.Element => {
       {isNewFolder && (
         <ModalInput
           setIsNewOne={setIsNewFolder}
-          name={'folder'}
-          handleContent={handleModalContent}
+          title="Create a new folder"
+          act="new folder"
+          handleContent={handleNewFolder}
         />
       )}
 
@@ -59,6 +75,24 @@ const Folders = (): JSX.Element => {
         <button onClick={handleModal} className="btnAdd">
           new folder
         </button>
+      </div>
+
+      <div className={styles.container}>
+        {isLoding ? (
+          <Skeleton />
+        ) : (
+          <ul>
+            {folders.map((item, i) => {
+              const [title, { content, description }] = item;
+
+              return (
+                <li key={i + 1}>
+                  <FolderBlock title={title} description={description} />
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </div>
     </div>
   );

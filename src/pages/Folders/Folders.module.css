@@ -3,3 +3,16 @@
   max-width: 1000px;
   margin: 40px auto;
 }
+
+.container {
+  padding: 20px;
+  margin: 40px auto;
+  text-align: left;
+  border-radius: 50px;
+}
+
+.container ul {
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+}

@@ -1,0 +1,56 @@
+.block {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  padding: 20px;
+  border-radius: 30px;
+  background-color: #6a2222;
+  max-width: 380px;
+  height: 140px;
+
+  text-align: left;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left {
+  display: flex;
+  gap: 10px;
+}
+
+.left h4 {
+  font-weight: 500;
+}
+
+.folder svg {
+  height: 1.2em;
+  width: 1.3em;
+}
+
+.bottom {
+  display: flex;
+  gap: 10px;
+}
+
+.bottom span {
+  padding-top: 2px;
+  font-size: 15px;
+}
+
+.plus {
+  cursor: pointer;
+}
+
+.plus svg {
+  fill: var(--color-white);
+  height: 1.1em;
+  width: 1.2em;
+}
+
+.description {
+  font-size: 15px;
+}

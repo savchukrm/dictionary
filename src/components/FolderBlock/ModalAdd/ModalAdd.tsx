@@ -3,35 +3,48 @@ import { useSelector } from 'react-redux';
 
 import { CgClose } from 'react-icons/cg';
 
-import { RootState } from '../../redux/store';
+import { RootState, useAppDispatch } from '../../../redux/store';
 
-import styles from './ModalInput.module.css';
+import { setFolders } from '../../../redux/folders/slice';
 
-interface ModalProps {
+import { addDescriptionToFolder } from '../../../utils/folders/folders';
+
+import styles from '../../ModalInput/ModalInput.module.css';
+
+interface ModalAddProps {
   title: string;
-  act: string;
-  setIsNewOne: React.Dispatch<React.SetStateAction<boolean>>;
-  handleContent: (inputName: string, id: number | null, now: string) => void;
+  visibleModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ModalInput: React.FC<ModalProps> = ({
-  setIsNewOne,
-  handleContent,
-  title,
-  act,
-}) => {
+const ModalAdd: React.FC<ModalAddProps> = ({ title, visibleModal }) => {
+  const dispatch = useAppDispatch();
+
   const [inputName, setInputName] = useState('');
 
   const { id } = useSelector((state: RootState) => state.user);
+  const { folders } = useSelector((state: RootState) => state.folders);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const now = new Date().toISOString();
+    const updatedFolders = folders.map((folder) => {
+      if (folder[0] === title) {
+        return [
+          folder[0],
+          {
+            description: inputName,
+          },
+        ];
+      }
+      return folder;
+    });
 
-    handleContent(inputName, id, now);
+    dispatch(setFolders(updatedFolders));
+
+    addDescriptionToFolder(id, title, inputName);
 
     document.body.classList.remove('modal-open');
+    visibleModal(false);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,26 +53,26 @@ const ModalInput: React.FC<ModalProps> = ({
 
   const handleModal = () => {
     document.body.classList.remove('modal-open');
-    setIsNewOne((prev) => !prev);
+    visibleModal(false);
   };
 
   return (
     <div className={styles.modal}>
       <div className={styles.block}>
         <div className={styles.top}>
-          <h3 className={styles.h3}>{title}</h3>
+          <h3 className={styles.h3}>Add description</h3>
           <button onClick={handleModal} className={styles.smallBtn}>
             <CgClose />
           </button>
         </div>
         <form className={styles.main} onSubmit={handleSubmit}>
           <label>
-            {act}
+            description
             <input
               className={styles.formInput}
               type="text"
-              placeholder="e.g. 'family'"
-              maxLength={15}
+              placeholder="write here"
+              maxLength={50}
               onChange={handleChange}
             />
           </label>
@@ -75,4 +88,4 @@ const ModalInput: React.FC<ModalProps> = ({
   );
 };
 
-export default ModalInput;
+export default ModalAdd;

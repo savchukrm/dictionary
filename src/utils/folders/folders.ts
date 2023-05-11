@@ -39,3 +39,32 @@ export const changeFolderName = async (
     console.error('Error:', error);
   }
 };
+
+export const addDescriptionToFolder = async (
+  userId: number | null,
+  folderName: string,
+  descr: string
+) => {
+  const now = new Date().toISOString();
+
+  try {
+    const folderRef = ref(database, `users/${userId}/folders/${folderName}`);
+    const folderSnapshot = await get(folderRef);
+
+    if (folderSnapshot.exists()) {
+      const folderData = folderSnapshot.val();
+      const { description = [] } = folderData;
+
+      description.push(descr);
+
+      await set(folderRef, {
+        description: description.join(', '),
+        createdAt: now,
+      });
+    } else {
+      console.log('Folder does not exist');
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
