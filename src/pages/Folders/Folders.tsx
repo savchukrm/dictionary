@@ -10,7 +10,7 @@ import { createNewFolder, getUserFolders } from '../../utils/folders/folders';
 import { setFolders } from '../../redux/folders/slice';
 
 import FolderBlock from '../../components/FolderBlock/FolderBlock';
-import ModalInput from '../../components/ModalInput/ModalInput';
+import ModalInput from '../../components/Modals/ModalInput/ModalInput';
 import Skeleton from '../../components/Skeleton/Skeleton';
 
 import styles from './Folders.module.css';
@@ -48,7 +48,7 @@ const Folders = (): JSX.Element => {
   ) => {
     createNewFolder(id, inputName);
     setIsNewFolder(false);
-    dispatch(setFolders([...folders, [inputName, { createdAt: now }]]));
+    dispatch(setFolders([...folders, [inputName, [{ createdAt: now }]]]));
   };
 
   return (

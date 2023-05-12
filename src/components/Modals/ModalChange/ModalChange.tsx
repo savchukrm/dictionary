@@ -3,41 +3,32 @@ import { useSelector } from 'react-redux';
 
 import { CgClose } from 'react-icons/cg';
 
-import { RootState, useAppDispatch } from '../../../../redux/store';
+import { RootState } from '../../../redux/store';
 
-import { setLists } from '../../../../redux/lists/slice';
-import { changeListName } from '../../../../utils/lists/list';
-
-import styles from '../../../ModalInput/ModalInput.module.css';
+import styles from '../ModalInput/ModalInput.module.css';
 
 interface ModalChangeProps {
-  setModalChange: React.Dispatch<React.SetStateAction<boolean>>;
   title: string;
+  name: string;
+  setModalChange: React.Dispatch<React.SetStateAction<boolean>>;
+  handleContent: (id: number | null, newName: string, title: string) => void;
 }
 
-const ModalChange: React.FC<ModalChangeProps> = ({ setModalChange, title }) => {
-  const dispatch = useAppDispatch();
-
+const ModalChange: React.FC<ModalChangeProps> = ({
+  title,
+  name,
+  handleContent,
+  setModalChange,
+}) => {
   const [newName, setNewName] = useState('');
 
   const { id } = useSelector((state: RootState) => state.user);
-  const { lists } = useSelector((state: RootState) => state.lists);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    changeListName(id, title, newName);
     setModalChange(false);
 
-    const updatedLists = lists.map((list: any) => {
-      const [name, content] = list;
-      if (name === title) {
-        return [newName, { ...content }];
-      } else {
-        return list;
-      }
-    });
-
-    dispatch(setLists(updatedLists));
+    handleContent(id, newName, title);
 
     document.body.classList.remove('modal-open');
   };
@@ -56,14 +47,14 @@ const ModalChange: React.FC<ModalChangeProps> = ({ setModalChange, title }) => {
     <div className={styles.modal}>
       <div className={styles.block}>
         <div className={styles.top}>
-          <h3 className={styles.h3}>Edit list name</h3>
+          <h3 className={styles.h3}>{`Edit ${name} name`}</h3>
           <button onClick={handleModal} className={styles.smallBtn}>
             <CgClose />
           </button>
         </div>
         <form className={styles.main} onSubmit={handleSubmit}>
           <label>
-            New list name
+            {`New ${name} name`}
             <input
               className={styles.formInput}
               type="text"
@@ -75,7 +66,7 @@ const ModalChange: React.FC<ModalChangeProps> = ({ setModalChange, title }) => {
             disabled={newName.length < 1}
             className={styles.btnConfirm}
             type="submit"
-            value="Change name"
+            value="Change"
           />
         </form>
       </div>

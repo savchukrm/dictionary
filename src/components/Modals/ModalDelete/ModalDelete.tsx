@@ -2,23 +2,24 @@ import { useSelector } from 'react-redux';
 
 import { IoMdClose } from 'react-icons/io';
 
-import { RootState, useAppDispatch } from '../../../../redux/store';
-import { setLists } from '../../../../redux/lists/slice';
-
-import { removeListFromLists } from '../../../../utils/lists/list';
+import { RootState } from '../../../redux/store';
 
 import styles from './ModalDelete.module.css';
 
 interface ModalDeleteProps {
-  setModalDelete: React.Dispatch<React.SetStateAction<boolean>>;
   title: string;
+  name: string;
+  setModalDelete: React.Dispatch<React.SetStateAction<boolean>>;
+  handleDeleteOne: (id: number | null, title: string) => void;
 }
 
-const ModalDelete: React.FC<ModalDeleteProps> = ({ setModalDelete, title }) => {
-  const dispatch = useAppDispatch();
-
+const ModalDelete: React.FC<ModalDeleteProps> = ({
+  title,
+  name,
+  setModalDelete,
+  handleDeleteOne,
+}) => {
   const { id } = useSelector((state: RootState) => state.user);
-  const { lists } = useSelector((state: RootState) => state.lists);
 
   const handleCloseModal = () => {
     setModalDelete(false);
@@ -27,9 +28,7 @@ const ModalDelete: React.FC<ModalDeleteProps> = ({ setModalDelete, title }) => {
   };
 
   const handleDeleteList = () => {
-    const newList = lists.filter((item) => item[0] !== title);
-    dispatch(setLists(newList));
-    removeListFromLists(id, title);
+    handleDeleteOne(id, title);
 
     setModalDelete(false);
     document.body.classList.remove('modal-open');
@@ -42,12 +41,12 @@ const ModalDelete: React.FC<ModalDeleteProps> = ({ setModalDelete, title }) => {
           <button onClick={handleCloseModal} className={styles.btnClose}>
             <IoMdClose />
           </button>
-          <h2>Delete list</h2>
+          <h2>{`Delete ${name}`}</h2>
         </div>
 
         <div className={styles.main}>
           <div className={styles.warn}>
-            <p>Do you really wish to delete your list?</p>
+            <p>{`Do you really wish to delete your ${name}?`}</p>
             <p>Please note that your data will be lost.</p>
           </div>
           <p className={styles.alert}>This action cannot be undone.</p>
@@ -55,10 +54,10 @@ const ModalDelete: React.FC<ModalDeleteProps> = ({ setModalDelete, title }) => {
 
         <div className={styles.blockBtn}>
           <button onClick={handleDeleteList} className={styles.btnDelete}>
-            delete list
+            {`delete ${name}`}
           </button>
           <button onClick={handleCloseModal} className={styles.btnKeep}>
-            keep list
+            {`keep ${name}`}
           </button>
         </div>
       </div>

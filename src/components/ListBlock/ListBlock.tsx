@@ -1,12 +1,18 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { IoMdClose } from 'react-icons/io';
 
+import { RootState, useAppDispatch } from '../../redux/store';
+import { setLists } from '../../redux/lists/slice';
+
+import { changeListName, removeListFromLists } from '../../utils/lists/list';
+
 import Menu from './Menu/Menu';
-import ModalDelete from './Menu/ModalDelete/ModalDelete';
-import ModalChange from './Menu/ModalChange/ModalChange';
+import ModalDelete from '../Modals/ModalDelete/ModalDelete';
+import ModalChange from '../Modals/ModalChange/ModalChange';
 
 import styles from './ListBlock.module.css';
 
@@ -16,9 +22,13 @@ export interface BlockProps {
 }
 
 const ListBlock: React.FC<BlockProps> = ({ title, length }) => {
-  const [openModal, setOpenModal] = useState(false);
+  const dispatch = useAppDispatch();
+
+  const [openMenu, setOpenMenu] = useState(false);
   const [modalDelete, setModalDelete] = useState(false);
   const [modalChange, setModalChange] = useState(false);
+
+  const { lists } = useSelector((state: RootState) => state.lists);
 
   const popupRef = useRef<HTMLDivElement>(null);
 
@@ -27,7 +37,7 @@ const ListBlock: React.FC<BlockProps> = ({ title, length }) => {
   ) => {
     event.preventDefault();
     event.stopPropagation();
-    setOpenModal((prev) => !prev);
+    setOpenMenu((prev) => !prev);
   };
 
   const handleClose = (
@@ -35,7 +45,7 @@ const ListBlock: React.FC<BlockProps> = ({ title, length }) => {
   ) => {
     event.preventDefault();
     event.stopPropagation();
-    setOpenModal((prev) => !prev);
+    setOpenMenu((prev) => !prev);
   };
 
   useEffect(() => {
@@ -48,18 +58,53 @@ const ListBlock: React.FC<BlockProps> = ({ title, length }) => {
 
   const handleOutsideClick = (event: MouseEvent) => {
     if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
-      setOpenModal(false);
+      setOpenMenu(false);
     }
+  };
+
+  const handleChangeListName = (
+    id: number | null,
+    newName: string,
+    title: string
+  ) => {
+    changeListName(id, title, newName);
+
+    const updatedLists = lists.map((list: any) => {
+      const [name, content] = list;
+      if (name === title) {
+        return [newName, { ...content }];
+      } else {
+        return list;
+      }
+    });
+
+    dispatch(setLists(updatedLists));
+  };
+
+  const handleDeleteList = (id: number | null, title: string) => {
+    const newList = lists.filter((item) => item[0] !== title);
+    dispatch(setLists(newList));
+    removeListFromLists(id, title);
   };
 
   return (
     <div>
       {modalDelete && (
-        <ModalDelete setModalDelete={setModalDelete} title={title} />
+        <ModalDelete
+          title={title}
+          name="list"
+          setModalDelete={setModalDelete}
+          handleDeleteOne={handleDeleteList}
+        />
       )}
 
       {modalChange && (
-        <ModalChange setModalChange={setModalChange} title={title} />
+        <ModalChange
+          title={title}
+          name="list"
+          handleContent={handleChangeListName}
+          setModalChange={setModalChange}
+        />
       )}
 
       <div className={styles.block}>
@@ -70,7 +115,7 @@ const ListBlock: React.FC<BlockProps> = ({ title, length }) => {
           <div className={styles.bottom}>
             <p>{length === 1 ? `${length} word` : `${length} words`}</p>
 
-            {!openModal ? (
+            {!openMenu ? (
               <button onClick={handleOpen} className={styles.btn}>
                 <BsThreeDotsVertical />
               </button>
@@ -82,11 +127,11 @@ const ListBlock: React.FC<BlockProps> = ({ title, length }) => {
           </div>
         </div>
 
-        {openModal && (
+        {openMenu && (
           <div ref={popupRef}>
             <Menu
               setModalDelete={setModalDelete}
-              setOpenModal={setOpenModal}
+              setOpenMenu={setOpenMenu}
               setModalChange={setModalChange}
             />
           </div>

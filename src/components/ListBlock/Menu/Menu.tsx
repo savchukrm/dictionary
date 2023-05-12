@@ -2,27 +2,23 @@ import styles from './Menu.module.css';
 
 interface MenuProps {
   setModalDelete: React.Dispatch<React.SetStateAction<boolean>>;
-  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
   setModalChange: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Menu: React.FC<MenuProps> = ({
   setModalDelete,
-  setOpenModal,
+  setOpenMenu,
   setModalChange,
 }) => {
   const handleModalDelete = () => {
-    document.body.classList.add('modal-open');
-
     setModalDelete(true);
-    setOpenModal(false);
+    setOpenMenu(false);
   };
 
   const hanleOpenInput = () => {
-    document.body.classList.add('modal-open');
-
     setModalChange(true);
-    setOpenModal(false);
+    setOpenMenu(false);
   };
 
   return (

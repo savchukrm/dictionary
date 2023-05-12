@@ -14,9 +14,17 @@ export const createNewFolder = (userId: number | null, name: string) => {
     .then(() => {
       set(ref(database, `users/${userId}/folders/${name}`), {
         createdAt: now,
+        description: '',
       }).catch((error) => console.log(error));
     })
     .catch((error) => console.log(error));
+};
+
+export const removeFolderFromFolders = (
+  userId: number | null,
+  folder: string
+) => {
+  remove(ref(database, `users/${userId}/folders/${folder}`));
 };
 
 export const changeFolderName = async (
@@ -40,31 +48,24 @@ export const changeFolderName = async (
   }
 };
 
-export const addDescriptionToFolder = async (
+export const changeDescriptionForFolder = async (
   userId: number | null,
   folderName: string,
   descr: string
 ) => {
-  const now = new Date().toISOString();
+  const folderRef = ref(database, `users/${userId}/folders/${folderName}`);
 
   try {
-    const folderRef = ref(database, `users/${userId}/folders/${folderName}`);
-    const folderSnapshot = await get(folderRef);
-
-    if (folderSnapshot.exists()) {
-      const folderData = folderSnapshot.val();
-      const { description = [] } = folderData;
-
-      description.push(descr);
-
+    const snapshot = await get(folderRef);
+    if (snapshot.exists()) {
       await set(folderRef, {
-        description: description.join(', '),
-        createdAt: now,
+        ...snapshot.val(),
+        description: descr,
       });
     } else {
-      console.log('Folder does not exist');
+      console.log('Folder does not exist.');
     }
   } catch (error) {
-    console.log(error);
+    console.log('An error occurred:', error);
   }
 };

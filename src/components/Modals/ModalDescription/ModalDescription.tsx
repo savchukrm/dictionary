@@ -7,16 +7,19 @@ import { RootState, useAppDispatch } from '../../../redux/store';
 
 import { setFolders } from '../../../redux/folders/slice';
 
-import { addDescriptionToFolder } from '../../../utils/folders/folders';
+import { changeDescriptionForFolder } from '../../../utils/folders/folders';
 
-import styles from '../../ModalInput/ModalInput.module.css';
+import styles from '../ModalInput/ModalInput.module.css';
 
-interface ModalAddProps {
+interface ModalDescriptionProps {
   title: string;
-  visibleModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalDescription: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ModalAdd: React.FC<ModalAddProps> = ({ title, visibleModal }) => {
+const ModalDescription: React.FC<ModalDescriptionProps> = ({
+  title,
+  setModalDescription,
+}) => {
   const dispatch = useAppDispatch();
 
   const [inputName, setInputName] = useState('');
@@ -29,22 +32,17 @@ const ModalAdd: React.FC<ModalAddProps> = ({ title, visibleModal }) => {
 
     const updatedFolders = folders.map((folder) => {
       if (folder[0] === title) {
-        return [
-          folder[0],
-          {
-            description: inputName,
-          },
-        ];
+        return [folder[0], { description: inputName }];
       }
       return folder;
     });
 
     dispatch(setFolders(updatedFolders));
 
-    addDescriptionToFolder(id, title, inputName);
+    changeDescriptionForFolder(id, title, inputName);
 
     document.body.classList.remove('modal-open');
-    visibleModal(false);
+    setModalDescription(false);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,14 +51,14 @@ const ModalAdd: React.FC<ModalAddProps> = ({ title, visibleModal }) => {
 
   const handleModal = () => {
     document.body.classList.remove('modal-open');
-    visibleModal(false);
+    setModalDescription(false);
   };
 
   return (
     <div className={styles.modal}>
       <div className={styles.block}>
         <div className={styles.top}>
-          <h3 className={styles.h3}>Add description</h3>
+          <h3 className={styles.h3}>Edit description</h3>
           <button onClick={handleModal} className={styles.smallBtn}>
             <CgClose />
           </button>
@@ -88,4 +86,4 @@ const ModalAdd: React.FC<ModalAddProps> = ({ title, visibleModal }) => {
   );
 };
 
-export default ModalAdd;
+export default ModalDescription;

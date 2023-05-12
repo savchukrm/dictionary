@@ -3,18 +3,18 @@ import { useSelector } from 'react-redux';
 
 import { CgClose } from 'react-icons/cg';
 
-import { RootState } from '../../redux/store';
+import { RootState } from '../../../redux/store';
 
 import styles from './ModalInput.module.css';
 
-interface ModalProps {
+interface ModalInputProps {
   title: string;
   act: string;
   setIsNewOne: React.Dispatch<React.SetStateAction<boolean>>;
   handleContent: (inputName: string, id: number | null, now: string) => void;
 }
 
-const ModalInput: React.FC<ModalProps> = ({
+const ModalInput: React.FC<ModalInputProps> = ({
   setIsNewOne,
   handleContent,
   title,

@@ -1,10 +1,23 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import { AiOutlineFolderOpen } from 'react-icons/ai';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { BsThreeDotsVertical } from 'react-icons/bs';
+import { IoMdClose } from 'react-icons/io';
 
-import ModalAdd from './ModalAdd/ModalAdd';
+import { RootState, useAppDispatch } from '../../redux/store';
+import { setFolders } from '../../redux/folders/slice';
+
+import {
+  changeFolderName,
+  removeFolderFromFolders,
+} from '../../utils/folders/folders';
+
+import FolderMenu from './Menu/FolderMenu';
+import ModalDescription from '../Modals/ModalDescription/ModalDescription';
+import ModalChange from '../Modals/ModalChange/ModalChange';
+import ModalDelete from '../Modals/ModalDelete/ModalDelete';
 
 import styles from './FolderBlock.module.css';
 
@@ -14,15 +27,99 @@ interface FolderBlockProps {
 }
 
 const FolderBlock: React.FC<FolderBlockProps> = ({ title, description }) => {
+  const dispatch = useAppDispatch();
+
   const [openModal, setOpenModal] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
+  const [modalChange, setModalChange] = useState(false);
+  const [modalDelete, setModalDelete] = useState(false);
+
+  const { folders } = useSelector((state: RootState) => state.folders);
+
+  const popupRef = useRef<HTMLDivElement>(null);
 
   const handleModal = () => {
     setOpenModal(true);
   };
 
+  const handleOpen = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setOpenMenu((prev) => !prev);
+  };
+
+  const handleClose = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setOpenMenu((prev) => !prev);
+  };
+
+  useEffect(() => {
+    window.addEventListener('click', handleOutsideClick);
+
+    return () => {
+      window.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
+
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
+      setOpenMenu(false);
+    }
+  };
+
+  const handleChangeFolderName = (
+    id: number | null,
+    newName: string,
+    title: string
+  ) => {
+    changeFolderName(id, title, newName);
+
+    const updatedFolders = folders.map((list: any) => {
+      const [name, content] = list;
+      if (name === title) {
+        return [newName, { ...content }];
+      } else {
+        return list;
+      }
+    });
+    dispatch(setFolders(updatedFolders));
+  };
+
+  const handleDeleteFolder = (id: number | null, title: string) => {
+    const newFolders = folders.filter((item) => item[0] !== title);
+    dispatch(setFolders(newFolders));
+    removeFolderFromFolders(id, title);
+  };
+
   return (
     <>
-      {openModal && <ModalAdd title={title} visibleModal={setOpenModal} />}
+      {openModal && (
+        <ModalDescription title={title} setModalDescription={setOpenModal} />
+      )}
+
+      {modalChange && (
+        <ModalChange
+          handleContent={handleChangeFolderName}
+          setModalChange={setModalChange}
+          title={title}
+          name="folder"
+        />
+      )}
+
+      {modalDelete && (
+        <ModalDelete
+          title={title}
+          name="folder"
+          setModalDelete={setModalDelete}
+          handleDeleteOne={handleDeleteFolder}
+        />
+      )}
+
       <div className={styles.block}>
         <div className={styles.top}>
           <div className={styles.left}>
@@ -31,10 +128,17 @@ const FolderBlock: React.FC<FolderBlockProps> = ({ title, description }) => {
             </div>
             <h4>{title}</h4>
           </div>
+
           <div>
-            <div>
-              <BsThreeDotsVertical />
-            </div>
+            {!openMenu ? (
+              <button onClick={handleOpen} className={styles.btn}>
+                <BsThreeDotsVertical />
+              </button>
+            ) : (
+              <button onClick={handleClose} className={styles.btn}>
+                <IoMdClose />
+              </button>
+            )}
           </div>
         </div>
 
@@ -49,6 +153,17 @@ const FolderBlock: React.FC<FolderBlockProps> = ({ title, description }) => {
           </div>
         )}
       </div>
+
+      {openMenu && (
+        <div ref={popupRef}>
+          <FolderMenu
+            setOpenMenu={setOpenMenu}
+            setModalChange={setModalChange}
+            setModalDelete={setModalDelete}
+            setModalDescription={setOpenModal}
+          />
+        </div>
+      )}
     </>
   );
 };

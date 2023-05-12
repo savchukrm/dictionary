@@ -14,7 +14,7 @@ import { setLists } from '../../redux/lists/slice';
 
 import ListBlock from '../../components/ListBlock/ListBlock';
 import FavoriteBlock from '../../components/ListBlock/FavoriteBlock';
-import ModalInput from '../../components/ModalInput/ModalInput';
+import ModalInput from '../../components/Modals/ModalInput/ModalInput';
 import Skeleton from '../../components/Skeleton/Skeleton';
 
 import styles from './Lists.module.css';
