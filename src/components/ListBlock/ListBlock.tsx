@@ -112,6 +112,7 @@ const ListBlock: React.FC<BlockProps> = ({ title, length }) => {
           <Link to={`/lists/${title}`}>
             <h3>{title}</h3>
           </Link>
+
           <div className={styles.bottom}>
             <p>{length === 1 ? `${length} word` : `${length} words`}</p>
 

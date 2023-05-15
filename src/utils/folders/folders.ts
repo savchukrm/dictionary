@@ -7,6 +7,13 @@ export const getUserFolders = (userId: number | null) => {
   return get(ref(database, `users/${userId}/folders`));
 };
 
+export const getUserFolder = (
+  userId: number | null,
+  name: string | undefined
+) => {
+  return get(ref(database, `users/${userId}/folders/${name}`));
+};
+
 export const createNewFolder = (userId: number | null, name: string) => {
   const now = new Date().toISOString();
 

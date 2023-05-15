@@ -16,6 +16,7 @@ import Lists from './pages/Lists/Lists';
 import ListContent from './pages/ListContent/ListContent';
 import Favourite from './pages/ListContent/Favourite';
 import Folders from './pages/Folders/Folders';
+import FolderContent from './pages/FolderContent/FolderContent';
 import Modal from './pages/Modal/Modal';
 import Flashcard from './pages/Flashcard/Flashcard';
 import NotFound from './pages/NotFound/NotFound';
@@ -47,10 +48,11 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/lists" element={<Lists />} />
-        <Route path="/folders" element={<Folders />} />
-        <Route path="/flashcard" element={<Flashcard />} />
         <Route path="/lists/:listName" element={<ListContent />} />
         <Route path="/lists/favourites" element={<Favourite />} />
+        <Route path="/folders" element={<Folders />} />
+        <Route path="/folders/:folderName" element={<FolderContent />} />
+        <Route path="/flashcard" element={<Flashcard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

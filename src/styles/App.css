@@ -109,8 +109,8 @@
   user-select: none;
   position: absolute;
 
-  left: 163px;
-  top: 263px;
+  bottom: -59px;
+  left: 159px;
 
   background-color: var(--color--greysecond);
   border: 1px solid var(--color-white);

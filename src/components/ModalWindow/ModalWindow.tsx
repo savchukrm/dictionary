@@ -9,7 +9,7 @@ import { handleClose } from '../../redux/modal/slice';
 import { removeUser } from '../../redux/auth/slice';
 import { clearFavorite } from '../../redux/favorite/slice';
 import { clearLists } from '../../redux/lists/slice';
-import { clearList } from '../../redux/set/slice';
+import { clearList } from '../../redux/list/slice';
 import { clearListForQuiz } from '../../redux/quiz/slice';
 import { clearFolders } from '../../redux/folders/slice';
 

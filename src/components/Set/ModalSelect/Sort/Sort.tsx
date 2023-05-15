@@ -6,7 +6,7 @@ import { RootState, useAppDispatch } from '../../../../redux/store';
 import { updateMainDefinitionOnList } from '../../../../utils/lists/list';
 import { updateMainDefinitionOnFavorite } from '../../../../utils/favorite/favorite';
 
-import { setList } from '../../../../redux/set/slice';
+import { setList } from '../../../../redux/list/slice';
 import { setFavorite } from '../../../../redux/favorite/slice';
 
 import styles from './Sort.module.css';

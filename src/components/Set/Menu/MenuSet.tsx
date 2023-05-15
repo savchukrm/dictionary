@@ -5,7 +5,7 @@ import { RootState, useAppDispatch } from '../../../redux/store';
 import { removeWordFromFavorite } from '../../../utils/favorite/favorite';
 import { removeWordFromList } from '../../../utils/lists/list';
 
-import { setList } from '../../../redux/set/slice';
+import { setList } from '../../../redux/list/slice';
 import { setFavorite } from '../../../redux/favorite/slice';
 
 import styles from '../../ListBlock/Menu/Menu.module.css';

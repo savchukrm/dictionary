@@ -1,0 +1,39 @@
+.container {
+  margin: 40px auto;
+  max-width: 1000px;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.title {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.title svg {
+  height: 2em;
+  width: 2em;
+}
+
+.content {
+  margin-top: 30px;
+  padding: 55px 40px 30px;
+  text-align: left;
+}
+
+@media screen and (max-width: 1000px) {
+  .content {
+    padding: 30px 20px;
+  }
+}
+
+@media screen and (max-width: 675px) {
+  .content {
+    padding: 15px 20px;
+  }
+}

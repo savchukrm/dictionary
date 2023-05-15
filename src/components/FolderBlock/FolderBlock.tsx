@@ -20,6 +20,7 @@ import ModalChange from '../Modals/ModalChange/ModalChange';
 import ModalDelete from '../Modals/ModalDelete/ModalDelete';
 
 import styles from './FolderBlock.module.css';
+import { Link } from 'react-router-dom';
 
 interface FolderBlockProps {
   title: string;
@@ -121,26 +122,28 @@ const FolderBlock: React.FC<FolderBlockProps> = ({ title, description }) => {
       )}
 
       <div className={styles.block}>
-        <div className={styles.top}>
-          <div className={styles.left}>
-            <div className={styles.folder}>
-              <AiOutlineFolderOpen />
+        <Link to={`/folders/${title}`}>
+          <div className={styles.top}>
+            <div className={styles.left}>
+              <div className={styles.folder}>
+                <AiOutlineFolderOpen />
+              </div>
+              <h4>{title}</h4>
             </div>
-            <h4>{title}</h4>
-          </div>
 
-          <div>
-            {!openMenu ? (
-              <button onClick={handleOpen} className={styles.btn}>
-                <BsThreeDotsVertical />
-              </button>
-            ) : (
-              <button onClick={handleClose} className={styles.btn}>
-                <IoMdClose />
-              </button>
-            )}
+            <div>
+              {!openMenu ? (
+                <button onClick={handleOpen} className={styles.btn}>
+                  <BsThreeDotsVertical />
+                </button>
+              ) : (
+                <button onClick={handleClose} className={styles.btn}>
+                  <IoMdClose />
+                </button>
+              )}
+            </div>
           </div>
-        </div>
+        </Link>
 
         {description ? (
           <p className={styles.description}>{description}</p>
@@ -155,7 +158,7 @@ const FolderBlock: React.FC<FolderBlockProps> = ({ title, description }) => {
       </div>
 
       {openMenu && (
-        <div ref={popupRef}>
+        <div className={styles.menuBlock} ref={popupRef}>
           <FolderMenu
             setOpenMenu={setOpenMenu}
             setModalChange={setModalChange}

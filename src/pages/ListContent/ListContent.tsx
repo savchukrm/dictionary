@@ -7,7 +7,7 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import { RootState, useAppDispatch } from '../../redux/store';
 
 import { getUserList } from '../../utils/lists/list';
-import { setList, clearList } from '../../redux/set/slice';
+import { setList, clearList } from '../../redux/list/slice';
 import { setListForQuiz } from '../../redux/quiz/slice';
 
 import { shuffleArray } from '../../utils/utilityFunctions';
@@ -26,7 +26,7 @@ const ListContent = () => {
   const { id } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
-    const fetchLists = async () => {
+    const fetchList = async () => {
       try {
         const res = await getUserList(id, listName);
         if (res.val() !== undefined) {
@@ -39,10 +39,10 @@ const ListContent = () => {
         console.log(error);
       }
     };
-    fetchLists();
+    fetchList();
   }, [id, dispatch]);
 
-  const handleClearLlist = () => {
+  const handleClearList = () => {
     dispatch(clearList());
   };
 
@@ -60,7 +60,7 @@ const ListContent = () => {
     <div className={styles.content}>
       <div className="header">
         <Link to="/lists">
-          <button onClick={handleClearLlist} className="btnBack">
+          <button onClick={handleClearList} className="btnBack">
             <IoMdArrowRoundBack />
             return
           </button>

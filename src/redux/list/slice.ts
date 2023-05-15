@@ -5,7 +5,7 @@ const initialState = {
 };
 
 const list = createSlice({
-  name: 'lists',
+  name: 'list',
   initialState,
   reducers: {
     setList(state, action) {
