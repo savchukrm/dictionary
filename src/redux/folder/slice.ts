@@ -1,19 +1,28 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
-  folder: [],
+type TermItems = {
+  definition: string;
+  meaning: string;
+};
+
+type FolderItems = {
+  description: string;
+  terms: TermItems[];
+};
+
+const initialState: FolderItems = {
+  description: '',
+  terms: [{ definition: '', meaning: '' }],
 };
 
 const folder = createSlice({
   name: 'folder',
   initialState,
   reducers: {
-    setFolder(state, action) {
-      state.folder = action.payload;
+    setFolder: (state, action: PayloadAction<FolderItems>) => {
+      return action.payload;
     },
-    clearFolder(state) {
-      state.folder = [];
-    },
+    clearFolder: () => initialState,
   },
 });
 

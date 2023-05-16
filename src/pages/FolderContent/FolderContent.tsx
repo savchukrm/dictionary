@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
@@ -11,22 +11,23 @@ import { getUserFolder } from '../../utils/folders/folders';
 import { setFolder, clearFolder } from '../../redux/folder/slice';
 
 import styles from './FolderContent.module.css';
+import ModalCreate from '../../components/Modals/ModalCreate/ModalCreate';
 
 const FolderContent = () => {
   const dispatch = useAppDispatch();
   const { folderName } = useParams();
 
-  const { folder } = useSelector((state: RootState) => state.folder);
   const { id } = useSelector((state: RootState) => state.user);
+  const { description } = useSelector((state: RootState) => state.folder);
+
+  const [openModalCreate, setOpenModalCreate] = useState(false);
 
   useEffect(() => {
     const fetchFolder = async () => {
       try {
         const res = await getUserFolder(id, folderName);
         if (res.val() !== undefined) {
-          const userFolderArray = Object.entries(res.val());
-
-          dispatch(setFolder(userFolderArray));
+          dispatch(setFolder(res.val()));
         } else {
           dispatch(clearFolder());
         }
@@ -39,6 +40,11 @@ const FolderContent = () => {
 
   const handleClearFolder = () => {
     dispatch(clearFolder());
+  };
+
+  const handleOpenModalCreate = () => {
+    setOpenModalCreate(true);
+    document.body.classList.add('modal-open');
   };
 
   return (
@@ -58,7 +64,7 @@ const FolderContent = () => {
               <h1>{folderName}</h1>
             </div>
 
-            <p>description</p>
+            <p>{description}</p>
           </div>
         </div>
       </div>
@@ -67,8 +73,12 @@ const FolderContent = () => {
         <h1>This folder has no sets yet</h1>
         <p>Organise your study sets with folders.</p>
 
-        <button className="btnAdd">Add set</button>
+        <button onClick={handleOpenModalCreate} className="btnAdd">
+          Add set
+        </button>
       </div>
+
+      {openModalCreate && <ModalCreate setModal={setOpenModalCreate} />}
     </div>
   );
 };

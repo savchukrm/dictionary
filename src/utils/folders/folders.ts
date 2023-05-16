@@ -15,12 +15,9 @@ export const getUserFolder = (
 };
 
 export const createNewFolder = (userId: number | null, name: string) => {
-  const now = new Date().toISOString();
-
   get(ref(database, `users/${userId}/folders/`))
     .then(() => {
       set(ref(database, `users/${userId}/folders/${name}`), {
-        createdAt: now,
         description: '',
       }).catch((error) => console.log(error));
     })
@@ -75,4 +72,25 @@ export const changeDescriptionForFolder = async (
   } catch (error) {
     console.log('An error occurred:', error);
   }
+};
+
+export const addNewTermToFolder = (
+  userId: number | null,
+  folderName: string | undefined,
+  meaning: string,
+  definition: string
+) => {
+  get(ref(database, `users/${userId}/folders/${folderName}`))
+    .then((snapshot) => {
+      const folder = snapshot.val();
+      const updatedTerms = folder.terms ? [...folder.terms] : [];
+      updatedTerms.push({ meaning, definition });
+
+      set(ref(database, `users/${userId}/folders/${folderName}`), {
+        ...folder,
+        terms: updatedTerms,
+        description: folder.description || '',
+      }).catch((error) => console.log(error));
+    })
+    .catch((error) => console.log(error));
 };
