@@ -10,10 +10,11 @@ import { addNewTermToFolder } from '../../../utils/folders/folders';
 import styles from './ModalCreate.module.css';
 
 interface ModalCreateProps {
+  folderName: string | undefined;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ModalCreate: React.FC<ModalCreateProps> = ({ setModal }) => {
+const ModalCreate: React.FC<ModalCreateProps> = ({ setModal, folderName }) => {
   const [definition, setDefinition] = useState('');
   const [meaning, setMeaning] = useState('');
 
@@ -21,20 +22,21 @@ const ModalCreate: React.FC<ModalCreateProps> = ({ setModal }) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    addNewTermToFolder(id, 'dd', definition, meaning);
+    addNewTermToFolder(id, folderName, definition, meaning);
 
     setMeaning('');
     setDefinition('');
   };
 
   const handleChangeDefinition = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     setDefinition(event.target.value);
   };
 
-  const handleChangeMeaning = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeMeaning = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     setMeaning(event.target.value);
   };
 
@@ -54,24 +56,25 @@ const ModalCreate: React.FC<ModalCreateProps> = ({ setModal }) => {
         </div>
 
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label>
-            <input
-              type="text"
-              placeholder="definition"
+          <label className={styles.inputsContainer}>
+            <textarea
+              placeholder="Enter term"
               value={definition}
               onChange={handleChangeDefinition}
-            />
-            <input
-              type="text"
-              placeholder="maening"
+              className={styles.input}
+            ></textarea>
+            <textarea
+              placeholder="Enter definition"
               value={meaning}
               onChange={handleChangeMeaning}
-            />
+              className={styles.input}
+            ></textarea>
           </label>
           <input
             disabled={meaning.length < 1 || definition.length < 1}
             type="submit"
             value="Confirm"
+            className={styles.btnConfirm}
           />
         </form>
       </div>

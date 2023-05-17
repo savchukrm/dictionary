@@ -70,15 +70,17 @@ const FolderContent = () => {
       </div>
 
       <div className={styles.content}>
-        <h1>This folder has no sets yet</h1>
+        <h3>This folder has no sets yet</h3>
         <p>Organise your study sets with folders.</p>
 
-        <button onClick={handleOpenModalCreate} className="btnAdd">
+        <button onClick={handleOpenModalCreate} className={styles.btnSet}>
           Add set
         </button>
       </div>
 
-      {openModalCreate && <ModalCreate setModal={setOpenModalCreate} />}
+      {openModalCreate && (
+        <ModalCreate setModal={setOpenModalCreate} folderName={folderName} />
+      )}
     </div>
   );
 };

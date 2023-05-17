@@ -21,19 +21,31 @@
 }
 
 .content {
-  margin-top: 30px;
-  padding: 55px 40px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+
+  padding: 85px 40px 30px;
   text-align: left;
 }
 
-@media screen and (max-width: 1000px) {
-  .content {
-    padding: 30px 20px;
-  }
+.content h3 {
+  font-size: 25px;
+  font-weight: 600;
 }
 
-@media screen and (max-width: 675px) {
-  .content {
-    padding: 15px 20px;
-  }
+.btnSet {
+  font-weight: 500;
+  color: var(--color-white);
+  font-size: 20px;
+  background-color: var(--color--greysecond);
+  border-radius: 30px;
+  padding: 10px 30px;
+}
+
+.btnSet:hover {
+  background-color: var(--color-teal);
+  color: var(--color-white);
 }

@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   top: 25%;
-  padding: 40px 40px 50px;
+  padding: 40px;
   border: 1px solid var(--color-white);
   border-radius: 20px;
   max-width: 500px;
@@ -16,4 +16,76 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.inputsContainer {
+  margin-bottom: 35px;
+}
+
+.input {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  color: var(--color-white);
+  background-color: #173554;
+  border-bottom: 2px solid var(--color-white);
+  resize: none;
+  overflow-y: auto;
+  height: auto;
+  max-height: 200px;
+}
+
+.input:focus {
+  outline: none;
+  border-bottom: 3px solid var(--color-teal);
+}
+
+.input:first-child {
+  margin-bottom: 20px;
+}
+
+.btnConfirm {
+  font-weight: 500;
+  color: var(--color-white);
+  font-size: 20px;
+  background-color: var(--color--greysecond);
+  border-radius: 30px;
+  padding: 10px 30px;
+}
+
+.btnConfirm:disabled {
+  background-color: rgb(98, 98, 98);
+  pointer-events: none;
+}
+
+.btnConfirm:hover {
+  background-color: var(--color-teal);
+  color: var(--color-white);
+}
+
+.top {
+  position: relative;
+  margin: 10px 0 10px;
+}
+
+.top .h3 {
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.smallBtn {
+  position: absolute;
+  bottom: 21px;
+  right: -20px;
+  color: var(--color-white);
+}
+
+.smallBtn svg {
+  height: 1.5em;
+  width: 1.5em;
+}
+
+.smallBtn:hover {
+  transform: scale(1.2);
+  transition: transform 0.3s ease-in-out;
 }
