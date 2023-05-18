@@ -3,9 +3,11 @@ import { useSelector } from 'react-redux';
 
 import { CgClose } from 'react-icons/cg';
 
-import { RootState } from '../../../redux/store';
+import { RootState, useAppDispatch } from '../../../redux/store';
 
 import { addNewTermToFolder } from '../../../utils/folders/folders';
+
+import { setFolder } from '../../../redux/folder/slice';
 
 import styles from './ModalCreate.module.css';
 
@@ -15,14 +17,37 @@ interface ModalCreateProps {
 }
 
 const ModalCreate: React.FC<ModalCreateProps> = ({ setModal, folderName }) => {
+  const dispatch = useAppDispatch();
+
   const [definition, setDefinition] = useState('');
   const [meaning, setMeaning] = useState('');
 
   const { id } = useSelector((state: RootState) => state.user);
+  const folder = useSelector((state: RootState) => state.folder);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    addNewTermToFolder(id, folderName, definition, meaning);
+
+    const updatedFolder = {
+      description: '',
+      terms: folder.terms
+        ? [
+            ...folder.terms,
+            {
+              meaning,
+              definition,
+            },
+          ]
+        : [
+            {
+              meaning,
+              definition,
+            },
+          ],
+    };
+
+    dispatch(setFolder(updatedFolder));
+    addNewTermToFolder(id, folderName, meaning, definition);
 
     setMeaning('');
     setDefinition('');

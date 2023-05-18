@@ -84,7 +84,7 @@ export const addNewTermToFolder = (
     .then((snapshot) => {
       const folder = snapshot.val();
       const updatedTerms = folder.terms ? [...folder.terms] : [];
-      updatedTerms.push({ meaning, definition });
+      updatedTerms.push({ definition, meaning });
 
       set(ref(database, `users/${userId}/folders/${folderName}`), {
         ...folder,

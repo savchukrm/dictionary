@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type TermItems = {
+export type TermItems = {
   definition: string;
   meaning: string;
 };

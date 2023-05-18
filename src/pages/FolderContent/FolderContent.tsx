@@ -9,18 +9,28 @@ import { RootState, useAppDispatch } from '../../redux/store';
 
 import { getUserFolder } from '../../utils/folders/folders';
 import { setFolder, clearFolder } from '../../redux/folder/slice';
+import { setListForQuiz } from '../../redux/quiz/slice';
+
+import { shuffleArray } from '../../utils/utilityFunctions';
+
+import ModalCreate from '../../components/Modals/ModalCreate/ModalCreate';
+import EmptyMessage from '../../components/EmptyMessage/EmptyMessage';
+import Skeleton from '../../components/Skeleton/Skeleton';
+import KitBlock from '../../components/KitBlock/KitBlock';
 
 import styles from './FolderContent.module.css';
-import ModalCreate from '../../components/Modals/ModalCreate/ModalCreate';
 
 const FolderContent = () => {
   const dispatch = useAppDispatch();
   const { folderName } = useParams();
 
   const { id } = useSelector((state: RootState) => state.user);
-  const { description } = useSelector((state: RootState) => state.folder);
+  const { description, terms } = useSelector(
+    (state: RootState) => state.folder
+  );
 
   const [openModalCreate, setOpenModalCreate] = useState(false);
+  const [isLoding, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchFolder = async () => {
@@ -31,12 +41,13 @@ const FolderContent = () => {
         } else {
           dispatch(clearFolder());
         }
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
     fetchFolder();
-  }, [id, dispatch]);
+  }, [id, dispatch, folderName]);
 
   const handleClearFolder = () => {
     dispatch(clearFolder());
@@ -47,39 +58,69 @@ const FolderContent = () => {
     document.body.classList.add('modal-open');
   };
 
+  const handleCreateFlashcardList = () => {
+    const newArray = terms.map((item) => [item.definition, item.meaning]);
+    const shuffledNewArray = shuffleArray(newArray);
+    dispatch(setListForQuiz(shuffledNewArray));
+  };
+
   return (
     <div className={styles.container}>
-      <div className="header">
-        <div className={styles.head}>
-          <Link to="/folders">
-            <button onClick={handleClearFolder} className="btnBack">
-              <IoMdArrowRoundBack />
-              return
-            </button>
-          </Link>
+      {isLoding ? (
+        <Skeleton />
+      ) : (
+        <div>
+          <div className="header">
+            <div className={styles.head}>
+              <Link to="/folders">
+                <button onClick={handleClearFolder} className="btnBack">
+                  <IoMdArrowRoundBack />
+                  return
+                </button>
+              </Link>
 
-          <div>
-            <div className={styles.title}>
-              <AiOutlineFolderOpen />
-              <h1>{folderName}</h1>
+              <div className={styles.header}>
+                <div>
+                  <div className={styles.title}>
+                    <AiOutlineFolderOpen />
+                    <h1>{folderName}</h1>
+                  </div>
+
+                  <p>{description}</p>
+                </div>
+                {terms && (
+                  <div>
+                    <button onClick={handleOpenModalCreate} className="btnSet">
+                      Add set
+                    </button>
+                  </div>
+                )}
+
+                <Link to="/flashcard">
+                  <button
+                    onClick={handleCreateFlashcardList}
+                    className="btnAdd btnFlashcard"
+                  >
+                    Flashcards
+                  </button>
+                </Link>
+              </div>
             </div>
-
-            <p>{description}</p>
           </div>
+
+          {terms ? (
+            <KitBlock />
+          ) : (
+            <EmptyMessage handleModal={handleOpenModalCreate} />
+          )}
+
+          {openModalCreate && (
+            <ModalCreate
+              setModal={setOpenModalCreate}
+              folderName={folderName}
+            />
+          )}
         </div>
-      </div>
-
-      <div className={styles.content}>
-        <h3>This folder has no sets yet</h3>
-        <p>Organise your study sets with folders.</p>
-
-        <button onClick={handleOpenModalCreate} className={styles.btnSet}>
-          Add set
-        </button>
-      </div>
-
-      {openModalCreate && (
-        <ModalCreate setModal={setOpenModalCreate} folderName={folderName} />
       )}
     </div>
   );

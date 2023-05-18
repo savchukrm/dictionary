@@ -80,7 +80,7 @@ const Folders = (): JSX.Element => {
       <div className={styles.container}>
         {isLoding ? (
           <Skeleton />
-        ) : (
+        ) : folders && folders.length > 0 ? (
           <ul>
             {folders.map((item, i) => {
               const [title, { content, description }] = item;
@@ -92,6 +92,8 @@ const Folders = (): JSX.Element => {
               );
             })}
           </ul>
+        ) : (
+          <p>You don't have any folders yet.</p>
         )}
       </div>
     </div>
