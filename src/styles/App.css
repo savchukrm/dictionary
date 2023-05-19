@@ -135,6 +135,14 @@
   color: var(--color-white);
 }
 
+.btnSetting svg {
+  fill: var(--color-white);
+}
+
+.btnSetting svg:hover {
+  fill: #dee516;
+}
+
 @media screen and (max-width: 1000px) {
   .header {
     padding: 0 20px;

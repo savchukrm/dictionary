@@ -99,7 +99,10 @@
   background-color: var(--color--greysecond);
   border-radius: 30px;
   padding: 10px 30px 10px 30px;
-  width: 100%;
+}
+
+.btnGo:first-child {
+  margin-right: 10px;
 }
 
 .btnGo:hover {

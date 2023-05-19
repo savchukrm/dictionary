@@ -1,10 +1,15 @@
-import KitElement from './KitElement/KitElement';
-
-import styles from './KitBlock.module.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 
-const KitBlock = () => {
+import KitElement from './KitElement/KitElement';
+
+import styles from './KitBlock.module.css';
+
+interface KitBlockProps {
+  folderName: string | undefined;
+}
+
+const KitBlock: React.FC<KitBlockProps> = ({ folderName }) => {
   const { terms } = useSelector((state: RootState) => state.folder);
 
   return (
@@ -14,7 +19,12 @@ const KitBlock = () => {
 
         return (
           <li key={i}>
-            <KitElement definition={definition} meaning={meaning} />
+            <KitElement
+              index={i}
+              definition={definition}
+              meaning={meaning}
+              folderName={folderName}
+            />
           </li>
         );
       })}

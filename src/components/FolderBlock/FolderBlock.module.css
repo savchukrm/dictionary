@@ -16,15 +16,17 @@
 .top {
   display: flex;
   justify-content: space-between;
+  height: 80px;
+  gap: 10px;
 }
 
 .left {
   display: flex;
-  gap: 10px;
 }
 
 .left h4 {
   font-weight: 500;
+  margin-left: 10px;
 }
 
 .folder svg {
@@ -54,10 +56,6 @@
 
 .description {
   font-size: 15px;
-}
-
-.btn svg {
-  fill: var(--color-white);
 }
 
 .menuBlock {

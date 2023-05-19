@@ -1,10 +1,8 @@
 import { useState } from 'react';
 
-import { BsThreeDotsVertical } from 'react-icons/bs';
-import { IoMdClose } from 'react-icons/io';
-
 import MenuSet from './Menu/MenuSet';
 import ModalSelect from './ModalSelect/ModalSelect';
+import SettingBtn from '../SettingBtn/SettingBtn';
 
 import styles from './Set.module.css';
 
@@ -54,15 +52,13 @@ const Set: React.FC<SetProps> = ({
 
         <p>{definition}</p>
 
-        {!openMenu ? (
-          <button onClick={handleOpenMenu} className={styles.btn}>
-            <BsThreeDotsVertical />
-          </button>
-        ) : (
-          <button onClick={handleCloseMenu} className={styles.btn}>
-            <IoMdClose />
-          </button>
-        )}
+        <div className={styles.btn}>
+          <SettingBtn
+            openMenu={openMenu}
+            handleClose={handleCloseMenu}
+            handleOpen={handleOpenMenu}
+          />
+        </div>
 
         {openMenu && (
           <MenuSet

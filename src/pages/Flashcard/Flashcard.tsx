@@ -93,8 +93,12 @@ const Flashcard = (): JSX.Element => {
                 </div>
               </div>
 
-              <Link to="/">
-                <button className={styles.btnGo}> Go to main page </button>
+              <Link to="/folders">
+                <button className={styles.btnGo}> Go to folders</button>
+              </Link>
+
+              <Link to="/lists">
+                <button className={styles.btnGo}> Go to lists </button>
               </Link>
             </div>
           )}

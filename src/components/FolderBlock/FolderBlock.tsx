@@ -1,10 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { AiOutlineFolderOpen } from 'react-icons/ai';
 import { AiOutlinePlus } from 'react-icons/ai';
-import { BsThreeDotsVertical } from 'react-icons/bs';
-import { IoMdClose } from 'react-icons/io';
 
 import { RootState, useAppDispatch } from '../../redux/store';
 import { setFolders } from '../../redux/folders/slice';
@@ -18,9 +17,9 @@ import FolderMenu from './Menu/FolderMenu';
 import ModalDescription from '../Modals/ModalDescription/ModalDescription';
 import ModalChange from '../Modals/ModalChange/ModalChange';
 import ModalDelete from '../Modals/ModalDelete/ModalDelete';
+import SettingBtn from '../SettingBtn/SettingBtn';
 
 import styles from './FolderBlock.module.css';
-import { Link } from 'react-router-dom';
 
 interface FolderBlockProps {
   title: string;
@@ -131,30 +130,26 @@ const FolderBlock: React.FC<FolderBlockProps> = ({ title, description }) => {
               <h4>{title}</h4>
             </div>
 
-            <div>
-              {!openMenu ? (
-                <button onClick={handleOpen} className={styles.btn}>
-                  <BsThreeDotsVertical />
-                </button>
-              ) : (
-                <button onClick={handleClose} className={styles.btn}>
-                  <IoMdClose />
-                </button>
-              )}
-            </div>
+            <SettingBtn
+              openMenu={openMenu}
+              handleClose={handleClose}
+              handleOpen={handleOpen}
+            />
           </div>
         </Link>
 
-        {description ? (
-          <p className={styles.description}>{description}</p>
-        ) : (
-          <div className={styles.bottom}>
-            <button onClick={handleModal} className={styles.plus}>
-              <AiOutlinePlus />
-            </button>
-            <span>add description</span>
-          </div>
-        )}
+        <div className={styles.footer}>
+          {description ? (
+            <p className={styles.description}>{description}</p>
+          ) : (
+            <div className={styles.bottom}>
+              <button onClick={handleModal} className={styles.plus}>
+                <AiOutlinePlus />
+              </button>
+              <span>add description</span>
+            </div>
+          )}
+        </div>
       </div>
 
       {openMenu && (

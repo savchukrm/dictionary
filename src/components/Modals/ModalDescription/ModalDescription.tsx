@@ -70,7 +70,7 @@ const ModalDescription: React.FC<ModalDescriptionProps> = ({
               className={styles.formInput}
               type="text"
               placeholder="write here"
-              maxLength={50}
+              maxLength={30}
               onChange={handleChange}
             />
           </label>

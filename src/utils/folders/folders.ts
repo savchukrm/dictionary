@@ -94,3 +94,74 @@ export const addNewTermToFolder = (
     })
     .catch((error) => console.log(error));
 };
+
+export const updateDefinition = (
+  userId: number | null,
+  folderName: string | undefined,
+  index: number,
+  newDefinition: string
+) => {
+  get(ref(database, `users/${userId}/folders/${folderName}`))
+    .then((snapshot) => {
+      const folder = snapshot.val();
+      const updatedTerms = folder.terms ? [...folder.terms] : [];
+
+      if (index >= 0 && index < updatedTerms.length) {
+        updatedTerms[index].definition = newDefinition;
+      }
+
+      set(ref(database, `users/${userId}/folders/${folderName}`), {
+        ...folder,
+        terms: updatedTerms,
+        description: folder.description || '',
+      }).catch((error) => console.log(error));
+    })
+    .catch((error) => console.log(error));
+};
+
+export const updateMeaning = (
+  userId: number | null,
+  folderName: string | undefined,
+  index: number,
+  newMeaning: string
+) => {
+  get(ref(database, `users/${userId}/folders/${folderName}`))
+    .then((snapshot) => {
+      const folder = snapshot.val();
+      const updatedTerms = folder.terms ? [...folder.terms] : [];
+
+      if (index >= 0 && index < updatedTerms.length) {
+        updatedTerms[index].meaning = newMeaning;
+      }
+
+      set(ref(database, `users/${userId}/folders/${folderName}`), {
+        ...folder,
+        terms: updatedTerms,
+        description: folder.description || '',
+      }).catch((error) => console.log(error));
+    })
+    .catch((error) => console.log(error));
+};
+
+export const deleteTermFromFolder = (
+  userId: number | null,
+  folderName: string | undefined,
+  indexToDelete: number
+) => {
+  get(ref(database, `users/${userId}/folders/${folderName}`))
+    .then((snapshot) => {
+      const folder = snapshot.val();
+      const updatedTerms = folder.terms ? [...folder.terms] : [];
+
+      if (indexToDelete >= 0 && indexToDelete < updatedTerms.length) {
+        updatedTerms.splice(indexToDelete, 1); // Remove the term at the specified index
+      }
+
+      set(ref(database, `users/${userId}/folders/${folderName}`), {
+        ...folder,
+        terms: updatedTerms,
+        description: folder.description || '',
+      }).catch((error) => console.log(error));
+    })
+    .catch((error) => console.log(error));
+};

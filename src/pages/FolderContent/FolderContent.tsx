@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
-
-import { IoMdArrowRoundBack } from 'react-icons/io';
-import { AiOutlineFolderOpen } from 'react-icons/ai';
+import { useParams } from 'react-router-dom';
 
 import { RootState, useAppDispatch } from '../../redux/store';
 
@@ -13,6 +10,7 @@ import { setListForQuiz } from '../../redux/quiz/slice';
 
 import { shuffleArray } from '../../utils/utilityFunctions';
 
+import FolderHeader from '../../components/FolderHeader/FolderHeader';
 import ModalCreate from '../../components/Modals/ModalCreate/ModalCreate';
 import EmptyMessage from '../../components/EmptyMessage/EmptyMessage';
 import Skeleton from '../../components/Skeleton/Skeleton';
@@ -70,46 +68,17 @@ const FolderContent = () => {
         <Skeleton />
       ) : (
         <div>
-          <div className="header">
-            <div className={styles.head}>
-              <Link to="/folders">
-                <button onClick={handleClearFolder} className="btnBack">
-                  <IoMdArrowRoundBack />
-                  return
-                </button>
-              </Link>
+          <FolderHeader
+            terms={terms}
+            folderName={folderName}
+            description={description}
+            handleClearFolder={handleClearFolder}
+            handleOpenModalCreate={handleOpenModalCreate}
+            handleCreateFlashcardList={handleCreateFlashcardList}
+          />
 
-              <div className={styles.header}>
-                <div>
-                  <div className={styles.title}>
-                    <AiOutlineFolderOpen />
-                    <h1>{folderName}</h1>
-                  </div>
-
-                  <p>{description}</p>
-                </div>
-                {terms && (
-                  <div>
-                    <button onClick={handleOpenModalCreate} className="btnSet">
-                      Add set
-                    </button>
-                  </div>
-                )}
-
-                <Link to="/flashcard">
-                  <button
-                    onClick={handleCreateFlashcardList}
-                    className="btnAdd btnFlashcard"
-                  >
-                    Flashcards
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {terms ? (
-            <KitBlock />
+          {terms && terms.length >= 1 ? (
+            <KitBlock folderName={folderName} />
           ) : (
             <EmptyMessage handleModal={handleOpenModalCreate} />
           )}

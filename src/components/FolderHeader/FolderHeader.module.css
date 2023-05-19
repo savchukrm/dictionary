@@ -1,0 +1,44 @@
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.header {
+  display: flex;
+  gap: 30px;
+}
+
+.title {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.title h2 {
+  margin: 0 20px;
+  font-size: 1.7em;
+  font-weight: 500;
+}
+
+.title svg {
+  height: 2em;
+  width: 2em;
+}
+
+.icon svg {
+  height: 1.8em;
+  width: 1.8em;
+}
+
+@media screen and (max-width: 1000px) {
+  .main {
+    padding: 0 20px;
+  }
+}

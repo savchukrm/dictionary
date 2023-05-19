@@ -2,9 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { BsThreeDotsVertical } from 'react-icons/bs';
-import { IoMdClose } from 'react-icons/io';
-
 import { RootState, useAppDispatch } from '../../redux/store';
 import { setLists } from '../../redux/lists/slice';
 
@@ -13,6 +10,7 @@ import { changeListName, removeListFromLists } from '../../utils/lists/list';
 import Menu from './Menu/Menu';
 import ModalDelete from '../Modals/ModalDelete/ModalDelete';
 import ModalChange from '../Modals/ModalChange/ModalChange';
+import SettingBtn from '../SettingBtn/SettingBtn';
 
 import styles from './ListBlock.module.css';
 
@@ -116,15 +114,11 @@ const ListBlock: React.FC<BlockProps> = ({ title, length }) => {
           <div className={styles.bottom}>
             <p>{length === 1 ? `${length} word` : `${length} words`}</p>
 
-            {!openMenu ? (
-              <button onClick={handleOpen} className={styles.btn}>
-                <BsThreeDotsVertical />
-              </button>
-            ) : (
-              <button onClick={handleClose} className={styles.btn}>
-                <IoMdClose />
-              </button>
-            )}
+            <SettingBtn
+              openMenu={openMenu}
+              handleClose={handleClose}
+              handleOpen={handleOpen}
+            />
           </div>
         </div>
 
