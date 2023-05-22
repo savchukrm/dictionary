@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import MenuSet from './Menu/MenuSet';
 import ModalSelect from './ModalSelect/ModalSelect';
@@ -26,13 +26,36 @@ const Set: React.FC<SetProps> = ({
   const [openMenu, setOpenMenu] = useState(false);
   const [modalSelect, setModalSelect] = useState(false);
 
-  const handleOpenMenu = () => {
-    setOpenMenu(true);
+  const popupRef = useRef<HTMLDivElement>(null);
+
+  const handleOpenMenu = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setOpenMenu((prev) => !prev);
   };
 
-  const handleCloseMenu = () => {
-    setOpenMenu(false);
+  const handleCloseMenu = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setOpenMenu((prev) => !prev);
   };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
+      setOpenMenu(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('click', handleClickOutside);
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   return (
     <div>
@@ -61,12 +84,14 @@ const Set: React.FC<SetProps> = ({
         </div>
 
         {openMenu && (
-          <MenuSet
-            setModalSelect={setModalSelect}
-            setOpenMenu={setOpenMenu}
-            listName={listName}
-            word={word}
-          />
+          <div ref={popupRef}>
+            <MenuSet
+              setModalSelect={setModalSelect}
+              setOpenMenu={setOpenMenu}
+              listName={listName}
+              word={word}
+            />
+          </div>
         )}
       </div>
     </div>

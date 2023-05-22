@@ -33,6 +33,11 @@
   padding: 10px;
 }
 
+.text {
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
 .term {
   order: 1;
 }

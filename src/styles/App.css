@@ -143,6 +143,11 @@
   fill: #dee516;
 }
 
+.icon svg {
+  height: 1.8em;
+  width: 1.8em;
+}
+
 @media screen and (max-width: 1000px) {
   .header {
     padding: 0 20px;
@@ -179,9 +184,5 @@
   .btnAdd {
     padding: 0px 10px;
     font-size: 14px;
-  }
-
-  .header h1 {
-    font-size: 1.1em;
   }
 }

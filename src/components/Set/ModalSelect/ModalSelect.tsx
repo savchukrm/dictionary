@@ -31,9 +31,13 @@ const ModalSelect: React.FC<ModalSelectProps> = ({
         <button onClick={handleCloseModal} className={styles.btnClose}>
           <CgClose />
         </button>
+
         <h2>Select a New Definition</h2>
+
         <h3>{word}</h3>
+
         <span>/{pronunciation.all}/</span>
+
         <ul className={styles.contentBlock}>
           <Sort
             content={content}

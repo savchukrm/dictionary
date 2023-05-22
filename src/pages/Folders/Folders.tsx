@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-
-import { IoMdArrowRoundBack } from 'react-icons/io';
 
 import { RootState, useAppDispatch } from '../../redux/store';
 
 import { createNewFolder, getUserFolders } from '../../utils/folders/folders';
 import { setFolders } from '../../redux/folders/slice';
 
+import PageHeader from '../../components/PageHeader/PageHeader';
 import FolderBlock from '../../components/FolderBlock/FolderBlock';
 import ModalInput from '../../components/Modals/ModalInput/ModalInput';
 import Skeleton from '../../components/Skeleton/Skeleton';
@@ -62,20 +60,7 @@ const Folders = (): JSX.Element => {
         />
       )}
 
-      <div className="header">
-        <Link to="/">
-          <button className="btnBack">
-            <IoMdArrowRoundBack />
-            return
-          </button>
-        </Link>
-
-        <h1>Folders</h1>
-
-        <button onClick={handleModal} className="btnAdd">
-          new folder
-        </button>
-      </div>
+      <PageHeader name="Folders" title="folder" handleModal={handleModal} />
 
       <div className={styles.container}>
         {isLoding ? (

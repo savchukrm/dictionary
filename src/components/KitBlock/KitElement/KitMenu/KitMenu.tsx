@@ -13,9 +13,14 @@ import styles from '../../KitBlock.module.css';
 interface KitMenuProps {
   index: number;
   folderName: string | undefined;
+  setOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const KitMenu: React.FC<KitMenuProps> = ({ index, folderName }) => {
+const KitMenu: React.FC<KitMenuProps> = ({
+  index,
+  folderName,
+  setOpenMenu,
+}) => {
   const dispatch = useAppDispatch();
 
   const [openModal, setOpenModal] = useState(false);
@@ -27,21 +32,27 @@ const KitMenu: React.FC<KitMenuProps> = ({ index, folderName }) => {
   const handleOpenModalForDefinition = () => {
     setCurrentTerm('definition');
     setOpenModal(true);
+
+    document.body.classList.add('modal-open');
   };
 
   const handleOpenModalForMeaning = () => {
     setCurrentTerm('meaning');
     setOpenModal(true);
+
+    document.body.classList.add('modal-open');
   };
 
   const handleCloseModal = () => {
     setOpenModal(false);
+
+    document.body.classList.remove('modal-open');
   };
 
   const deleteSet = () => {
     if (index >= 0 && index < folder.terms.length) {
       const updatedTerms = [...folder.terms];
-      updatedTerms.splice(index, 1); // Remove the term at the specified index
+      updatedTerms.splice(index, 1);
 
       const updatedFolder = {
         ...folder,
@@ -73,6 +84,7 @@ const KitMenu: React.FC<KitMenuProps> = ({ index, folderName }) => {
           name={currentTerm}
           folderName={folderName}
           closeModal={handleCloseModal}
+          setOpenMenu={setOpenMenu}
         />
       )}
     </div>

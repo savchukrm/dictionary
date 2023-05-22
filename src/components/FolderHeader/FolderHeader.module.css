@@ -32,9 +32,10 @@
   width: 2em;
 }
 
-.icon svg {
-  height: 1.8em;
-  width: 1.8em;
+.description {
+  word-wrap: break-word;
+  word-break: break-word;
+  text-align: left;
 }
 
 @media screen and (max-width: 1000px) {

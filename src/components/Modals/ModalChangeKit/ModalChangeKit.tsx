@@ -19,6 +19,7 @@ interface ModalChangeKitProps {
   index: number;
   folderName: string | undefined;
   closeModal: () => void;
+  setOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ModalChangeKit: React.FC<ModalChangeKitProps> = ({
@@ -26,6 +27,7 @@ const ModalChangeKit: React.FC<ModalChangeKitProps> = ({
   index,
   closeModal,
   folderName,
+  setOpenMenu,
 }) => {
   const dispatch = useAppDispatch();
   const [term, setTerm] = useState('');
@@ -78,6 +80,9 @@ const ModalChangeKit: React.FC<ModalChangeKitProps> = ({
 
     setTerm('');
     closeModal();
+    setOpenMenu(false);
+
+    document.body.classList.remove('modal-open');
   };
 
   const handleChangeTerm = (event: React.ChangeEvent<HTMLTextAreaElement>) => {

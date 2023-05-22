@@ -69,7 +69,9 @@ const Sort: React.FC<SortProps> = ({
   };
 
   const updateDefinition = () => {
-    listName === 'favorite' ? updateFavoriteList() : updateCurrentList();
+    if (selectedItem !== '') {
+      listName === 'favorite' ? updateFavoriteList() : updateCurrentList();
+    }
 
     setModalSelect(false);
     document.body.classList.remove('modal-open');

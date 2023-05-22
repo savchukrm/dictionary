@@ -58,6 +58,7 @@ const ModalChange: React.FC<ModalChangeProps> = ({
             <input
               className={styles.formInput}
               type="text"
+              maxLength={15}
               placeholder="new name"
               onChange={handleChange}
             />

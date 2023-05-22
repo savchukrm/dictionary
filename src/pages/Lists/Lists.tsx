@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-
-import { IoMdArrowRoundBack } from 'react-icons/io';
 
 import { RootState, useAppDispatch } from '../../redux/store';
 
@@ -12,6 +9,7 @@ import { getUserLists, createNewList } from '../../utils/lists/list';
 import { setFavorite } from '../../redux/favorite/slice';
 import { setLists } from '../../redux/lists/slice';
 
+import PageHeader from '../../components/PageHeader/PageHeader';
 import ListBlock from '../../components/ListBlock/ListBlock';
 import FavoriteBlock from '../../components/ListBlock/FavoriteBlock';
 import ModalInput from '../../components/Modals/ModalInput/ModalInput';
@@ -90,20 +88,7 @@ const Lists = (): JSX.Element => {
         />
       )}
 
-      <div className="header">
-        <Link to="/">
-          <button className="btnBack">
-            <IoMdArrowRoundBack />
-            return
-          </button>
-        </Link>
-
-        <h1>My lists</h1>
-
-        <button onClick={handleModal} className="btnAdd">
-          new list
-        </button>
-      </div>
+      <PageHeader name="My lists" title="list" handleModal={handleModal} />
 
       <div className={styles.content}>
         {isLoding ? (

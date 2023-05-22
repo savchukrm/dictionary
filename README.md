@@ -1,6 +1,7 @@
 # Dictionary
 
-The software to search for words and get their definitions, create an account, create lists and add words here.
+The software to search for words and get their definitions, create an account, create lists and add words here;
+add definitions and meanings, learn it using flashcards.
 
 - Single page application with React.
 - Authentication, data storage, and CRUD functionality implemented with Firebase.

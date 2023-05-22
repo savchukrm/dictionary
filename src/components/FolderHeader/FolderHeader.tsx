@@ -49,7 +49,7 @@ const FolderHeader: React.FC<FolderHeaderProps> = ({
           {terms && terms.length >= 1 && (
             <div onClick={handleOpenModalCreate}>
               {isDesktop ? (
-                <div className={styles.icon}>
+                <div className="icon">
                   <RxPlusCircled />
                 </div>
               ) : (
@@ -62,7 +62,7 @@ const FolderHeader: React.FC<FolderHeaderProps> = ({
             <div onClick={handleCreateFlashcardList}>
               <Link to="/flashcard">
                 {isDesktop ? (
-                  <div className={styles.icon}>
+                  <div className="icon">
                     <BsCardText />
                   </div>
                 ) : (
@@ -73,7 +73,7 @@ const FolderHeader: React.FC<FolderHeaderProps> = ({
           )}
         </div>
       </div>
-      <p>{description}</p>
+      <p className={styles.description}>{description}</p>
     </div>
   );
 };
