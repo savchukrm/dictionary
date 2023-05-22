@@ -41,12 +41,15 @@ const Lists = (): JSX.Element => {
     const fetchData = async () => {
       try {
         const res = await getUserLists(id);
-        if (res.val() !== undefined) {
+
+        if (res.val() !== undefined && res.val() !== null) {
           const userListsArray = Object.keys(res.val()).map((key) => [
             key,
             res.val()[key],
           ]);
           dispatch(setLists(userListsArray));
+        } else {
+          dispatch(setLists([]));
         }
         setIsLoading(false);
       } catch (error) {
@@ -91,15 +94,15 @@ const Lists = (): JSX.Element => {
       <PageHeader name="My lists" title="list" handleModal={handleModal} />
 
       <div className={styles.content}>
-        {isLoding ? (
-          <Skeleton />
-        ) : (
-          <ul className={styles.blocks}>
-            <li className={styles.item} key={0}>
-              <FavoriteBlock length={favoriteLength} title="favourites" />
-            </li>
+        <ul className={styles.blocks}>
+          <li className={styles.item} key={0}>
+            <FavoriteBlock length={favoriteLength} title="favourites" />
+          </li>
 
-            {lists.map((item, i) => {
+          {isLoding ? (
+            <Skeleton />
+          ) : (
+            lists.map((item, i) => {
               const [title, content] = item;
               const contentLength = Object.entries(content);
 
@@ -114,9 +117,9 @@ const Lists = (): JSX.Element => {
                   <ListBlock title={title} length={lengthValue} />
                 </li>
               );
-            })}
-          </ul>
-        )}
+            })
+          )}
+        </ul>
       </div>
     </div>
   );
