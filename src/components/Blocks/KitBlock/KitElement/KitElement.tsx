@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 
-import SettingBtn from '../../SettingBtn/SettingBtn';
+import SettingBtn from '../../../SettingBtn/SettingBtn';
 import KitMenu from './KitMenu/KitMenu';
 
 import styles from '../KitBlock.module.css';

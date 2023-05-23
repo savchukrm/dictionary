@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 
-import { useAppDispatch } from '../../../redux/store';
-import { handleOpen } from '../../../redux/modal/slice';
+import { useAppDispatch } from '../../../../redux/store';
+import { handleOpen } from '../../../../redux/modal/slice';
 
-import { useAuth } from '../../../hooks/use-auth';
+import { useAuth } from '../../../../hooks/use-auth';
 
 import styles from '../Header.module.css';
 

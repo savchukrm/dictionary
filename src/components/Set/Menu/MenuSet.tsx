@@ -8,7 +8,7 @@ import { removeWordFromList } from '../../../utils/lists/list';
 import { setList } from '../../../redux/list/slice';
 import { setFavorite } from '../../../redux/favorite/slice';
 
-import styles from '../../ListBlock/Menu/Menu.module.css';
+import styles from '../../Blocks/ListBlock/Menu/Menu.module.css';
 
 interface MenuSetProps {
   setModalSelect: React.Dispatch<React.SetStateAction<boolean>>;

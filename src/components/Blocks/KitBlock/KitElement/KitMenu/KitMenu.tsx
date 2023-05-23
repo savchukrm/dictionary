@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { RootState, useAppDispatch } from '../../../../redux/store';
+import { RootState, useAppDispatch } from '../../../../../redux/store';
 
-import { deleteTermFromFolder } from '../../../../utils/folders/folders';
-import { setFolder } from '../../../../redux/folder/slice';
+import { deleteTermFromFolder } from '../../../../../utils/folders/folders';
+import { setFolder } from '../../../../../redux/folder/slice';
 
-import ModalChangeKit from '../../../Modals/ModalChangeKit/ModalChangeKit';
+import ModalChangeKit from '../../../../Modals/ModalChangeKit/ModalChangeKit';
 
 import styles from '../../KitBlock.module.css';
 

@@ -9,9 +9,9 @@ import { getUserLists, createNewList } from '../../utils/lists/list';
 import { setFavorite } from '../../redux/favorite/slice';
 import { setLists } from '../../redux/lists/slice';
 
-import PageHeader from '../../components/PageHeader/PageHeader';
-import ListBlock from '../../components/ListBlock/ListBlock';
-import FavoriteBlock from '../../components/ListBlock/FavoriteBlock';
+import PageHeader from '../../components/Headers/PageHeader/PageHeader';
+import ListBlock from '../../components/Blocks/ListBlock/ListBlock';
+import FavoriteBlock from '../../components/Blocks/ListBlock/FavoriteBlock';
 import ModalInput from '../../components/Modals/ModalInput/ModalInput';
 import Skeleton from '../../components/Skeleton/Skeleton';
 

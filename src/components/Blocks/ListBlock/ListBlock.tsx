@@ -2,15 +2,15 @@ import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { RootState, useAppDispatch } from '../../redux/store';
-import { setLists } from '../../redux/lists/slice';
+import { RootState, useAppDispatch } from '../../../redux/store';
+import { setLists } from '../../../redux/lists/slice';
 
-import { changeListName, removeListFromLists } from '../../utils/lists/list';
+import { changeListName, removeListFromLists } from '../../../utils/lists/list';
 
 import Menu from './Menu/Menu';
-import ModalDelete from '../Modals/ModalDelete/ModalDelete';
-import ModalChange from '../Modals/ModalChange/ModalChange';
-import SettingBtn from '../SettingBtn/SettingBtn';
+import ModalDelete from '../../Modals/ModalDelete/ModalDelete';
+import ModalChange from '../../Modals/ModalChange/ModalChange';
+import SettingBtn from '../../SettingBtn/SettingBtn';
 
 import styles from './ListBlock.module.css';
 

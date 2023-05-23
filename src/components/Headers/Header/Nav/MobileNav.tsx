@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { BiMenu } from 'react-icons/bi';
 import { CgClose } from 'react-icons/cg';
 
-import { useAppDispatch } from '../../../redux/store';
+import { useAppDispatch } from '../../../../redux/store';
 
-import { handleOpen } from '../../../redux/modal/slice';
-import { useAuth } from '../../../hooks/use-auth';
+import { handleOpen } from '../../../../redux/modal/slice';
+import { useAuth } from '../../../../hooks/use-auth';
 
 import styles from '../Header.module.css';
 

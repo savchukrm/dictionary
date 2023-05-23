@@ -7,7 +7,7 @@ import { RootState, useAppDispatch } from './redux/store';
 import { getAuth } from 'firebase/auth';
 import { setUser } from './redux/auth/slice';
 
-import Header from './components/Header/Header';
+import Header from './components/Headers/Header/Header';
 
 import Main from './pages/Main/Main';
 import LoginPage from './pages/Auth/LoginPage';

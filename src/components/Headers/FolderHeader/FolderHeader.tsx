@@ -7,7 +7,7 @@ import { RxPlusCircled } from 'react-icons/rx';
 import { BsCardText } from 'react-icons/bs';
 
 import styles from './FolderHeader.module.css';
-import { TermItems } from '../../redux/folder/slice';
+import { TermItems } from '../../../redux/folder/slice';
 
 interface FolderHeaderProps {
   terms: TermItems[];

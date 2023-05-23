@@ -8,6 +8,10 @@
   border-radius: 20px;
 }
 
+.setBlock:last-child {
+  margin-bottom: 0px;
+}
+
 .setBlock h3 {
   text-transform: capitalize;
   font-size: 20px;

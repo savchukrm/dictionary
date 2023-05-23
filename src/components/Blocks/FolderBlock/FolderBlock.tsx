@@ -5,19 +5,19 @@ import { useSelector } from 'react-redux';
 import { AiOutlineFolderOpen } from 'react-icons/ai';
 import { AiOutlinePlus } from 'react-icons/ai';
 
-import { RootState, useAppDispatch } from '../../redux/store';
-import { setFolders } from '../../redux/folders/slice';
+import { RootState, useAppDispatch } from '../../../redux/store';
+import { setFolders } from '../../../redux/folders/slice';
 
 import {
   changeFolderName,
   removeFolderFromFolders,
-} from '../../utils/folders/folders';
+} from '../../../utils/folders/folders';
 
 import FolderMenu from './Menu/FolderMenu';
-import ModalDescription from '../Modals/ModalDescription/ModalDescription';
-import ModalChange from '../Modals/ModalChange/ModalChange';
-import ModalDelete from '../Modals/ModalDelete/ModalDelete';
-import SettingBtn from '../SettingBtn/SettingBtn';
+import ModalDescription from '../../Modals/ModalDescription/ModalDescription';
+import ModalChange from '../../Modals/ModalChange/ModalChange';
+import ModalDelete from '../../Modals/ModalDelete/ModalDelete';
+import SettingBtn from '../../SettingBtn/SettingBtn';
 
 import styles from './FolderBlock.module.css';
 

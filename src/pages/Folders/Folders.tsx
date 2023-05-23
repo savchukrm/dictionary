@@ -6,8 +6,8 @@ import { RootState, useAppDispatch } from '../../redux/store';
 import { createNewFolder, getUserFolders } from '../../utils/folders/folders';
 import { setFolders } from '../../redux/folders/slice';
 
-import PageHeader from '../../components/PageHeader/PageHeader';
-import FolderBlock from '../../components/FolderBlock/FolderBlock';
+import PageHeader from '../../components/Headers/PageHeader/PageHeader';
+import FolderBlock from '../../components/Blocks/FolderBlock/FolderBlock';
 import ModalInput from '../../components/Modals/ModalInput/ModalInput';
 import Skeleton from '../../components/Skeleton/Skeleton';
 

@@ -10,11 +10,11 @@ import { setListForQuiz } from '../../redux/quiz/slice';
 
 import { shuffleArray } from '../../utils/utilityFunctions';
 
-import FolderHeader from '../../components/FolderHeader/FolderHeader';
+import FolderHeader from '../../components/Headers/FolderHeader/FolderHeader';
 import ModalCreate from '../../components/Modals/ModalCreate/ModalCreate';
 import EmptyMessage from '../../components/EmptyMessage/EmptyMessage';
 import Skeleton from '../../components/Skeleton/Skeleton';
-import KitBlock from '../../components/KitBlock/KitBlock';
+import KitBlock from '../../components/Blocks/KitBlock/KitBlock';
 
 import styles from './FolderContent.module.css';
 
