@@ -11,17 +11,19 @@ import { setFavorite } from '../../../redux/favorite/slice';
 import styles from '../../Blocks/ListBlock/Menu/Menu.module.css';
 
 interface MenuSetProps {
-  setModalSelect: React.Dispatch<React.SetStateAction<boolean>>;
-  setOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
-  listName: string | undefined;
   word: string;
+  listName: string | undefined;
+  setOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalSelect: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalChangeWord: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const MenuSet: React.FC<MenuSetProps> = ({
-  setModalSelect,
-  setOpenMenu,
-  listName,
   word,
+  listName,
+  setOpenMenu,
+  setModalSelect,
+  setModalChangeWord,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -31,6 +33,13 @@ const MenuSet: React.FC<MenuSetProps> = ({
 
   const handleOpenModalSelect = () => {
     setModalSelect(true);
+    setOpenMenu(false);
+
+    document.body.classList.add('modal-open');
+  };
+
+  const handleOpenModalChangeWord = () => {
+    setModalChangeWord(true);
     setOpenMenu(false);
 
     document.body.classList.add('modal-open');
@@ -85,7 +94,10 @@ const MenuSet: React.FC<MenuSetProps> = ({
       <div onClick={handleOpenModalSelect} className={styles.item}>
         Change definition
       </div>
-      <div className={styles.item} onClick={handleDeleteWordFromList}>
+      <div onClick={handleOpenModalChangeWord} className={styles.item}>
+        Write own term
+      </div>
+      <div onClick={handleDeleteWordFromList} className={styles.item}>
         Remove word
       </div>
     </ul>

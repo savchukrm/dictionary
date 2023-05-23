@@ -7,6 +7,7 @@ import SettingBtn from '../SettingBtn/SettingBtn';
 import styles from './Set.module.css';
 
 import { DefinitionsItem } from '../../redux/words/types';
+import ModalChangeWord from '../Modals/ModalChangeWord/ModalChangeWord';
 
 interface SetProps {
   listName: string | undefined;
@@ -25,6 +26,7 @@ const Set: React.FC<SetProps> = ({
 }) => {
   const [openMenu, setOpenMenu] = useState(false);
   const [modalSelect, setModalSelect] = useState(false);
+  const [modalChangeWord, setModalChangeWord] = useState(false);
 
   const popupRef = useRef<HTMLDivElement>(null);
 
@@ -59,39 +61,49 @@ const Set: React.FC<SetProps> = ({
 
   return (
     <div>
-      {modalSelect && (
-        <ModalSelect
-          listName={listName}
-          word={word}
-          setModalSelect={setModalSelect}
-          content={meanings}
-          pronunciation={pronunciation}
-        />
-      )}
-
       <div className={styles.setBlock}>
         <h3>{word}</h3>
+
         {pronunciation && <span>/{pronunciation.all}/</span>}
 
-        <p>{definition}</p>
+        <p className={styles.definition}>{definition}</p>
 
         <div className={styles.btn}>
           <SettingBtn
             openMenu={openMenu}
-            handleClose={handleCloseMenu}
             handleOpen={handleOpenMenu}
+            handleClose={handleCloseMenu}
           />
         </div>
 
         {openMenu && (
           <div ref={popupRef}>
             <MenuSet
-              setModalSelect={setModalSelect}
-              setOpenMenu={setOpenMenu}
-              listName={listName}
               word={word}
+              listName={listName}
+              setOpenMenu={setOpenMenu}
+              setModalSelect={setModalSelect}
+              setModalChangeWord={setModalChangeWord}
             />
           </div>
+        )}
+
+        {modalSelect && (
+          <ModalSelect
+            word={word}
+            content={meanings}
+            listName={listName}
+            pronunciation={pronunciation}
+            setModalSelect={setModalSelect}
+          />
+        )}
+
+        {modalChangeWord && (
+          <ModalChangeWord
+            word={word}
+            listName={listName}
+            setModal={setModalChangeWord}
+          />
         )}
       </div>
     </div>
