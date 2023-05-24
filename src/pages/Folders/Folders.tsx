@@ -23,14 +23,16 @@ const Folders = (): JSX.Element => {
   const [isLoding, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    getUserFolders(id)
-      .then((res) => {
-        if (res.val() != null) {
-          dispatch(setFolders(Object.entries(res.val())));
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => console.log(error));
+    if (id !== null) {
+      getUserFolders(id)
+        .then((res) => {
+          if (res.val() != null) {
+            dispatch(setFolders(Object.entries(res.val())));
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => console.log(error));
+    }
   }, [dispatch, id]);
 
   const handleModal = () => {

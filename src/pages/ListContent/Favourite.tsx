@@ -25,13 +25,15 @@ const Favourite = () => {
   const { id } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
-    getUserFavorite(id)
-      .then((res) => {
-        if (res.val() != null) {
-          dispatch(setFavorite(Object.entries(res.val())));
-        }
-      })
-      .catch((error) => console.log(error));
+    if (id !== null) {
+      getUserFavorite(id)
+        .then((res) => {
+          if (res.val() != null) {
+            dispatch(setFavorite(Object.entries(res.val())));
+          }
+        })
+        .catch((error) => console.log(error));
+    }
   }, [dispatch, id]);
 
   const handleCreateFlashcardList = () => {

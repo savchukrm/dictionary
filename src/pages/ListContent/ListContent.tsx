@@ -26,20 +26,22 @@ const ListContent = () => {
   const { id } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
-    const fetchList = async () => {
-      try {
-        const res = await getUserList(id, listName);
-        if (res.val() !== undefined) {
-          const userListsArray = Object.entries(res.val());
-          dispatch(setList(userListsArray));
-        } else {
-          dispatch(clearList());
+    if (id !== null) {
+      const fetchList = async () => {
+        try {
+          const res = await getUserList(id, listName);
+          if (res.val() !== undefined) {
+            const userListsArray = Object.entries(res.val());
+            dispatch(setList(userListsArray));
+          } else {
+            dispatch(clearList());
+          }
+        } catch (error) {
+          console.log(error);
         }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchList();
+      };
+      fetchList();
+    }
   }, [id, dispatch]);
 
   const handleClearList = () => {

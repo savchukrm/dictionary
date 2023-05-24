@@ -38,26 +38,28 @@ const Lists = (): JSX.Element => {
   }, [dispatch, id]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await getUserLists(id);
+    if (id !== null) {
+      const fetchData = async () => {
+        try {
+          const res = await getUserLists(id);
 
-        if (res.val() !== undefined && res.val() !== null) {
-          const userListsArray = Object.keys(res.val()).map((key) => [
-            key,
-            res.val()[key],
-          ]);
-          dispatch(setLists(userListsArray));
-        } else {
-          dispatch(setLists([]));
+          if (res.val() !== undefined && res.val() !== null) {
+            const userListsArray = Object.keys(res.val()).map((key) => [
+              key,
+              res.val()[key],
+            ]);
+            dispatch(setLists(userListsArray));
+          } else {
+            dispatch(setLists([]));
+          }
+          setIsLoading(false);
+        } catch (error) {
+          console.log(error);
         }
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+      };
 
-    fetchData();
+      fetchData();
+    }
   }, [dispatch, id]);
 
   const handleModal = () => {

@@ -66,43 +66,40 @@ const ModalCreate: React.FC<ModalCreateProps> = ({ setModal, folderName }) => {
   };
 
   const closeModal = () => {
-    document.body.classList.remove('modal-open');
     setModal(false);
   };
 
   return (
-    <div className="modal">
-      <div className={styles.block}>
-        <div className={styles.top}>
-          <h3 className={styles.h3}>Add new term</h3>
-          <button onClick={closeModal} className={styles.smallBtn}>
-            <CgClose />
-          </button>
-        </div>
-
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <label className={styles.inputsContainer}>
-            <textarea
-              placeholder="Enter term"
-              value={definition}
-              onChange={handleChangeDefinition}
-              className={styles.input}
-            ></textarea>
-            <textarea
-              placeholder="Enter definition"
-              value={meaning}
-              onChange={handleChangeMeaning}
-              className={styles.input}
-            ></textarea>
-          </label>
-          <input
-            disabled={meaning.length < 1 || definition.length < 1}
-            type="submit"
-            value="Confirm"
-            className={styles.btnConfirm}
-          />
-        </form>
+    <div className={styles.block}>
+      <div className={styles.top}>
+        <h3 className={styles.h3}>Add a new term</h3>
+        <button onClick={closeModal} className={styles.smallBtn}>
+          <CgClose />
+        </button>
       </div>
+
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <label className={styles.inputsContainer}>
+          <textarea
+            placeholder="Enter term"
+            value={definition}
+            onChange={handleChangeDefinition}
+            className={styles.input}
+          ></textarea>
+          <textarea
+            placeholder="Enter definition"
+            value={meaning}
+            onChange={handleChangeMeaning}
+            className={styles.input}
+          ></textarea>
+        </label>
+        <input
+          disabled={meaning.length < 1 || definition.length < 1}
+          type="submit"
+          value="Add"
+          className={styles.btnConfirm}
+        />
+      </form>
     </div>
   );
 };

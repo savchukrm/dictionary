@@ -31,20 +31,22 @@ const FolderContent = () => {
   const [isLoding, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const fetchFolder = async () => {
-      try {
-        const res = await getUserFolder(id, folderName);
-        if (res.val() !== undefined) {
-          dispatch(setFolder(res.val()));
-        } else {
-          dispatch(clearFolder());
+    if (id !== null) {
+      const fetchFolder = async () => {
+        try {
+          const res = await getUserFolder(id, folderName);
+          if (res.val() !== undefined) {
+            dispatch(setFolder(res.val()));
+          } else {
+            dispatch(clearFolder());
+          }
+          setIsLoading(false);
+        } catch (error) {
+          console.log(error);
         }
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchFolder();
+      };
+      fetchFolder();
+    }
   }, [id, dispatch, folderName]);
 
   const handleClearFolder = () => {
@@ -53,7 +55,6 @@ const FolderContent = () => {
 
   const handleOpenModalCreate = () => {
     setOpenModalCreate(true);
-    document.body.classList.add('modal-open');
   };
 
   const handleCreateFlashcardList = () => {
@@ -78,17 +79,19 @@ const FolderContent = () => {
               handleCreateFlashcardList={handleCreateFlashcardList}
             />
 
-            {terms && terms.length >= 1 ? (
-              <KitBlock folderName={folderName} />
-            ) : (
-              <EmptyMessage handleModal={handleOpenModalCreate} />
-            )}
-
             {openModalCreate && (
               <ModalCreate
                 setModal={setOpenModalCreate}
                 folderName={folderName}
               />
+            )}
+
+            {terms && terms.length >= 1 ? (
+              <KitBlock folderName={folderName} />
+            ) : (
+              !openModalCreate && (
+                <EmptyMessage handleModal={handleOpenModalCreate} />
+              )
             )}
           </div>
         )}
