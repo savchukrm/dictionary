@@ -3,6 +3,10 @@
   margin: 0 auto;
 }
 
+.box {
+  min-height: calc(100vh - 61px);
+}
+
 .sorry {
   margin-top: 50px;
 }
@@ -177,6 +181,12 @@
     position: absolute;
     top: 13px;
     left: 11px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .box {
+    min-height: calc(80vh - 61px);
   }
 }
 

@@ -81,45 +81,47 @@ const Lists = (): JSX.Element => {
   };
 
   return (
-    <div className={styles.listBlock}>
-      {isNewList && (
-        <ModalInput
-          setIsNewOne={setIsNewList}
-          title="Create a new list"
-          act="new list"
-          handleContent={handleModalContent}
-        />
-      )}
+    <div className="box">
+      <div className={styles.listBlock}>
+        {isNewList && (
+          <ModalInput
+            setIsNewOne={setIsNewList}
+            title="Create a new list"
+            act="new list"
+            handleContent={handleModalContent}
+          />
+        )}
 
-      <PageHeader name="My lists" title="list" handleModal={handleModal} />
+        <PageHeader name="My lists" title="list" handleModal={handleModal} />
 
-      <div className={styles.content}>
-        <ul className={styles.blocks}>
-          <li className={styles.item} key={0}>
-            <FavoriteBlock length={favoriteLength} title="favourites" />
-          </li>
+        <div className={styles.content}>
+          <ul className={styles.blocks}>
+            <li className={styles.item} key={0}>
+              <FavoriteBlock length={favoriteLength} title="favourites" />
+            </li>
 
-          {isLoding ? (
-            <Skeleton />
-          ) : (
-            lists.map((item, i) => {
-              const [title, content] = item;
-              const contentLength = Object.entries(content);
+            {isLoding ? (
+              <Skeleton />
+            ) : (
+              lists.map((item, i) => {
+                const [title, content] = item;
+                const contentLength = Object.entries(content);
 
-              const lengthValue = contentLength.find(
-                (el) => el[0] === 'createdAt'
-              )
-                ? 0
-                : contentLength.length;
+                const lengthValue = contentLength.find(
+                  (el) => el[0] === 'createdAt'
+                )
+                  ? 0
+                  : contentLength.length;
 
-              return (
-                <li key={i + 1}>
-                  <ListBlock title={title} length={lengthValue} />
-                </li>
-              );
-            })
-          )}
-        </ul>
+                return (
+                  <li key={i + 1}>
+                    <ListBlock title={title} length={lengthValue} />
+                  </li>
+                );
+              })
+            )}
+          </ul>
+        </div>
       </div>
     </div>
   );

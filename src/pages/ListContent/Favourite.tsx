@@ -45,53 +45,55 @@ const Favourite = () => {
     : '';
 
   return (
-    <div className={styles.content}>
-      <div className="header">
-        <Link to="/lists">
-          <button className="btnBack">
-            <IoMdArrowRoundBack />
-            return
-          </button>
-        </Link>
+    <div className="box">
+      <div className={styles.content}>
+        <div className="header">
+          <Link to="/lists">
+            <button className="btnBack">
+              <IoMdArrowRoundBack />
+              return
+            </button>
+          </Link>
 
-        <h1>Favourites</h1>
+          <h1>Favourites</h1>
 
-        <Link to="/flashcard">
-          <button
-            onClick={handleCreateFlashcardList}
-            className={`btnAdd btnFlashcard ${showFlashcardsBtn && 'hide'}`}
-          >
-            Flashcards
-          </button>
-        </Link>
+          <Link to="/flashcard">
+            <button
+              onClick={handleCreateFlashcardList}
+              className={`btnAdd btnFlashcard ${showFlashcardsBtn && 'hide'}`}
+            >
+              Flashcards
+            </button>
+          </Link>
+        </div>
+
+        <ul className={styles.contentBlock}>
+          {favorite.map((item, i) => {
+            const [word, content]: [
+              string,
+              [DefinitionsItem[], { all: string }, string]
+            ] = item;
+
+            const [meanings, pronunciation, mainDefinition] = content;
+
+            return (
+              <li key={i}>
+                {word === 'createdAt' ? (
+                  <p>You do not have any saved items in the current list</p>
+                ) : (
+                  <Set
+                    listName="favorite"
+                    word={word}
+                    definition={mainDefinition}
+                    meanings={meanings}
+                    pronunciation={pronunciation}
+                  />
+                )}
+              </li>
+            );
+          })}
+        </ul>
       </div>
-
-      <ul className={styles.contentBlock}>
-        {favorite.map((item, i) => {
-          const [word, content]: [
-            string,
-            [DefinitionsItem[], { all: string }, string]
-          ] = item;
-
-          const [meanings, pronunciation, mainDefinition] = content;
-
-          return (
-            <li key={i}>
-              {word === 'createdAt' ? (
-                <p>You do not have any saved items in the current list</p>
-              ) : (
-                <Set
-                  listName="favorite"
-                  word={word}
-                  definition={mainDefinition}
-                  meanings={meanings}
-                  pronunciation={pronunciation}
-                />
-              )}
-            </li>
-          );
-        })}
-      </ul>
     </div>
   );
 };

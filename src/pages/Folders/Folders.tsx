@@ -50,36 +50,38 @@ const Folders = (): JSX.Element => {
   };
 
   return (
-    <div className={styles.folderBlock}>
-      {isNewFolder && (
-        <ModalInput
-          setIsNewOne={setIsNewFolder}
-          title="Create a new folder"
-          act="new folder"
-          handleContent={handleNewFolder}
-        />
-      )}
-
-      <PageHeader name="Folders" title="folder" handleModal={handleModal} />
-
-      <div className={styles.container}>
-        {isLoding ? (
-          <Skeleton />
-        ) : folders && folders.length > 0 ? (
-          <ul>
-            {folders.map((item, i) => {
-              const [title, { content, description }] = item;
-
-              return (
-                <li key={i + 1}>
-                  <FolderBlock title={title} description={description} />
-                </li>
-              );
-            })}
-          </ul>
-        ) : (
-          <p>You don't have any folders yet.</p>
+    <div className="box">
+      <div className={styles.folderBlock}>
+        {isNewFolder && (
+          <ModalInput
+            setIsNewOne={setIsNewFolder}
+            title="Create a new folder"
+            act="new folder"
+            handleContent={handleNewFolder}
+          />
         )}
+
+        <PageHeader name="Folders" title="folder" handleModal={handleModal} />
+
+        <div className={styles.container}>
+          {isLoding ? (
+            <Skeleton />
+          ) : folders && folders.length > 0 ? (
+            <ul>
+              {folders.map((item, i) => {
+                const [title, { content, description }] = item;
+
+                return (
+                  <li key={i + 1}>
+                    <FolderBlock title={title} description={description} />
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p>You don't have any folders yet.</p>
+          )}
+        </div>
       </div>
     </div>
   );

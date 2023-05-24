@@ -19,6 +19,7 @@ import Folders from './pages/Folders/Folders';
 import FolderContent from './pages/FolderContent/FolderContent';
 import Modal from './pages/Modal/Modal';
 import Flashcard from './pages/Flashcard/Flashcard';
+import Footer from './components/Footer/Footer';
 import NotFound from './pages/NotFound/NotFound';
 
 import './styles/App.css';
@@ -55,6 +56,7 @@ function App() {
         <Route path="/flashcard" element={<Flashcard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </>
   );
 }

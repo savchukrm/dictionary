@@ -55,11 +55,13 @@ const Main = (): JSX.Element => {
   }, [id]);
 
   return (
-    <div className={styles.main}>
-      <div className="container">
-        <Search />
-        {status === 'success' && words.results && <Word />}
-        <Image />
+    <div className="box">
+      <div className={styles.main}>
+        <div className="container">
+          <Search />
+          {status === 'success' && words.results && <Word />}
+          <Image />
+        </div>
       </div>
     </div>
   );

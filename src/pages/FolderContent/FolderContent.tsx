@@ -63,34 +63,36 @@ const FolderContent = () => {
   };
 
   return (
-    <div className={styles.container}>
-      {isLoding ? (
-        <Skeleton />
-      ) : (
-        <div>
-          <FolderHeader
-            terms={terms}
-            folderName={folderName}
-            description={description}
-            handleClearFolder={handleClearFolder}
-            handleOpenModalCreate={handleOpenModalCreate}
-            handleCreateFlashcardList={handleCreateFlashcardList}
-          />
-
-          {terms && terms.length >= 1 ? (
-            <KitBlock folderName={folderName} />
-          ) : (
-            <EmptyMessage handleModal={handleOpenModalCreate} />
-          )}
-
-          {openModalCreate && (
-            <ModalCreate
-              setModal={setOpenModalCreate}
+    <div className="box">
+      <div className={styles.container}>
+        {isLoding ? (
+          <Skeleton />
+        ) : (
+          <div>
+            <FolderHeader
+              terms={terms}
               folderName={folderName}
+              description={description}
+              handleClearFolder={handleClearFolder}
+              handleOpenModalCreate={handleOpenModalCreate}
+              handleCreateFlashcardList={handleCreateFlashcardList}
             />
-          )}
-        </div>
-      )}
+
+            {terms && terms.length >= 1 ? (
+              <KitBlock folderName={folderName} />
+            ) : (
+              <EmptyMessage handleModal={handleOpenModalCreate} />
+            )}
+
+            {openModalCreate && (
+              <ModalCreate
+                setModal={setOpenModalCreate}
+                folderName={folderName}
+              />
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
