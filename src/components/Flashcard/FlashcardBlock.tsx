@@ -26,7 +26,7 @@ const FlashcardBlock: React.FC<FlashcardProps> = ({
 
         <div className={styles.flashcardBack}>
           <h4>Definition</h4>
-          <p>{definition}</p>
+          <p className={styles.definition}>{definition}</p>
         </div>
       </div>
     </div>
