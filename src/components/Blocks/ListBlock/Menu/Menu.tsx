@@ -14,11 +14,13 @@ const Menu: React.FC<MenuProps> = ({
   const handleModalDelete = () => {
     setModalDelete(true);
     setOpenMenu(false);
+    document.body.classList.add('modal-open');
   };
 
   const hanleOpenInput = () => {
     setModalChange(true);
     setOpenMenu(false);
+    document.body.classList.add('modal-open');
   };
 
   return (

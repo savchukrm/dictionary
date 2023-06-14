@@ -40,6 +40,7 @@ const FolderBlock: React.FC<FolderBlockProps> = ({ title, description }) => {
 
   const handleModal = () => {
     setOpenModal(true);
+    document.body.classList.add('modal-open');
   };
 
   const handleOpen = (
@@ -48,6 +49,7 @@ const FolderBlock: React.FC<FolderBlockProps> = ({ title, description }) => {
     event.preventDefault();
     event.stopPropagation();
     setOpenMenu((prev) => !prev);
+    document.body.classList.add('modal-open');
   };
 
   const handleClose = (

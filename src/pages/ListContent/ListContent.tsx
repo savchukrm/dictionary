@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 
+import { BsCardText } from 'react-icons/bs';
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import { IoChevronBackCircleOutline } from 'react-icons/io5';
 
 import { RootState, useAppDispatch } from '../../redux/store';
 
@@ -21,6 +24,8 @@ import { DefinitionsItem } from '../../redux/words/types';
 const ListContent = () => {
   const dispatch = useAppDispatch();
   const { listName } = useParams();
+
+  const isDesktop = useMediaQuery({ maxWidth: 650 });
 
   const { list } = useSelector((state: RootState) => state.list);
   const { id } = useSelector((state: RootState) => state.user);
@@ -63,22 +68,38 @@ const ListContent = () => {
       <div className={styles.content}>
         <div className="header">
           <Link to="/lists">
-            <button onClick={handleClearList} className="btnBack">
-              <IoMdArrowRoundBack />
-              return
-            </button>
+            {isDesktop ? (
+              <div className="icon" onClick={handleClearList}>
+                <IoChevronBackCircleOutline />
+              </div>
+            ) : (
+              <button className="btnBack" onClick={handleClearList}>
+                <IoMdArrowRoundBack />
+                return
+              </button>
+            )}
           </Link>
 
           <h1>{listName}</h1>
 
-          <Link to="/flashcard">
-            <button
-              onClick={handleCreateFlashcardList}
-              className={`btnAdd btnFlashcard ${showFlashcardsBtn && 'hide'}`}
-            >
-              Flashcards
-            </button>
-          </Link>
+          <div onClick={handleCreateFlashcardList}>
+            <Link to="/flashcard">
+              {isDesktop ? (
+                <div className={`icon ${showFlashcardsBtn && 'hide'}`}>
+                  <BsCardText />
+                </div>
+              ) : (
+                <button
+                  onClick={handleCreateFlashcardList}
+                  className={`btnAdd btnFlashcard ${
+                    showFlashcardsBtn && 'hide'
+                  }`}
+                >
+                  Flashcards
+                </button>
+              )}
+            </Link>
+          </div>
         </div>
 
         <ul className={styles.contentBlock}>
