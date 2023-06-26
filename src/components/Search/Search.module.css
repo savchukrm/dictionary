@@ -1,12 +1,17 @@
 .form {
+  position: relative;
   display: flex;
   justify-content: center;
   gap: 15px;
 }
 
+.label {
+  position: relative;
+}
+
 .formInput {
   border-radius: 30px;
-  padding: 10px 30px;
+  padding: 10px 50px 10px 30px;
   border: 2px solid var(--color-darkblue);
 }
 
@@ -26,6 +31,29 @@
 .formBtn:hover {
   background-color: var(--color-teal);
   color: var(--color-white);
+}
+
+.clearBtn {
+  position: absolute;
+  color: #848b9b;
+
+  right: 20px;
+  top: 15px;
+}
+
+.clearBtn svg {
+  height: 22px;
+  width: 18px;
+}
+
+.error {
+  position: absolute;
+  bottom: -20px;
+  left: 30px;
+  color: #d12323;
+  font-size: 15px;
+  font-weight: 400;
+  margin-top: 4px;
 }
 
 @media (max-width: 450px) {

@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch, RootState } from '../../redux/store';
 
+import { CgClose } from 'react-icons/cg';
+
 import { searchWord } from '../../redux/search/slice';
 import { fetchWords } from '../../redux/words/asynAction';
 
@@ -10,7 +12,7 @@ import styles from './Search.module.css';
 const Search = () => {
   const dispatch = useAppDispatch();
   const [validForm, setValidForm] = useState(false);
-
+  const [error, setError] = useState('');
   const { word } = useSelector((state: RootState) => state.search);
 
   useEffect(() => {
@@ -21,34 +23,59 @@ const Search = () => {
     }
   }, [word]);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
+    if (error) {
+      return;
+    }
     await dispatch(fetchWords(word));
     dispatch(searchWord(''));
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(searchWord(event.target.value));
+    const value = event.target.value;
+    const regex = /^[a-zA-Z\s]*$/;
+    if (!regex.test(value)) {
+      setError('Invalid input');
+    } else {
+      setError('');
+    }
+    dispatch(searchWord(value));
+  };
+
+  const clearForm = () => {
+    dispatch(searchWord(''));
   };
 
   return (
     <>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <label>
+        <label className={styles.label}>
           <input
             className={styles.formInput}
             type="text"
             value={word}
             placeholder="Input word..."
             onChange={handleChange}
+            maxLength={100}
           />
+
+          {word.length > 0 && (
+            <button onClick={() => clearForm()} className={styles.clearBtn}>
+              <CgClose />
+            </button>
+          )}
         </label>
-        <input
-          disabled={validForm}
+
+        {error && <p className={styles.error}>{error}</p>}
+
+        <button
+          disabled={validForm || !!error}
           className={styles.formBtn}
           type="submit"
-          value="Search"
-        />
+        >
+          Search
+        </button>
       </form>
     </>
   );
