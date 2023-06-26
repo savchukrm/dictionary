@@ -19,6 +19,14 @@ const dataWords = createSlice({
     setWords(state, action) {
       state.words = action.payload;
     },
+    clearWords(state) {
+      state.words = {
+        results: [{ definition: '', partOfSpeech: '', synonyms: [] }],
+        pronunciation: { all: '' },
+        word: '',
+      };
+      state.status = Status.NOTHING;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchWords.pending, (state, action) => {
@@ -44,6 +52,6 @@ const dataWords = createSlice({
   },
 });
 
-export const { setWords } = dataWords.actions;
+export const { setWords, clearWords } = dataWords.actions;
 
 export default dataWords.reducer;

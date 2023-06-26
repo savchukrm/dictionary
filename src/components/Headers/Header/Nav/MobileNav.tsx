@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { BiMenu } from 'react-icons/bi';
 import { CgClose } from 'react-icons/cg';
 
 import { useAppDispatch } from '../../../../redux/store';
+import { clearWords } from '../../../../redux/words/slice';
 
 import { handleOpen } from '../../../../redux/modal/slice';
 import { useAuth } from '../../../../hooks/use-auth';
@@ -12,6 +13,9 @@ import { useAuth } from '../../../../hooks/use-auth';
 import styles from '../Header.module.css';
 
 function MobileNav() {
+  const location = useLocation();
+  const currentPathname = location.pathname;
+
   const [openNav, setOpenNav] = useState(false);
 
   const dispatch = useAppDispatch();
@@ -27,9 +31,15 @@ function MobileNav() {
     setOpenNav((prev) => !prev);
   };
 
+  const handleBack = () => {
+    if (currentPathname !== '/') {
+      dispatch(clearWords());
+    }
+  };
+
   return (
     <nav className={styles.headerRow}>
-      <Link to="/">
+      <Link to="/" onClick={handleBack}>
         <h3 className={styles.headerLogo}>Meaningo</h3>
       </Link>
 

@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { useAppDispatch } from '../../../../redux/store';
 import { handleOpen } from '../../../../redux/modal/slice';
+import { clearWords } from '../../../../redux/words/slice';
 
 import { useAuth } from '../../../../hooks/use-auth';
 
@@ -9,6 +10,9 @@ import styles from '../Header.module.css';
 
 const BrowserNav = () => {
   const dispatch = useAppDispatch();
+  const location = useLocation();
+  const currentPathname = location.pathname;
+
   const { isAuth } = useAuth();
 
   const openModal = () => {
@@ -16,10 +20,18 @@ const BrowserNav = () => {
     dispatch(handleOpen());
   };
 
+  const handleBack = () => {
+    if (currentPathname !== '/') {
+      dispatch(clearWords());
+    }
+  };
+
   return (
     <nav className={styles.headerRow}>
-      <Link to="/">
-        <h3 className={styles.headerLogo}>Meaningo</h3>
+      <Link to="/" onClick={handleBack}>
+        <h3 className={`${styles.headerLogo} ${styles.headerBrowser}`}>
+          Meaningo
+        </h3>
       </Link>
       <ul className={styles.headerBtnRow}>
         {isAuth && (

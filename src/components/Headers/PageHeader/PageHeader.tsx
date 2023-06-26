@@ -5,6 +5,9 @@ import { IoChevronBackCircleOutline } from 'react-icons/io5';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { RxPlusCircled } from 'react-icons/rx';
 
+import { useAppDispatch } from '../../../redux/store';
+import { clearWords } from '../../../redux/words/slice';
+
 interface PageHeaderProps {
   name: string;
   title: string;
@@ -17,11 +20,16 @@ const PageHeader: React.FC<PageHeaderProps> = ({
   title,
 }) => {
   const isDesktop = useMediaQuery({ maxWidth: 650 });
+  const dispatch = useAppDispatch();
+
+  const handleBack = () => {
+    dispatch(clearWords());
+  };
 
   return (
     <>
       <div className="header">
-        <Link to="/">
+        <Link to="/" onClick={handleBack}>
           {isDesktop ? (
             <div className="icon">
               <IoChevronBackCircleOutline />
