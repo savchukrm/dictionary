@@ -6,14 +6,19 @@ import { CgClose } from 'react-icons/cg';
 
 import { searchWord } from '../../redux/search/slice';
 import { fetchWords } from '../../redux/words/asynAction';
+import { addWordToPreviousRequests } from '../../utils/requests/previousRequest';
 
 import styles from './Search.module.css';
 
 const Search = () => {
   const dispatch = useAppDispatch();
+
   const [validForm, setValidForm] = useState(false);
   const [error, setError] = useState('');
+
   const { word } = useSelector((state: RootState) => state.search);
+  const { id } = useSelector((state: RootState) => state.user);
+  const { status } = useSelector((state: RootState) => state.words);
 
   useEffect(() => {
     if (word.length >= 1) {
@@ -25,12 +30,20 @@ const Search = () => {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
+
     if (error) {
       return;
     }
+
     await dispatch(fetchWords(word));
     dispatch(searchWord(''));
   };
+
+  useEffect(() => {
+    if (id !== null && status === 'success') {
+      addWordToPreviousRequests(id, word);
+    }
+  }, [status]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;

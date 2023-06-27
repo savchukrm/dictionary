@@ -12,6 +12,7 @@ import { clearLists } from '../../redux/lists/slice';
 import { clearList } from '../../redux/list/slice';
 import { clearListForQuiz } from '../../redux/quiz/slice';
 import { clearFolders } from '../../redux/folders/slice';
+import { clearLastRequests } from '../../redux/requests/slice';
 
 import styles from './ModalWindow.module.css';
 
@@ -30,6 +31,7 @@ function ModalWindow(): JSX.Element {
     dispatch(clearList());
     dispatch(clearListForQuiz());
     dispatch(clearFolders());
+    dispatch(clearLastRequests());
 
     auth
       .signOut()

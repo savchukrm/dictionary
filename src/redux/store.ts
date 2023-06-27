@@ -11,6 +11,7 @@ import list from './list/slice';
 import quiz from './quiz/slice';
 import folders from './folders/slice';
 import folder from './folder/slice';
+import requests from './requests/slice';
 
 export const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ export const store = configureStore({
     quiz,
     folders,
     folder,
+    requests,
   },
 });
 

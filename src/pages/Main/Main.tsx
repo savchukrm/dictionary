@@ -12,6 +12,7 @@ import { getUserLists } from '../../utils/lists/list';
 import Search from '../../components/Search/Search';
 import Image from '../../components/Image';
 import Word from '../../components/Word/Word';
+import Requests from '../../components/PreviousRequests/Requests';
 
 import styles from './Main.module.css';
 
@@ -59,7 +60,11 @@ const Main = (): JSX.Element => {
       <div className={styles.main}>
         <div className="container">
           <Search />
+
+          {id !== null && <Requests />}
+
           {status === 'success' && words.results && <Word />}
+
           <Image />
         </div>
       </div>

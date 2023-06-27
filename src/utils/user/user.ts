@@ -3,7 +3,7 @@ import { ref, set } from 'firebase/database';
 
 const { database } = apps;
 
-interface Favorite {
+interface Required {
   createdAt: string;
 }
 
@@ -13,7 +13,8 @@ export const addNewUser = (
   password: string,
   list: string[],
   folders: string[],
-  favorite: Favorite
+  favorite: Required,
+  previousRequests: Required
 ) => {
   set(ref(database, 'users/' + userId), {
     email,
@@ -21,5 +22,6 @@ export const addNewUser = (
     folders,
     password,
     favorite,
+    previousRequests,
   });
 };

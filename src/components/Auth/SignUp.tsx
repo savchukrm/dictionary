@@ -34,7 +34,15 @@ const SignUp = (): JSX.Element => {
           setUser({ email: user.email, id: user.uid, token: user.refreshToken })
         );
         const now = new Date().toISOString();
-        addNewUser(user.uid, email, password, [], [], { createdAt: now });
+        addNewUser(
+          user.uid,
+          email,
+          password,
+          [],
+          [],
+          { createdAt: now },
+          { createdAt: now }
+        );
 
         navigate('/');
       })
@@ -84,8 +92,8 @@ const SignUp = (): JSX.Element => {
 
             set(userRef, {
               email: user.email,
-              password: Math.floor(Math.random() * 900000) + 100000,
               favorite: { createdAt: now },
+              previousRequests: { createdAt: now },
             });
 
             navigate('/');
