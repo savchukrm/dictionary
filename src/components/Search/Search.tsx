@@ -31,7 +31,7 @@ const Search = () => {
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
-    if (error) {
+    if (error || word.trim() === '') {
       return;
     }
 

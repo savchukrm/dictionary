@@ -11,11 +11,22 @@ export const addWordToPreviousRequests = (
   userId: number | null,
   word: string
 ) => {
-  get(ref(database, `users/${userId}/previousRequests`)).then((res) => {
+  if (word.trim() === '') {
+    return;
+  }
+
+  const previousRequestsRef = ref(database, `users/${userId}/previousRequests`);
+
+  get(previousRequestsRef).then((res) => {
     const { createdAt, ...rest } = res.val();
-    set(ref(database, 'users/' + userId + '/previousRequests/'), {
-      ...rest,
-      [word]: word,
-    }).catch((error) => console.log(error));
+    const previousRequests = Object.values(rest);
+
+    const updatedRequests = [...previousRequests, word];
+
+    const limitedRequests = updatedRequests.slice(-10);
+
+    set(previousRequestsRef, limitedRequests).catch((error) =>
+      console.log(error)
+    );
   });
 };
