@@ -35,7 +35,7 @@ const Search = () => {
       return;
     }
 
-    await dispatch(fetchWords(word));
+    await dispatch(fetchWords(word.trim()));
     dispatch(searchWord(''));
   };
 
@@ -49,7 +49,7 @@ const Search = () => {
     const value = event.target.value;
     const regex = /^[a-zA-Z\s]*$/;
     if (!regex.test(value)) {
-      setError('Invalid input');
+      setError('Cannot use any sumbols or numbers');
     } else {
       setError('');
     }

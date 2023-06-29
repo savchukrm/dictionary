@@ -170,6 +170,13 @@
   border-bottom: 1px solid var(--color-white);
 }
 
+.wrong-request {
+  color: #f44336;
+  font-weight: bold;
+  font-size: 20px;
+  padding-left: 5px;
+}
+
 @media screen and (max-width: 1000px) {
   .header {
     padding: 0 20px;
