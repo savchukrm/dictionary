@@ -1,34 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { useAppDispatch, RootState } from '../../redux/store';
 
 import { CgClose } from 'react-icons/cg';
 
+import { useAppDispatch, RootState } from '../../redux/store';
 import { searchWord } from '../../redux/search/slice';
 import { fetchWords } from '../../redux/words/asynAction';
-import { addWordToPreviousRequests } from '../../utils/requests/previousRequest';
 
+import { addWordToPreviousRequests } from '../../utils/requests/previousRequest';
 import styles from './Search.module.css';
 
 const Search = () => {
   const dispatch = useAppDispatch();
 
-  const [validForm, setValidForm] = useState(false);
   const [error, setError] = useState('');
+  const [isActive, setIsActive] = useState(false);
 
   const { word } = useSelector((state: RootState) => state.search);
   const { id } = useSelector((state: RootState) => state.user);
   const { status } = useSelector((state: RootState) => state.words);
 
-  useEffect(() => {
-    if (word.length >= 1) {
-      setValidForm(false);
-    } else {
-      setValidForm(true);
-    }
-  }, [word]);
+  const searchButtonRef = useRef<HTMLButtonElement>(null);
 
-  const handleSubmit = async (event: any) => {
+  useEffect(() => {
+    searchButtonRef.current?.focus();
+  }, []);
+
+  const handleButtonClick = () => {
+    setIsActive(true);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (error || word.trim() === '') {
@@ -43,13 +45,14 @@ const Search = () => {
     if (id !== null && status === 'success') {
       addWordToPreviousRequests(id, word);
     }
-  }, [status]);
+  }, [id, status]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsActive(false);
     const value = event.target.value;
     const regex = /^[a-zA-Z\s]*$/;
     if (!regex.test(value)) {
-      setError('Cannot use any sumbols or numbers');
+      setError('Cannot use any symbols or numbers');
     } else {
       setError('');
     }
@@ -58,6 +61,12 @@ const Search = () => {
 
   const clearForm = () => {
     dispatch(searchWord(''));
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key === 'Enter' && (error || word.trim() === '')) {
+      event.preventDefault();
+    }
   };
 
   return (
@@ -72,20 +81,23 @@ const Search = () => {
             onChange={handleChange}
             maxLength={100}
           />
-
+          {error && <p className={styles.error}>{error}</p>}
           {word.length > 0 && (
-            <button onClick={() => clearForm()} className={styles.clearBtn}>
+            <div onClick={clearForm} className={styles.clearBtn}>
               <CgClose />
-            </button>
+            </div>
           )}
         </label>
 
-        {error && <p className={styles.error}>{error}</p>}
-
         <button
-          disabled={validForm || !!error}
-          className={styles.formBtn}
+          ref={searchButtonRef}
+          disabled={!!error}
+          className={`${styles.formBtn} ${error ? styles.disabled : ''} ${
+            isActive ? styles.active : ''
+          }`}
           type="submit"
+          onClick={handleButtonClick}
+          onKeyDown={handleKeyDown}
         >
           Search
         </button>

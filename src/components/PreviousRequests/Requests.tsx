@@ -30,7 +30,9 @@ const Requests = () => {
   const allRequests = lastRequests
     .slice(0, 10)
     .map((item) => item[1])
-    .filter((item) => item !== '');
+    .filter((item, index, arr) => {
+      return item !== '' && arr.lastIndexOf(item) === index;
+    });
 
   if (lastRequests.length === 1 && lastRequests[0][0] === 'createdAt') {
     return null;
