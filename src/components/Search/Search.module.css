@@ -35,36 +35,41 @@
   font-weight: 500;
   color: var(--color-white);
   font-size: 20px;
-  background-color: var(--color--greysecond);
+  background-color: var(--color-teal);
   border-radius: 30px;
   padding: 10px 30px;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s, background-color 0.2s;
 }
 
 .formBtn:focus-visible,
 .formBtn:active {
   outline: none;
   transform: scale(0.95);
+  background-color: rgb(47, 119, 206);
+}
+
+.formBtn.active {
+  pointer-events: none;
+  background-color: rgb(47, 119, 206);
 }
 
 .formBtn:hover {
-  background-color: var(--color-teal);
-  color: var(--color-white);
+  color: rgb(238, 237, 249);
   transform: scale(1.05);
 }
 
-.formBtn:disabled {
+.formBtn.disabled {
+  pointer-events: none;
+
   cursor: initial;
   background-color: var(--color--greysecond);
 }
 
-.formBtn.invalid {
+.formBtn:disabled {
+  pointer-events: none;
+  cursor: initial;
   background-color: var(--color--greysecond);
-}
-
-.active {
-  background-color: var(--color-teal);
 }
 
 .clearBtn {

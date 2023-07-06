@@ -27,7 +27,12 @@ const Search = () => {
   }, []);
 
   const handleButtonClick = () => {
-    setIsActive(true);
+    if (!error && word.trim() !== '') {
+      setIsActive(true);
+      setTimeout(() => {
+        setIsActive(false);
+      }, 300);
+    }
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -91,7 +96,7 @@ const Search = () => {
 
         <button
           ref={searchButtonRef}
-          disabled={!!error}
+          disabled={!!error || word.trim().length === 0}
           className={`${styles.formBtn} ${error ? styles.disabled : ''} ${
             isActive ? styles.active : ''
           }`}
