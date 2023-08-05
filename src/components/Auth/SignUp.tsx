@@ -15,7 +15,7 @@ import { ref, get, set } from 'firebase/database';
 import { setUser, removeUser } from '../../redux/auth/slice';
 import { addNewUser } from '../../utils/user/user';
 
-import Form from './Form';
+import FormBlock from './Form';
 
 const SignUp = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -107,7 +107,7 @@ const SignUp = (): JSX.Element => {
 
   return (
     <div>
-      <Form
+      <FormBlock
         title="register"
         handleClick={handleRegister}
         viaGoogle={signUpViaGoogle}

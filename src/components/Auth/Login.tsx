@@ -14,7 +14,7 @@ import {
 
 import { setUser, removeUser } from '../../redux/auth/slice';
 
-import Form from './Form';
+import FormBlock from './Form';
 
 const Login = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -91,7 +91,7 @@ const Login = (): JSX.Element => {
 
   return (
     <div>
-      <Form
+      <FormBlock
         title="log in"
         handleClick={handleLogin}
         error={errorMessage}
