@@ -21,8 +21,8 @@ const Word = (): JSX.Element => {
       {status === 'success' && words.results && (
         <div>
           <div className={styles.top}>
-            <div>
-              <h1 className={styles.h1}>{words.word}</h1>
+            <div className={styles.wrapper}>
+              <h5 className={styles.h5}>{words.word}</h5>
 
               <span>
                 {words.pronunciation && `/${words.pronunciation.all}/`}

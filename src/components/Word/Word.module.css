@@ -10,6 +10,7 @@
 .top {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   border-bottom: 2px solid var(--color--greysecond);
   padding-bottom: 20px;
@@ -35,9 +36,15 @@
   fill: var(--color-teal);
 }
 
-.h1 {
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.h5 {
   font-weight: 600;
   font-size: 49px;
+  text-align: center;
 }
 
 .list {
@@ -94,11 +101,20 @@ li {
     border: none;
     padding: 20px;
   }
+
+  .h5 {
+    font-weight: 600;
+    font-size: 39px;
+  }
 }
 
 @media (max-width: 920px) {
   .word {
     width: 660px;
+  }
+  .h5 {
+    font-weight: 600;
+    font-size: 28px;
   }
 }
 

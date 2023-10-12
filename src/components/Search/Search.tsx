@@ -12,6 +12,8 @@ import styles from './Search.module.css';
 
 const Search = () => {
   const dispatch = useAppDispatch();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const searchButtonRef = useRef<HTMLButtonElement>(null);
 
   const [error, setError] = useState('');
   const [isActive, setIsActive] = useState(false);
@@ -19,8 +21,6 @@ const Search = () => {
   const { word } = useSelector((state: RootState) => state.search);
   const { id } = useSelector((state: RootState) => state.user);
   const { status } = useSelector((state: RootState) => state.words);
-
-  const searchButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     searchButtonRef.current?.focus();
@@ -31,6 +31,7 @@ const Search = () => {
       setIsActive(true);
       setTimeout(() => {
         setIsActive(false);
+        inputRef.current?.focus();
       }, 300);
     }
   };
@@ -66,6 +67,7 @@ const Search = () => {
 
   const clearForm = () => {
     dispatch(searchWord(''));
+    setError('');
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
@@ -79,6 +81,7 @@ const Search = () => {
       <form className={styles.form} onSubmit={handleSubmit}>
         <label className={styles.label}>
           <input
+            ref={inputRef}
             className={styles.formInput}
             type="text"
             value={word}
